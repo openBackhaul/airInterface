@@ -40,7 +40,7 @@ Technology specific interface definition for microwave air interfaces
 
 ### Open Issue List
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
-- [bugtracker.openBackhaul.com](bugtracker.openBackhaul.com)
+- [bugtracker.openBackhaul.com](https://bugtracker.openBackhaul.com)
 
 ### Comments
-The first implementations of the airInterface have been made within framework of ONF PoCs 2 to 5. Consolidated UML and YANG models contain ONF Core IM 1.2, airInterface, wireInterface, pureEthernetStructure and ethernetContainer as they have been applied during these ONF PoCs.
+The first implementations of the airInterface have been made within framework of ONF PoCs 2 to 5. Consolidated UML and YANG models contain ONF Core IM 1.2, airInterface, wireInterface, hybridMwStructure, pureEthernetStructure, tdmContainer and ethernetContainer as they have been applied during these ONF PoCs.

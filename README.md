@@ -7,12 +7,11 @@ Technology specific interface definition for microwave air interfaces
 
 ### UML
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
-- 1.1.0-tr532v1_1.180822.1354 : [180814_ONF_MW_IM_TR-532_v1_1.zip](./180814_ONF_MW_IM_TR-532_v1_1.zip)
-- 1.1.0-tr532v1_1.190204.1013 (GenDoc Template added) : [190204_ONF_MW_IM_TR-532_v1_1.zip](./190204_ONF_MW_IM_TR-532_v1_1.zip)
+- 1.1.0-tr532v1_1.180822.1354 : [MwIM_1.1.0-tr532v1_1.190204.1013.zip](./MwIM_1.1.0-tr532v1_1.190204.1013.zip)
 
 ### Overview 
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
-- 1.1.0-tr532v1_1.180822.1354+overview.1 : [190201_AirInterfaceCD.PNG](./190201_AirInterfaceCD.PNG)
+- 1.1.0-tr532v1_1.180822.1354+overview.1 : [AirInterfacePac_1.1.0-tr532v1_1.190204.1013+overview.190204.1346.png 	](./AirInterfacePac_1.1.0-tr532v1_1.190204.1013+overview.190204.1346.png 	)
 
 ### List of Classes
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
@@ -35,7 +34,7 @@ Technology specific interface definition for microwave air interfaces
 
 ### Publication
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
-- 1.1.0-tr532v1_1.190204.1013+tr.1 : [TR-532_v1.1_MicrowaveDataDictionary_generated-2019-02-04-095933-.docx](./TR-532_v1.1_MicrowaveDataDictionary_generated-2019-02-04-095933-.docx)
+- 1.1.0-tr532v1_1.190204.1013+tr.1 : [Tr532v1.1_1.1.0-tr532v1_1.190204.1013+tr.190204.1513.docx](./Tr532v1.1_1.1.0-tr532v1_1.190204.1013+tr.190204.1513.docx)
 
 ### Aspired Model Classification
 - Published

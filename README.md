@@ -8,6 +8,7 @@ Technology specific interface definition for microwave air interfaces
 ### UML
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
 - 1.1.0-tr532v1_1.180822.1354 : [180814_ONF_MW_IM_TR-532_v1_1.zip](./180814_ONF_MW_IM_TR-532_v1_1.zip)
+- 1.1.0-tr532v1_1.190204.1013 (GenDoc Template added) : [190204_ONF_MW_IM_TR-532_v1_1.zip](./190204_ONF_MW_IM_TR-532_v1_1.zip)
 
 ### Overview 
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
@@ -15,11 +16,11 @@ Technology specific interface definition for microwave air interfaces
 
 ### List of Classes
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
-- 1.1.0-tr532v1_1.180822.1354+list.1 : [
+- 1.1.0-tr532v1_1.190204.1013+list.1 : [AirInterfacePac_1.1.0-tr532v1_1.190204.1013+txt.190204.1346.txt](./AirInterfacePac_1.1.0-tr532v1_1.190204.1013+txt.190204.1346.txt)
 
 ### GenDoc Export
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
-- 1.1.0-tr532v1_1.180822.1354+gendoc.1 : [
+- 1.1.0-tr532v1_1.190204.1013+gendoc.1 : [AirInterfacePac_1.1.0-tr532v1_1.190204.1013+gendoc.190204.1346.docx](./AirInterfacePac_1.1.0-tr532v1_1.190204.1013+gendoc.190204.1346.docx)
 
 ### YANG File
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
@@ -34,7 +35,7 @@ Technology specific interface definition for microwave air interfaces
 
 ### Publication
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
-- to be provided
+- 1.1.0-tr532v1_1.190204.1013+tr.1 : [TR-532_v1.1_MicrowaveDataDictionary_generated-2019-02-04-095933-.docx](./TR-532_v1.1_MicrowaveDataDictionary_generated-2019-02-04-095933-.docx)
 
 ### Aspired Model Classification
 - Published

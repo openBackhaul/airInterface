@@ -7,11 +7,12 @@ Technology specific interface definition for microwave air interfaces
 
 ### UML
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
-- 1.1.0-tr532v1_1.180822.1354 : [MwIM_1.1.0-tr532v1_1.190204.1013.zip](./MwIM_1.1.0-tr532v1_1.190204.1013.zip)
+- 1.1.0-tr532v1_1.190204.1013 : [MwIM_1.1.0-tr532v1_1.190204.1013.zip](./MwIM_1.1.0-tr532v1_1.190204.1013.zip)
+- 1.1.0-tr532v1_1.190204.1013 = 1.1.0-tr532v1_1.180822.1354 + several GendocTemplates
 
 ### Overview 
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
-- 1.1.0-tr532v1_1.180822.1354+overview.1 : [AirInterfacePac_1.1.0-tr532v1_1.190204.1013+overview.190204.1346.png 	](./AirInterfacePac_1.1.0-tr532v1_1.190204.1013+overview.190204.1346.png 	)
+- 1.1.0-tr532v1_1.190204.1013+overview.1 : [AirInterfacePac_1.1.0-tr532v1_1.190204.1013+overview.190204.1346.png 	](./AirInterfacePac_1.1.0-tr532v1_1.190204.1013+overview.190204.1346.png 	)
 
 ### List of Classes
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)

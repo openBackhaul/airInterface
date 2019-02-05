@@ -7,7 +7,7 @@ Technology specific interface definition for microwave air interfaces
 
 ### UML
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
-- 2.0.0-tsp.190205.1530 : [](./)
+- 2.0.0-tsp.190205.1530 : [190205 AirInterfacePac.zip](./190205%20AirInterfacePac.zip)
 
 ### Overview 
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)

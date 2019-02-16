@@ -35,7 +35,7 @@ Technology specific interface definition for microwave air interfaces
 
 ### Publication
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
-- 1.1.0-tr532v1_1.190204.1013+tr.1 : [Tr532v1.1_1.1.0-tr532v1_1.190204.1013+tr.190204.1513.docx](./Tr532v1.1_1.1.0-tr532v1_1.190204.1013+tr.190204.1513.docx)
+- 1.1.0-tr532v1_1.190204.1013+tr.2 : [Tr532v1.1_1.1.0-tr532v1_1.190204.1013+tr.190216.1229.docx](./Tr532v1.1_1.1.0-tr532v1_1.190204.1013+tr.190216.1229.docx)
 
 ### Aspired Model Classification
 - Published

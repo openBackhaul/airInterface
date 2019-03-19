@@ -2,7 +2,7 @@
 Technology specific interface definition for microwave air interfaces
 
 ### Branch
-- 1.0.0-tr532v1.d.t : Model officially published in December 2016
+- 1.0.0-tr532v1.d.t : Model officially published by ONF in December 2016
 
 ### UML
 - 1.0.0-tr532v1.20161215.1546 : [161215_ONF_MW_IM_TR-532_v1_0.zip](./161215_ONF_MW_IM_TR-532_v1_0.zip)

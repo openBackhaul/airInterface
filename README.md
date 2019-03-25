@@ -7,8 +7,8 @@ Technology specific interface definition for microwave air interfaces
 
 ### UML
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
-- 1.1.0-tr532v1_1.190204.1013 : [MwIM_1.1.0-tr532v1_1.190204.1013.zip](./MwIM_1.1.0-tr532v1_1.190204.1013.zip)
-- 1.1.0-tr532v1_1.190204.1013 = 1.1.0-tr532v1_1.180822.1354 + several GendocTemplates
+- 1.1.0-tr532v1_1.190204.1013 : [MwIM_1.1.0-tr532v1_1.190204.1013](./MwIM_1.1.0-tr532v1_1.190204.1013.zip) = 1.1.0-tr532v1_1.180822.1354 + several GendocTemplates
+- 1.1.0-tr532v1_1.190320.1445 : [MwIM_1.1.0-tr532v1_1.190320.1445](./MwIM_1.1.0-tr532v1_1.190320.1445.zip) = 1.1.0-tr532v1_1.190204.1013 + if-feature "revision1_1"
 
 ### Overview 
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
@@ -19,8 +19,7 @@ Technology specific interface definition for microwave air interfaces
 - 1.1.0-tr532v1_1.190204.1013+list.1 : [AirInterfacePac_1.1.0-tr532v1_1.190204.1013+txt.190204.1346.txt](./AirInterfacePac_1.1.0-tr532v1_1.190204.1013+txt.190204.1346.txt)
 
 ### GenDoc Export
-- Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
-- 1.1.0-tr532v1_1.190204.1013+gendoc.1 : [AirInterfacePac_1.1.0-tr532v1_1.190204.1013+gendoc.190204.1346.docx](./AirInterfacePac_1.1.0-tr532v1_1.190204.1013+gendoc.190204.1346.docx)
+- see Publication
 
 ### YANG File
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
@@ -38,9 +37,10 @@ Technology specific interface definition for microwave air interfaces
 - 1.1.0-tr532v1_1.190204.1013+tr.2 : [Tr532v1.1_1.1.0-tr532v1_1.190204.1013+tr.190216.1229](./Tr532v1.1_1.1.0-tr532v1_1.190204.1013+tr.190216.1229.docx)
 - 1.1.0-tr532v1_1.190204.1013+tr.3 : [Tr532v1.1_1.1.0-tr532v1_1.190204.1013+tr.190304.1201](./Tr532v1.1_1.1.0-tr532v1_1.190204.1013+tr.190304.1201.docx)
 - 1.1.0-tr532v1_1.190204.1013+tr.4 : [Tr532v1.1_1.1.0-tr532v1_1.190204.1013+tr.190308.1715](./Tr532v1.1_1.1.0-tr532v1_1.190204.1013+tr.190308.1715.docx)
+- 1.1.0-tr532v1_1.190320.1445.tr.1 : [Tr532v1.1_1.1.0-tr532v1_1.190320.1445+tr.190320.1726.pdf](./Tr532v1.1_1.1.0-tr532v1_1.190320.1445+tr.190320.1726.pdf)
 
 ### Aspired Model Classification
-- Published
+- to be published
 
 ### Open Issue List
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)

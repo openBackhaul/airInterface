@@ -7,11 +7,11 @@ Technology specific interface definition for microwave air interfaces
 
 ### [1.1.0-tr532v1_1.d.t](./https://github.com/openBackhaul/airInterface/tree/TR532v1_1)
 - Model officially published by ONF in December 2016
-- published
+- finalized
 
 ### [2.0.0-tsp.d.t](./https://github.com/openBackhaul/airInterface/tree/tsp)
 - Model officially published by ONF in December 2016
-- published
+- under definition
 
 ### Open Issue List
 - [bugtracker.openBackhaul.com](https://bugtracker.openBackhaul.com)

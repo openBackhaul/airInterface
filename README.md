@@ -6,11 +6,11 @@ Technology specific interface definition for microwave air interfaces
 - published
 
 ### [1.1.0-tr532v1_1.d.t](./https://github.com/openBackhaul/airInterface/tree/TR532v1_1)
-- Model officially published by ONF in December 2016
-- finalized
+- Model about to be officially published by ONF
+- finalized and waiting for publishing
 
 ### [2.0.0-tsp.d.t](./https://github.com/openBackhaul/airInterface/tree/tsp)
-- Model officially published by ONF in December 2016
+- Component of TR-532 that has been updated by Deutsche Telekom, Ericsson, Ceragon, Nokia, SIAE and Telefonica
 - under definition
 
 ### Open Issue List

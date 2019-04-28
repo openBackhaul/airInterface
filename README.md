@@ -1,5 +1,5 @@
 # airInterface
-Technology specific interface definition for microwave air interfaces
+Technology specific amendment to the LayerProtocol class for microwave radio interfaces.
 
 ### Branch
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
@@ -7,23 +7,22 @@ Technology specific interface definition for microwave air interfaces
 
 ### UML
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
-- 1.1.0-tr532v1_1.190204.1013 : [MwIM_1.1.0-tr532v1_1.190204.1013](./MwIM_1.1.0-tr532v1_1.190204.1013.zip) = 1.1.0-tr532v1_1.180822.1354 + several GendocTemplates
-- 1.1.0-tr532v1_1.190320.1445 : [MwIM_1.1.0-tr532v1_1.190320.1445](./MwIM_1.1.0-tr532v1_1.190320.1445.zip) = 1.1.0-tr532v1_1.190204.1013 + if-feature "revision1_1"
+- 1.1.0-tr532v1_1.190410.1620 : [MwIM_1.1.0-tr532v1_1.190410.1620](./MwIM_1.1.0-tr532v1_1.190410.1620.zip)
 
 ### Overview 
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
-- 1.1.0-tr532v1_1.190204.1013+overview.1 : [AirInterfacePac_1.1.0-tr532v1_1.190204.1013+overview.190204.1346.png 	](./AirInterfacePac_1.1.0-tr532v1_1.190204.1013+overview.190204.1346.png 	)
+- 1.1.0-tr532v1_1.190410.1620+overview.1 : 
 
 ### List of Classes
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
-- 1.1.0-tr532v1_1.190204.1013+list.1 : [AirInterfacePac_1.1.0-tr532v1_1.190204.1013+txt.190204.1346.txt](./AirInterfacePac_1.1.0-tr532v1_1.190204.1013+txt.190204.1346.txt)
+- 1.1.0-tr532v1_1.190410.1620+list.1 : 
 
 ### GenDoc Export
-- see Publication
+- 1.1.0-tr532v1_1.190410.1620+gendoc.1 : 
 
 ### YANG File
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
-- 1.1.0-tr532v1_1.180822.1354+yang.1 : [MW-YANG-files-POC-5-04-10-2018-1901.zip](./MW-YANG-files-POC-5-04-10-2018-1901.zip)
+- 1.1.0-tr532v1_1.190410.1620+yang.1 : [YANG-Data-Model-for-TR-532-v1_1](./YANG-Data-Model-for-TR-532-v1_1.zip)
 
 ### Interface Simulator
 - Alex Stancu (Alex.Stancu@openBackhaul.com)
@@ -34,10 +33,7 @@ Technology specific interface definition for microwave air interfaces
 
 ### Publication
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
-- 1.1.0-tr532v1_1.190204.1013+tr.2 : [Tr532v1.1_1.1.0-tr532v1_1.190204.1013+tr.190216.1229](./Tr532v1.1_1.1.0-tr532v1_1.190204.1013+tr.190216.1229.docx)
-- 1.1.0-tr532v1_1.190204.1013+tr.3 : [Tr532v1.1_1.1.0-tr532v1_1.190204.1013+tr.190304.1201](./Tr532v1.1_1.1.0-tr532v1_1.190204.1013+tr.190304.1201.docx)
-- 1.1.0-tr532v1_1.190204.1013+tr.4 : [Tr532v1.1_1.1.0-tr532v1_1.190204.1013+tr.190308.1715](./Tr532v1.1_1.1.0-tr532v1_1.190204.1013+tr.190308.1715.docx)
-- 1.1.0-tr532v1_1.190320.1445.tr.1 : [Tr532v1.1_1.1.0-tr532v1_1.190320.1445+tr.190320.1726.pdf](./Tr532v1.1_1.1.0-tr532v1_1.190320.1445+tr.190320.1726.pdf)
+- 1.1.0-tr532v1_1.190410.1620.tr.1 : [Tr532v1.1_1.1.0-tr532v1_1.190410.1620+tr.1](./Tr532v1.1_1.1.0-tr532v1_1.190410.1620+tr.1.pdf)
 
 ### Aspired Model Classification
 - to be published

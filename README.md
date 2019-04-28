@@ -1,5 +1,5 @@
 # airInterface
-Technology specific interface definition for microwave air interfaces
+Technology specific amendment to the LayerProtocol class for microwave radio interfaces.
 
 ### [1.0.0-tr532v1.d.t](../../tree/TR532v1_0)
 - Model officially published by ONF in December 2016

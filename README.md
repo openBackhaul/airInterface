@@ -3,7 +3,7 @@ Technology specific amendment to the LayerProtocol class for microwave radio int
 
 ### Branch
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
-- 1.1.0-tr532v1_1.d.t : Model to be officially published as TR532v1.1
+- 1.1.0-tr532v1_1.d.t : Model officially published by ONF as TR532 v1.1 in April 2019
 
 ### UML
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
@@ -20,7 +20,7 @@ Technology specific amendment to the LayerProtocol class for microwave radio int
 - 1.1.0-tr532v1_1.190410.1620+gendoc.1 : see Publication
 
 ### YANG File
-- Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
+- Martin Skorupski (martin.skorupski@openBackhaul.com)
 - 1.1.0-tr532v1_1.190410.1620+yang.1 : [YANG-Data-Model-for-TR-532-v1_1](./YANG-Data-Model-for-TR-532-v1_1.zip)
 
 ### Interface Simulator
@@ -34,8 +34,8 @@ Technology specific amendment to the LayerProtocol class for microwave radio int
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
 - 1.1.0-tr532v1_1.190410.1620.tr.1 : [Tr532v1.1_1.1.0-tr532v1_1.190410.1620+tr.1](./Tr532v1.1_1.1.0-tr532v1_1.190410.1620+tr.1.pdf)
 
-### Aspired Model Classification
-- to be published
+### Model Classification
+- Published by ONF
 
 ### Open Issue List
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)

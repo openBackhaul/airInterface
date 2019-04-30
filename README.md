@@ -39,6 +39,7 @@ Technology specific interface definition for microwave air interfaces
 
 ### Open Issue List
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
-- [bugtracker.openBackhaul.com](https://bugtracker.openBackhaul.com)
+- [airInterface/issues](../../issues)
 
 ### Comments
+./.

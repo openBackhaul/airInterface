@@ -13,8 +13,5 @@ Technology specific amendment to the LayerProtocol class for microwave radio int
 - Component of TR-532 that has been updated by Deutsche Telekom, Ericsson, Ceragon, Nokia, SIAE and Telefonica
 - under definition
 
-### Open Issue List
-- [bugtracker.openBackhaul.com](https://bugtracker.openBackhaul.com)
-
 ### Comments
 ./.

@@ -7,22 +7,20 @@ Technology specific interface definition for microwave air interfaces
 
 ### UML
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
-- 2.0.0-tsp.190205.1530 : [190205 AirInterfacePac.zip](./190205%20AirInterfacePac.zip)
+- [AirInterface_2.0.0-tsp.190529.2035](./AirInterface_2.0.0-tsp.190529.2035.zip)
 
 ### Overview 
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
-- 2.0.0-tsp.190205.1530+overview.1 : [](./)
+- [AirInterface_2.0.0-tsp.190529.2035+overview.1](./AirInterface_2.0.0-tsp.190529.2035+overview.1.PNG)
 
 ### List of Classes
-- Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
-- 2.0.0-tsp.190205.1530+list.1 : [](./)
+- 
 
 ### GenDoc Export
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
-- 2.0.0-tsp.190205.1530+gendoc.1 : [](./)
+- [AirInterface_2.0.0-tsp.190529.2035+gendoc.1](./AirInterface_2.0.0-tsp.190529.2035+gendoc.1.docx)
 
 ### YANG File
-- Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
 - to be provided
 
 ### Interface Simulator

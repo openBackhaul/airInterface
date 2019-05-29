@@ -14,7 +14,7 @@ Technology specific interface definition for microwave air interfaces
 - [AirInterface_2.0.0-tsp.190529.2035+overview.1](./AirInterface_2.0.0-tsp.190529.2035+overview.1.PNG)
 
 ### List of Classes
-- 
+- to be provided
 
 ### GenDoc Export
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)

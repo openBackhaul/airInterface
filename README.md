@@ -7,18 +7,18 @@ Technology specific interface definition for microwave air interfaces
 
 ### UML
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
-- [AirInterface_2.0.0-tsp.190529.2035](./AirInterface_2.0.0-tsp.190529.2035.zip)
+- [AirInterface_2.0.0-tsp.190710.1735](./AirInterface_2.0.0-tsp.190710.1735.zip)
 
 ### Overview 
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
-- [AirInterface_2.0.0-tsp.190529.2035+overview.1](./AirInterface_2.0.0-tsp.190529.2035+overview.1.PNG)
+- [AirInterface_2.0.0-tsp.190710.1735+overview.1](./AirInterface_2.0.0-tsp.190710.1735+overview.1.png)
 
 ### List of Classes
 - to be provided
 
 ### GenDoc Export
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
-- [AirInterface_2.0.0-tsp.190529.2035+gendoc.1](./AirInterface_2.0.0-tsp.190529.2035+gendoc.1.docx)
+- [AirInterface_2.0.0-tsp.190710.1735+gendoc.1](./AirInterface_2.0.0-tsp.190710.1735+gendoc.1.docx)
 
 ### Augmentation Condition
 - When statement in Augmentation statement demands for LayerProtocol::layerProtocolName==LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER

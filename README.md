@@ -20,6 +20,9 @@ Technology specific interface definition for microwave air interfaces
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
 - [AirInterface_2.0.0-tsp.190529.2035+gendoc.1](./AirInterface_2.0.0-tsp.190529.2035+gendoc.1.docx)
 
+### Augmentation Condition
+- When statement in Augmentation statement demands for LayerProtocol::layerProtocolName==LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER
+
 ### YANG File
 - to be provided
 

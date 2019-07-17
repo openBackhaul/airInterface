@@ -24,8 +24,9 @@ Technology specific interface definition for microwave air interfaces
 - When statement in Augmentation statement demands for LayerProtocol::layerProtocolName==LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER
 
 ### YANG File
-- to be provided
-- [AirInterface_2.0.0-tsp.190711.1825+yang.1](./AirInterface_2.0.0-tsp.190711.1825+yang.1.zip)
+- Martin Skorupski (Martin.Skorupski@openBackhaul.com)
+- [AirInterface_2.0.0-tsp.190711.1825+yang.2](./AirInterface_2.0.0-tsp.190711.1825+yang.2.zip)
+- [Issue#6](../../issues/6) in divergence to +yang.1 fixed.
 
 ### Interface Simulator
 - to be provided

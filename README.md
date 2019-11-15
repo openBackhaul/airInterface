@@ -25,9 +25,7 @@ Technology specific interface definition for microwave air interfaces
 
 ### YANG File
 - Martin Skorupski (Martin.Skorupski@openBackhaul.com)
-- [AirInterface_2.0.0-tsp.190711.1825+yang.2](./AirInterface_2.0.0-tsp.190711.1825+yang.2.zip)
-- [Issue#6](../../issues/6) in divergence to +yang.1 fixed.
-- AirInterface_2.0.0-tsp.191114.1420+yang.1
+- [AirInterface_2.0.0-tsp.191114.1420+yang.1](./AirInterface_2.0.0-tsp.191114.1420+yang.1.zip)
 
 ### Interface Simulator
 - to be provided

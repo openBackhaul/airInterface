@@ -12,7 +12,6 @@
 - [AirInterface_2.0.0-tsp.191122.1800+overview.1](./AirInterface_2.0.0-tsp.191122.1800+overview.1.png)
 
 ### GenDoc Export
-- Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
 - [AirInterface_2.0.0-tsp.191122.1800+gendoc.1](./AirInterface_2.0.0-tsp.191122.1800+gendoc.1.docx)
 
 ### Augmentation Condition
@@ -22,7 +21,7 @@
 - [AirInterface_2.0.0-tsp.191122.1800+yang.1](./AirInterface_2.0.0-tsp.191122.1800+yang.1.zip)
 
 ### JSON Schema
--
+- to be provided
 
 ### Interface Simulator
 - to be provided

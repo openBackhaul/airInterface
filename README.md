@@ -1,20 +1,15 @@
 # airInterface
-Technology specific interface definition for microwave air interfaces
+- Technology specific interface definition for microwave air interfaces
+- Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
 
 ### Branch
-- Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
 - 2.0.0-tsp.d.t : Model for the Transport SDN Pilot at Telefonica Germany
 
 ### UML
-- Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
 - [AirInterface_2.0.0-tsp.191122.1800](./AirInterface_2.0.0-tsp.191122.1800.zip)
 
 ### Overview 
-- Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
 - [AirInterface_2.0.0-tsp.191122.1800+overview.1](./AirInterface_2.0.0-tsp.191122.1800+overview.1.png)
-
-### List of Classes
-- to be provided
 
 ### GenDoc Export
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
@@ -24,23 +19,24 @@ Technology specific interface definition for microwave air interfaces
 - When statement in Augmentation statement demands for LayerProtocol::layerProtocolName==LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER
 
 ### YANG File
-- Martin Skorupski (Martin.Skorupski@openBackhaul.com)
 - [AirInterface_2.0.0-tsp.191122.1800+yang.1](./AirInterface_2.0.0-tsp.191122.1800+yang.1.zip)
+
+### JSON Schema
+-
 
 ### Interface Simulator
 - to be provided
 
 ### Interface Validator
-- to be provided
+- [AirInterface_2.0.0-tsp.191122.1800+validator.1](./AirInterface_2.0.0-tsp.191122.1800+validator.1.zip)
 
 ### Publication
-- not planned
+- Candidate for ONF TR-532 v2.0 
 
 ### Aspired Model Classification
-- Trial
+- Live Network
 
 ### Open Issue List
-- Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
 - [airInterface/issues](../../issues)
 
 ### Comments

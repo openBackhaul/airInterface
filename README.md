@@ -7,18 +7,22 @@
 
 ### UML
 - [AirInterface_2.0.0-tsp.191122.1800](./AirInterface_2.0.0-tsp.191122.1800.zip)
+- Intermediate Update: [AirInterface_2.0.0-tsp.200121.1750](./AirInterface_2.0.0-tsp.200121.1750.zip)
 
 ### Overview 
 - [AirInterface_2.0.0-tsp.191122.1800+overview.1](./AirInterface_2.0.0-tsp.191122.1800+overview.1.png)
+- Intermediate Update: [AirInterface_2.0.0-tsp.200121.1750+overview.1](./AirInterface_2.0.0-tsp.200121.1750+overview.1.png)
 
 ### GenDoc Export
 - [AirInterface_2.0.0-tsp.191122.1800+gendoc.1](./AirInterface_2.0.0-tsp.191122.1800+gendoc.1.docx)
+- Intermediate Update: [AirInterface_2.0.0-tsp.200121.1750+gendoc.1](./AirInterface_2.0.0-tsp.200121.1750+gendoc.1.docx)
 
 ### Augmentation Condition
 - When statement in Augmentation statement demands for LayerProtocol::layerProtocolName==LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER
 
 ### YANG File
 - [AirInterface_2.0.0-tsp.191122.1800+yang.1](./AirInterface_2.0.0-tsp.191122.1800+yang.1.zip)
+- Intermediate Update: [AirInterface_2.0.0-tsp.200121.1750+yang.1](./AirInterface_2.0.0-tsp.200121.1750+yang.1.zip)
 
 ### JSON Schema
 - to be provided

@@ -31,7 +31,7 @@
 - to be provided
 
 ### Interface Validator
-- [AirInterface_2.0.0-tsp.191122.1800+validator.4](./AirInterface_2.0.0-tsp.191122.1800+validator.4.zip)
+- [AirInterface_2.0.0-tsp.200121.1750+validator.4](./AirInterface_2.0.0-tsp.200121.1750+validator.4.zip)
 
 ### Publication
 - Candidate for ONF TR-532 v2.0 

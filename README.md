@@ -7,22 +7,22 @@
 
 ### UML
 - [AirInterface_2.0.0-tsp.220328.1245](./AirInterface_2.0.0-tsp.220328.1245.zip) (deprecated)
-- [AirInterface_2.0.0-tsi.231005.1700](./AirInterface_2.0.0-tsi.231005.1700.zip)
+- [AirInterface_2.0.0-tsi.231016.1145](./AirInterface_2.0.0-tsi.231016.1145.zip)
 
 ### Overview 
 - [AirInterface_2.0.0-tsp.220328.1245+overview.1](./AirInterface_2.0.0-tsp.220328.1245+overview.1.png) (deprecated)
-- [AirInterface_2.0.0-tsi.231005.1700+overview.1](./AirInterface_2.0.0-tsi.231005.1700+overview.1.png)
+- [AirInterface_2.0.0-tsi.231016.1145+overview.1](./AirInterface_2.0.0-tsi.231016.1145+overview.1.png)
 
 ### GenDoc Export
 - [AirInterface_2.0.0-tsp.220328.1245+gendoc.1](./AirInterface_2.0.0-tsp.220328.1245+gendoc.1.docx) (deprecated)
-- [AirInterface_2.0.0-tsi.231005.1700+gendoc.1](./AirInterface_2.0.0-tsi.231005.1700+gendoc.1.docx)
+- [AirInterface_2.0.0-tsi.231016.1145+gendoc.1](./AirInterface_2.0.0-tsi.231016.1145+gendoc.1.docx)
 
 ### Augmentation Condition
 - When statement in Augmentation statement demands for LayerProtocol::layerProtocolName==LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER
 
 ### YANG File
 - [AirInterface_2.0.0-tsp.220328.1245+yang.2](./AirInterface_2.0.0-tsp.220328.1245+yang.2.zip) (deprecated)
-- [AirInterface_2.0.0-tsi.231005.1700+yang.2](./AirInterface_2.0.0-tsi.231005.1700+yang.2.zip)
+- [AirInterface_2.0.0-tsi.231016.1145+yang.2](./AirInterface_2.0.0-tsi.231016.1145+yang.2.zip)
 
 ### JSON Schema
 - to be provided

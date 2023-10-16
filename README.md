@@ -22,7 +22,7 @@
 
 ### YANG File
 - [AirInterface_2.0.0-tsp.220328.1245+yang.2](./AirInterface_2.0.0-tsp.220328.1245+yang.2.zip) (deprecated)
-- [AirInterface_2.0.0-tsi.231016.1145+yang.2](./AirInterface_2.0.0-tsi.231016.1145+yang.2.zip)
+- [AirInterface_2.0.0-tsi.231016.1145+yang.1](./AirInterface_2.0.0-tsi.231016.1145+yang.1.zip)
 
 ### JSON Schema
 - to be provided

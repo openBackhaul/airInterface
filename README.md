@@ -1,6 +1,5 @@
 # airInterface
 - Technology specific interface definition for microwave air interfaces
-- Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
 
 ### Branch
 - 2.0.0-tsi.d.t : Model for the Transport SDN Introduction at Telefonica Germany
@@ -27,7 +26,7 @@
 - to be provided
 
 ### Interface Validator
-- [AirInterface_2.0.0-tsp.200121.1750+validator.4](./AirInterface_2.0.0-tsp.200121.1750+validator.4.zip)
+- [AirInterface_2.0.0-tsp.200121.1750+validator.4](./AirInterface_2.0.0-tsp.200121.1750+validator.4.zip) (deprecated)
 
 ### Publication
 - Candidate for ONF TR-532 v2.0 

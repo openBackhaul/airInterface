@@ -13,7 +13,7 @@ Technology specific amendment to the LayerProtocol class for microwave radio int
 - TR-532 v2.0 officially published by ONF in January 2024
 - published
 
-### [2.0.0-tsi.d.t](../../tree/tsi)
+### [2.1.0-tsi.d.t](../../tree/tsi)
 - Component of TR-532 that has been updated by Deutsche Telekom, Ericsson, Ceragon, Nokia, SIAE and Telefonica
 - under definition
 

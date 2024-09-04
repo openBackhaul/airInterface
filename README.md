@@ -35,7 +35,7 @@
 - Operational in Live Network
 
 ### Open Issue List
-- [wredProfile/issues](../../issues)
+- [airInterface/issues](../../issues)
 
 ### Comments
 ./.

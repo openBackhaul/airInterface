@@ -1,0 +1,44 @@
+ [
+	{
+		"mode": "debug",
+		"serverList": [
+			{
+				"serverName": "dummy",
+				"dummyUri": "ping.openBackhaul.com"
+			},
+			{
+				"serverName": "controller",
+				"server": "https://IP_ADRESS:PORT",
+				"pathToControlConstruct": "/rests/data/network-topology:network-topology/topology=topology-netconf/node={mountName}/yang-ext:mount/core-model-1-4:control-construct",
+				"authorizationCode": "YOUR_BASIC_AUTH_CODE"
+			},
+			{
+				"serverName": "AirInterface_2.0.0-tsi.240102.1740+simulator.completeness",
+				"server": "http://localhost:3002",
+				"pathToControlConstruct": "/core-model-1-4:network-control-domain=cache/control-construct={mountName}",
+				"authorizationCode": "",
+				"operationKey": "Operation key not yet provided.",
+				"userName": "Thorsten Heinze",
+				"originator": "InterfaceValidator_TR532v2.0",
+				"xCorrelator": "00000000-0000-0000-0000-000000000532",
+				"traceIndicator": "1",
+				"customerJourney": ""
+			}
+		],
+		"collectionInputList": [
+			{
+				"collectionName": "_device",
+				"serverToBeApplied": "controller",
+				"mountName": "513250011",
+				"kindOfReference": "dynamic"
+			},
+			{
+				"collectionName": "_simulator",
+				"serverToBeApplied": "AirInterface_2.0.0-tsi.240102.1740+simulator.completeness",
+				"mountName": "0001",
+				"kindOfReference": "static",
+				"suffixUrlEncodingIsRequired": true
+			}
+		]
+	}
+]

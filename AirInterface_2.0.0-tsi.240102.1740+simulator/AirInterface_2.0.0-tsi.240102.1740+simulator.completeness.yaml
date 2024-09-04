@@ -1,0 +1,1625 @@
+openapi: 3.0.1
+info:
+  title: AirInterface_2.0.0-tsi.240102.1740+simulator
+  version: 1.0.0
+
+paths:
+########################################################################################################################
+#   Device 0001 for AirInterface_2.0.0-tsi.240102.1740+validator.completeness in static reference mode
+########################################################################################################################
+
+
+########################################################################################################################
+#   Generic Paths
+########################################################################################################################
+  /generic/place-holder:
+    parameters:
+      - $ref: '#/components/parameters/user'
+      - $ref: '#/components/parameters/originator'
+      - $ref: '#/components/parameters/x-correlator'
+      - $ref: '#/components/parameters/trace-indicator'
+      - $ref: '#/components/parameters/customer-journey'
+      - $ref: '#/components/parameters/mountName'
+      - $ref: '#/components/parameters/fields'
+    get:
+      operationId: getCachedControlConstruct
+      summary: 'Provides ControlConstruct from cache'
+      tags:
+        - IndividualServices
+      security:
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: 'ControlConstruct provided from cache'
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - core-model-1-4:control-construct
+                properties:
+                  core-model-1-4:control-construct:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/control-construct'
+                example:
+                  core-model-1-4:control-construct:
+                    - logical-termination-point:
+                        - uuid: 'TdmContainerUuid'
+                          layer-protocol:
+                            - local-id: 'TdmContainerLocalId'
+                              layer-protocol-name: 'tdm-container-2-0:LAYER_PROTOCOL_NAME_TYPE_TDM_CONTAINER_LAYER'
+                        - uuid: 'SyncUuid'
+                          layer-protocol:
+                            - local-id: 'SyncLocalId'
+                              layer-protocol-name: 'synchronization-1-0:LAYER_PROTOCOL_NAME_TYPE_SYNCHRONIZATION_LAYER'
+                        - uuid: 'EthernetContainerUuid'
+                          layer-protocol:
+                            - local-id: 'EthernetContainerLocalId'
+                              layer-protocol-name: 'ethernet-container-2-0:LAYER_PROTOCOL_NAME_TYPE_ETHERNET_CONTAINER_LAYER'
+                        - uuid: 'EthernetContainerUuid2'
+                          layer-protocol:
+                            - local-id: 'EthernetContainerLocalId2'
+                              layer-protocol-name: 'ethernet-container-2-0:LAYER_PROTOCOL_NAME_TYPE_ETHERNET_CONTAINER_LAYER'
+          headers:
+            x-correlator:
+              $ref: '#/components/headers/x-correlator'
+            exec-time:
+              $ref: '#/components/headers/exec-time'
+            backend-time:
+              $ref: '#/components/headers/backend-time'
+            life-cycle-state:
+              $ref: '#/components/headers/life-cycle-state'
+
+
+########################################################################################################################
+#   Common Components
+########################################################################################################################
+components:
+  parameters:
+    user:
+      name: user
+      in: header
+      required: true
+      schema:
+        type: string
+        example: 'User Name'
+      description: 'User identifier from the system starting the service call'
+    originator:
+      name: originator
+      in: header
+      required: true
+      schema:
+        type: string
+        minLength: 3
+        example: 'Resolver'
+      description: >
+        'Identification for the system consuming the API, as defined in
+         [/core-model-1-4:control-construct/logical-termination-point={uuid}/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]'
+    x-correlator:
+      name: x-correlator
+      in: header
+      required: true
+      schema:
+        type: string
+        pattern: '^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$'
+        description: 'Empty string accepted from external applications.'
+        example: '550e8400-e29b-11d4-a716-446655440000'
+      description: 'UUID for the service execution flow that allows to correlate requests and responses'
+    trace-indicator:
+      name: trace-indicator
+      in: header
+      required: true
+      schema:
+        type: string
+        pattern: '^([0-9]+)(\.([0-9]+))*$'
+        description: 'Empty string accepted from external applications.'
+        example: '1.3.1'
+      description: 'Sequence of request numbers along the flow'
+    customer-journey:
+      name: customer-journey
+      in: header
+      required: true
+      schema:
+        type: string
+        example: 'Unknown value'
+      description: 'Holds information supporting customer’s journey to which the execution applies'
+    mountName:
+      name: mountName
+      in: path
+      required: true
+      schema:
+        type: string
+        example: '222250001'
+      description: 'The mountName of the device that is addressed by the request'
+    uuid:
+      name: uuid
+      in: path
+      required: true
+      schema:
+        type: string
+        example: 'LTP-MWPS-TTP-1-1'
+      description: 'Instance identifier that is unique within the device'
+    uuid1:
+      name: uuid1
+      in: path
+      required: true
+      schema:
+        type: string
+        example: 'LTP-MWPS-TTP-1-1'
+      description: 'Another instance identifier that is unique within the device'
+    localId:
+      name: localId
+      in: path
+      required: true
+      schema:
+        type: string
+        example: 'LP-MWPS-TTP-1-1'
+      description: 'Instance identifier that is unique within its list'
+    fields:
+      name: fields
+      in: query
+      required: false
+      schema:
+        type: string
+        example: 'node(node-id;netconf-node-topology:connection-status)'
+      description: 'Query parameter to filter ressources according to RFC8040 fields filter spec'
+  responses:
+    responseForErroredServiceRequests:
+      description: 'Response in case of errored service requests'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorDescription'
+      headers:
+        x-correlator:
+          schema:
+            type: string
+            pattern: '^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$'
+            example: '550e8400-e29b-11d4-a716-446655440000'
+          description: 'UUID for the service execution flow that allows to correlate requests and responses. Its value must be identical at the response compared with its corresponding request'
+        exec-time:
+          schema:
+            type: integer
+            example: 1100
+          description: 'Value written by the service provider, reporting the total elapsed time for the execution, including all the additional processing needed to retrieve the data from the backend service. Expressed in milliseconds'
+        backend-time:
+          schema:
+            type: integer
+            example: 850
+          description: 'Value written by the service provider, reporting the elapsed time for data retrieval from the backend (service invocation, database access…). Expressed in milliseconds'
+    responseForErroredOamRequests:
+      description: 'Response in case of errored OaM requests'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorDescription'
+  headers:
+    x-correlator:
+      schema:
+        type: string
+        example: '550e8400-e29b-11d4-a716-446655440000'
+      description: 'UUID for the service execution flow that allows to correlate requests and responses. Its value must be identical at the response compared with its corresponding request'
+    exec-time:
+      schema:
+        type: integer
+        example: 1100
+      description: 'Value written by the service provider, reporting the total elapsed time for the execution, including all the additional processing needed to retrieve the data from the backend service. Expressed in milliseconds'
+    backend-time:
+      schema:
+        type: integer
+        example: 850
+      description: 'Value written by the service provider, reporting the elapsed time for data retrieval from the backend (service invocation, database access…). Expressed in milliseconds'
+    life-cycle-state:
+      schema:
+        type: string
+        enum:
+          - 'EXPERIMENTAL'
+          - 'OPERATIONAL'
+          - 'DEPRECATED'
+          - 'OBSOLETE'
+          - 'UNKNOWN'
+          - 'NOT_YET_DEFINED'
+        example: 'EXPERIMENTAL'
+  schemas:
+    errorDescription:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+
+    control-construct:
+      type: object
+      required:
+        - top-level-equipment
+        - equipment
+        - logical-termination-point
+        - forwarding-domain
+        - profile-collection
+        - uuid
+        - equipment-augment-1-0:control-construct-pac
+        - protocol-collection
+      properties:
+        top-level-equipment:
+          type: array
+          minItems: 1
+          maxItems: 1
+          items:
+            type: string
+        equipment:
+          type: array
+          minItems: 1
+          x-key: uuid
+          items:
+            $ref: '#/components/schemas/equipment'
+        logical-termination-point:
+          type: array
+          minItems: 1
+          x-key: uuid
+          items:
+            $ref: '#/components/schemas/logical-termination-point'
+        forwarding-domain:
+          type: array
+          minItems: 1
+          x-key: uuid
+          items:
+            $ref: '#/components/schemas/forwarding-domain'
+        profile-collection:
+          $ref: '#/components/schemas/profile-collection'
+        external-managed-id:
+          type: object
+          properties:
+            manager-identifier:
+              type: string
+            external-managed-uuid:
+              type: string
+        local-id:
+          type: string
+        uuid:
+          type: string
+        name:
+          type: array
+        label:
+          type: array
+        extension:
+          type: array
+        operational-state:
+          type: string
+        administrative-control:
+          type: string
+        administrative-state:
+          type: string
+        lifecycle-state:
+          type: string
+        address:
+          type: array
+        equipment-augment-1-0:control-construct-pac:
+          type: object
+          required:
+            - external-label
+            - last-config-change-timestamp
+            - device-model-name
+          properties:
+            external-label:
+              type: string
+            last-config-change-timestamp:
+              type: string
+              pattern: '^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[\+\-]\d{2}:\d{2})$'
+            device-model-name:
+              type: string
+        protocol-collection:
+          type: object
+          properties:
+            protocol:
+              type: array
+              minItems: 0
+              x-key: uuid
+              items:
+                type: object
+                required:
+                  - protocol-name
+                  - uuid
+                properties:
+                  protocol-name:
+                    type: string
+                  external-managed-id:
+                    type: object
+                    properties:
+                      manager-identifier:
+                        type: string
+                      external-managed-uuid:
+                        type: string
+                  local-id:
+                    type: string
+                  uuid:
+                    type: string
+                  name:
+                    type: array
+                  label:
+                    type: array
+                  extension:
+                    type: array
+                  operational-state:
+                    type: string
+                  administrative-control:
+                    type: string
+                  administrative-state:
+                    type: string
+                  lifecycle-state:
+                    type: string
+                  address:
+                    type: array
+
+    equipment:
+      type: object
+
+    profile-collection:
+      type: object
+      required:
+        - profile
+      properties:
+        profile:
+          type: array
+          minItems: 1
+          x-key: uuid
+          items:
+            $ref: '#/components/schemas/profile'
+    profile:
+      allOf:
+        - # Profile class
+          type: object
+          required:
+            - uuid
+            - profile-name
+          properties:
+            profile-name:
+              type: string
+              enum:
+                - 'co-channel-profile-1-0:PROFILE_NAME_TYPE_CO_CHANNEL_PROFILE'
+                - 'l-3vpn-profile-1-0:PROFILE_NAME_TYPE_L3VPN_PROFILE'
+                - 'policing-profile-1-0:PROFILE_NAME_TYPE_POLICING_PROFILE'
+                - 'qos-profile-1-0:PROFILE_NAME_TYPE_QOS_PROFILE'
+                - 'scheduler-profile-1-0:PROFILE_NAME_TYPE_SCHEDULER_PROFILE'
+                - 'wred-profile-1-0:PROFILE_NAME_TYPE_WRED_PROFILE'
+                - 'wred-template-profile-1-0:PROFILE_NAME_TYPE_WRED_TEMPLATE_PROFILE'
+            external-managed-id:
+              type: object
+              properties:
+                manager-identifier:
+                  type: string
+                external-managed-uuid:
+                  type: string
+            local-id:
+              type: string
+            uuid:
+              type: string
+            name:
+              type: array
+            label:
+              type: array
+            extension:
+              type: array
+            operational-state:
+              type: string
+            administrative-control:
+              type: string
+            administrative-state:
+              type: string
+            lifecycle-state:
+              type: string
+            address:
+              type: array
+        - # Technology specific augments
+          oneOf:
+            - # CoChannelProfile
+              type: object
+              required:
+                - co-channel-profile-1-0:co-channel-profile-pac
+              properties:
+                co-channel-profile-1-0:co-channel-profile-pac:
+                  type: object
+                  required:
+                    - co-channel-profile-capability
+                    - co-channel-profile-configuration
+                  properties:
+                    co-channel-profile-capability:
+                      $ref: '#/components/schemas/co-channel-profile-capability'
+                    co-channel-profile-configuration:
+                      $ref: '#/components/schemas/co-channel-profile-configuration'
+            - # L3VpnProfile
+              type: object
+              required:
+                - l-3vpn-profile-1-0:l-3vpn-profile-pac
+              properties:
+                l-3vpn-profile-1-0:l-3vpn-profile-pac:
+                  type: object
+                  required:
+                    - l-3vpn-profile-capability
+                    - l-3vpn-profile-configuration
+                  properties:
+                    l-3vpn-profile-capability:
+                      $ref: '#/components/schemas/l-3vpn-profile-capability'
+                    l-3vpn-profile-configuration:
+                      $ref: '#/components/schemas/l-3vpn-profile-configuration'
+            - # PolicingProfile
+              type: object
+              required:
+                - policing-profile-1-0:policing-profile-pac
+              properties:
+                policing-profile-1-0:policing-profile-pac:
+                  type: object
+                  required:
+                    - policing-profile-capability
+                    - policing-profile-configuration
+                  properties:
+                    policing-profile-capability:
+                      $ref: '#/components/schemas/policing-profile-capability'
+                    policing-profile-configuration:
+                      $ref: '#/components/schemas/policing-profile-configuration'
+            - # QosProfile
+              type: object
+              required:
+                - qos-profile-1-0:qos-profile-pac
+              properties:
+                qos-profile-1-0:qos-profile-pac:
+                  type: object
+                  required:
+                    - qos-profile-capability
+                    - qos-profile-configuration
+                  properties:
+                    qos-profile-capability:
+                      $ref: '#/components/schemas/qos-profile-capability'
+                    qos-profile-configuration:
+                      $ref: '#/components/schemas/qos-profile-configuration'
+            - # SchedulerProfile
+              type: object
+              required:
+                - scheduler-profile-1-0:scheduler-profile-pac
+              properties:
+                scheduler-profile-1-0:scheduler-profile-pac:
+                  type: object
+                  required:
+                    - scheduler-profile-capability
+                    - scheduler-profile-configuration
+                  properties:
+                    scheduler-profile-capability:
+                      $ref: '#/components/schemas/scheduler-profile-capability'
+                    scheduler-profile-configuration:
+                      $ref: '#/components/schemas/scheduler-profile-configuration'
+            - # WredProfile
+              type: object
+              required:
+                - wred-profile-1-0:wred-profile-pac
+              properties:
+                wred-profile-1-0:wred-profile-pac:
+                  type: object
+                  required:
+                    - wred-profile-capability
+                    - wred-profile-configuration
+                  properties:
+                    wred-profile-capability:
+                      $ref: '#/components/schemas/wred-profile-capability'
+                    wred-profile-configuration:
+                      $ref: '#/components/schemas/wred-profile-configuration'
+            - # WredTemplateProfile
+              type: object
+              required:
+                - wred-template-profile-1-0:wred-template-profile-pac
+              properties:
+                wred-template-profile-1-0:wred-template-profile-pac:
+                  type: object
+                  required:
+                    - wred-template-profile-capability
+                    - wred-template-profile-configuration
+                  properties:
+                    wred-template-profile-capability:
+                      $ref: '#/components/schemas/wred-template-profile-capability'
+                    wred-template-profile-configuration:
+                      $ref: '#/components/schemas/wred-template-profile-configuration'
+    co-channel-profile-capability:
+      type: object
+      required:
+        - xpic-is-avail
+        - mimo-is-avail
+        - number-of-mimo-channels-max
+        - alic-is-avail
+      properties:
+        xpic-is-avail:
+          type: boolean
+        mimo-is-avail:
+          type: boolean
+        number-of-mimo-channels-max:
+          type: integer
+          format: int8
+        alic-is-avail:
+          type: boolean
+    co-channel-profile-configuration:
+      type: object
+      required:
+        - external-label
+        - kind-of-co-channel-profile
+      properties:
+        external-label:
+          type: string
+        kind-of-co-channel-profile:
+          type: string
+          enum:
+            - 'co-channel-profile-1-0:KIND_OF_CO_CHANNEL_PROFILE_TYPE_XPIC'
+            - 'co-channel-profile-1-0:KIND_OF_CO_CHANNEL_PROFILE_TYPE_MIMO'
+            - 'co-channel-profile-1-0:KIND_OF_CO_CHANNEL_PROFILE_TYPE_ALIC'
+            - 'co-channel-profile-1-0:KIND_OF_CO_CHANNEL_PROFILE_TYPE_NOT_YET_DEFINED'
+        logical-termination-point-list:
+          type: array
+          minItems: 0
+          items:
+            type: string
+    l-3vpn-profile-capability:
+      type: object
+      required:
+        - profile-naming-is-avail
+        - l-3vpn-based-on-ip-v-6-is-avail
+      properties:
+        profile-naming-is-avail:
+          type: boolean
+        l-3vpn-based-on-ip-v-6-is-avail:
+          type: boolean
+    l-3vpn-profile-configuration:
+      type: object
+      required:
+        - external-label
+        - l-3vpn-description
+        - l-3vpn-configuration-list
+      properties:
+        external-label:
+          type: string
+        l-3vpn-description:
+          type: string
+        l-3vpn-configuration-list:
+          type: array
+          minItems: 1
+          maxItems: 2
+          x-key: label-mode
+          items:
+            type: object
+            required:
+              - label-mode
+              - route-distinguisher
+              - route-target-import-list
+              - route-target-export-list
+              - address-family
+            properties:
+              label-mode:
+                type: string
+                enum:
+                  - 'l-3vpn-profile-1-0:LABEL_MODE_TYPE_PER_INSTANCE'
+                  - 'l-3vpn-profile-1-0:LABEL_MODE_TYPE_PER_ROUTE'
+              route-distinguisher:
+                type: object
+                required:
+                  - vpn-number
+                  - device-identifier-kind
+                  - loop-back-ip-address
+                  - as-number
+                properties:
+                  vpn-number:
+                    type: string
+                  device-identifier-kind:
+                    type: string
+                    enum:
+                      - 'l-3vpn-profile-1-0:DEVICE_IDENTIFIER_KIND_TYPE_LOOP_BACK_IP_ADDRESS'
+                      - 'l-3vpn-profile-1-0:DEVICE_IDENTIFIER_KIND_TYPE_AS_NUMBER'
+                      - 'l-3vpn-profile-1-0:DEVICE_IDENTIFIER_KIND_TYPE_NOT_YET_DEFINED'
+                  loop-back-ip-address:
+                    type: string
+                    pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
+                  as-number:
+                    type: string
+              route-target-import-list:
+                type: array
+                minItems: 1
+                x-key: vpn-number
+                items:
+                  type: object
+                  required:
+                    - vpn-number
+                    - device-identifier-kind
+                    - loop-back-ip-address
+                    - as-number
+                  properties:
+                    vpn-number:
+                      type: string
+                    device-identifier-kind:
+                      type: string
+                      enum:
+                        - 'l-3vpn-profile-1-0:DEVICE_IDENTIFIER_KIND_TYPE_LOOP_BACK_IP_ADDRESS'
+                        - 'l-3vpn-profile-1-0:DEVICE_IDENTIFIER_KIND_TYPE_AS_NUMBER'
+                        - 'l-3vpn-profile-1-0:DEVICE_IDENTIFIER_KIND_TYPE_NOT_YET_DEFINED'
+                    loop-back-ip-address:
+                      type: string
+                      pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
+                    as-number:
+                      type: string
+              route-target-export-list:
+                type: array
+                minItems: 1
+                x-key: vpn-number
+                items:
+                  type: object
+                  required:
+                    - vpn-number
+                    - device-identifier-kind
+                    - loop-back-ip-address
+                    - as-number
+                  properties:
+                    vpn-number:
+                      type: string
+                    device-identifier-kind:
+                      type: string
+                      enum:
+                        - 'l-3vpn-profile-1-0:DEVICE_IDENTIFIER_KIND_TYPE_LOOP_BACK_IP_ADDRESS'
+                        - 'l-3vpn-profile-1-0:DEVICE_IDENTIFIER_KIND_TYPE_AS_NUMBER'
+                        - 'l-3vpn-profile-1-0:DEVICE_IDENTIFIER_KIND_TYPE_NOT_YET_DEFINED'
+                    loop-back-ip-address:
+                      type: string
+                      pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
+                    as-number:
+                      type: string
+              address-family:
+                type: string
+                enum:
+                  - 'l-3vpn-profile-1-0:ADDRESS_FAMILY_TYPE_IPV4-FAMILY'
+                  - 'l-3vpn-profile-1-0:ADDRESS_FAMILY_TYPE_IPV6-FAMILY'
+                  - 'l-3vpn-profile-1-0:ADDRESS_FAMILY_TYPE_UNKNOWN'
+                  - 'l-3vpn-profile-1-0:ADDRESS_FAMILY_TYPE_NOT_YET_DEFINED'
+    policing-profile-capability:
+      type: object
+      required:
+        - profile-naming-is-avail
+        - supported-marker-mode-list
+        - supported-policer-kind-list
+        - information-rate-min
+        - information-rate-max
+        - burst-size-min
+        - burst-size-max
+      properties:
+        profile-naming-is-avail:
+          type: boolean
+        supported-marker-mode-list:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            enum:
+              - 'policing-profile-1-0:MARKER_MODE_TYPE_COLOR_BLIND'
+              - 'policing-profile-1-0:MARKER_MODE_TYPE_COLOR_AWARE'
+              - 'policing-profile-1-0:MARKER_MODE_TYPE_NOT_YET_DEFINED'
+        supported-policer-kind-list:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            enum:
+              - 'policing-profile-1-0:POLICER_KIND_TYPE_SINGLE_RATE_THREE_COLOR'
+              - 'policing-profile-1-0:POLICER_KIND_TYPE_TWO_RATE_THREE_COLOR'
+              - 'policing-profile-1-0:POLICER_KIND_TYPE_NOT_YET_DEFINED'
+        information-rate-min:
+          type: integer
+          format: int32
+        information-rate-max:
+          type: integer
+          format: int32
+        burst-size-min:
+          type: integer
+          format: int16
+        burst-size-max:
+          type: integer
+          format: int16
+    policing-profile-configuration:
+      type: object
+      required:
+        - external-label
+        - marker-mode
+        - policer-kind
+        - committed-information-rate
+        - committed-burst-size
+        - excess-burst-size
+        - peak-information-rate
+        - peak-burst-size
+      properties:
+        external-label:
+          type: string
+        marker-mode:
+          type: string
+          enum:
+            - 'policing-profile-1-0:MARKER_MODE_TYPE_COLOR_BLIND'
+            - 'policing-profile-1-0:MARKER_MODE_TYPE_COLOR_AWARE'
+            - 'policing-profile-1-0:MARKER_MODE_TYPE_NOT_YET_DEFINED'
+        policer-kind:
+          type: string
+          enum:
+            - 'policing-profile-1-0:POLICER_KIND_TYPE_SINGLE_RATE_THREE_COLOR'
+            - 'policing-profile-1-0:POLICER_KIND_TYPE_TWO_RATE_THREE_COLOR'
+            - 'policing-profile-1-0:POLICER_KIND_TYPE_NOT_YET_DEFINED'
+        committed-information-rate:
+          type: integer
+          format: int32
+        committed-burst-size:
+          type: integer
+          format: int32
+        excess-burst-size:
+          type: integer
+          format: int32
+        peak-information-rate:
+          type: integer
+          format: int32
+        peak-burst-size:
+          type: integer
+          format: int32
+    qos-profile-capability:
+      type: object
+      required:
+        - profile-naming-is-avail
+        - drop-precedence-at-be-queue-is-avail
+        - drop-precedence-at-af-queues-is-avail
+        - drop-precedence-at-prio-queues-is-avail
+        - available-qos-profile-kind-list
+        - queue-depth-configuration-is-avail
+      properties:
+        profile-naming-is-avail:
+          type: boolean
+        available-queue-list:
+          type: array
+          minItems: 0
+          x-key: queue-name
+          items:
+            type: object
+            required:
+              - queue-name
+              - supported-queue-depth-list
+            properties:
+              queue-name:
+                type: string
+                enum:
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_BEST_EFFORT_QUEUE'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE1'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE2'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE3'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE4'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_EXPEDITED_FORWARDING_QUEUE'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE6'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE7'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_NOT_YET_DEFINED'
+              supported-queue-depth-list:
+                type: array
+                minItems: 1
+                items:
+                  type: integer
+                  format: int32
+        drop-precedence-at-be-queue-is-avail:
+          type: boolean
+        drop-precedence-at-af-queues-is-avail:
+          type: boolean
+        drop-precedence-at-prio-queues-is-avail:
+          type: boolean
+        available-qos-profile-kind-list:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            enum:
+              - 'qos-profile-1-0:QOS_PROFILE_KIND_TYPE_NONE'
+              - 'qos-profile-1-0:QOS_PROFILE_KIND_TYPE_IEEE8021P'
+              - 'qos-profile-1-0:QOS_PROFILE_KIND_TYPE_MPLS_EXP'
+              - 'qos-profile-1-0:QOS_PROFILE_KIND_TYPE_IP_DSCP'
+              - 'qos-profile-1-0:QOS_PROFILE_KIND_TYPE_NOT_YET_DEFINED'
+        queue-depth-configuration-is-avail:
+          type: boolean
+    qos-profile-configuration:
+      type: object
+      required:
+        - external-label
+        - qos-profile-kind
+        - ingress-8021p-to-per-hop-behavior-mapping-list
+        - ingress-exp-to-per-hop-behavior-mapping-list
+        - ingress-ip-dscp-to-per-hop-behavior-mapping-list
+        - writing-per-hop-behavior-into-8021p-is-on
+        - egress-per-hop-behavior-to-8021p-mapping-list
+        - writing-per-hop-behavior-into-mpls-exp-is-on
+        - egress-per-hop-behavior-to-mpls-exp-mapping-list
+        - writing-per-hop-behavior-into-ip-dscp-is-on
+        - egress-per-hop-behavior-to-ip-dscp-mapping-list
+      properties:
+        external-label:
+          type: string
+        queue-depth-list:
+          type: array
+          minItems: 0
+          x-key: queue-name
+          items:
+            type: object
+            required:
+              - queue-name
+              - queue-depth
+            properties:
+              queue-name:
+                type: string
+                enum:
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_BEST_EFFORT_QUEUE'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE1'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE2'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE3'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE4'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_EXPEDITED_FORWARDING_QUEUE'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE6'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE7'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_NOT_YET_DEFINED'
+              queue-depth:
+                type: integer
+                format: int32
+        qos-profile-kind:
+          type: string
+          enum:
+            - 'qos-profile-1-0:QOS_PROFILE_KIND_TYPE_NONE'
+            - 'qos-profile-1-0:QOS_PROFILE_KIND_TYPE_IEEE8021P'
+            - 'qos-profile-1-0:QOS_PROFILE_KIND_TYPE_MPLS_EXP'
+            - 'qos-profile-1-0:QOS_PROFILE_KIND_TYPE_IP_DSCP'
+            - 'qos-profile-1-0:QOS_PROFILE_KIND_TYPE_NOT_YET_DEFINED'
+        ingress-8021p-to-per-hop-behavior-mapping-list:
+          type: array
+          minItems: 8
+          maxItems: 8
+          x-key: p-8021-priority
+          items:
+            type: object
+            required:
+              - p-8021-priority
+              - queue-name
+              - drop-precedence-inside-queue
+            properties:
+              p-8021-priority:
+                type: string
+              queue-name:
+                type: string
+                enum:
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_BEST_EFFORT_QUEUE'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE1'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE2'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE3'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE4'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_EXPEDITED_FORWARDING_QUEUE'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE6'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE7'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_NOT_YET_DEFINED'
+              drop-precedence-inside-queue:
+                type: string
+                enum:
+                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_NONE'
+                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_LOW'
+                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_MEDIUM'
+                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_HIGH'
+                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_NOT_YET_DEFINED'
+        ingress-exp-to-per-hop-behavior-mapping-list:
+          type: array
+          minItems: 8
+          maxItems: 8
+          x-key: exp-priority
+          items:
+            type: object
+            required:
+              - exp-priority
+              - queue-name
+              - drop-precedence-inside-queue
+            properties:
+              exp-priority:
+                type: string
+              queue-name:
+                type: string
+                enum:
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_BEST_EFFORT_QUEUE'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE1'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE2'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE3'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE4'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_EXPEDITED_FORWARDING_QUEUE'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE6'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE7'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_NOT_YET_DEFINED'
+              drop-precedence-inside-queue:
+                type: string
+                enum:
+                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_NONE'
+                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_LOW'
+                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_MEDIUM'
+                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_HIGH'
+                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_NOT_YET_DEFINED'
+        ingress-ip-dscp-to-per-hop-behavior-mapping-list:
+          type: array
+          minItems: 64
+          maxItems: 64
+          x-key: dscp-priority
+          items:
+            type: object
+            required:
+              - dscp-priority
+              - queue-name
+              - drop-precedence-inside-queue
+            properties:
+              dscp-priority:
+                type: string
+              queue-name:
+                type: string
+                enum:
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_BEST_EFFORT_QUEUE'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE1'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE2'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE3'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE4'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_EXPEDITED_FORWARDING_QUEUE'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE6'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE7'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_NOT_YET_DEFINED'
+              drop-precedence-inside-queue:
+                type: string
+                enum:
+                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_NONE'
+                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_LOW'
+                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_MEDIUM'
+                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_HIGH'
+                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_NOT_YET_DEFINED'
+        writing-per-hop-behavior-into-8021p-is-on:
+          type: boolean
+        egress-per-hop-behavior-to-8021p-mapping-list:
+          type: array
+          minItems: 24
+          maxItems: 24
+          x-key: mapping-number
+          items:
+            type: object
+            required:
+              - mapping-number
+              - queue-name
+              - drop-precedence-inside-queue
+              - value-of-priority-bits
+            properties:
+              mapping-number:
+                type: integer
+                format: int8
+              queue-name:
+                type: string
+                enum:
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_BEST_EFFORT_QUEUE'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE1'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE2'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE3'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE4'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_EXPEDITED_FORWARDING_QUEUE'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE6'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE7'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_NOT_YET_DEFINED'
+              drop-precedence-inside-queue:
+                type: string
+                enum:
+                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_NONE'
+                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_LOW'
+                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_MEDIUM'
+                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_HIGH'
+                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_NOT_YET_DEFINED'
+              value-of-priority-bits:
+                type: integer
+                format: int8
+        writing-per-hop-behavior-into-mpls-exp-is-on:
+          type: boolean
+        egress-per-hop-behavior-to-mpls-exp-mapping-list:
+          type: array
+          minItems: 24
+          maxItems: 24
+          x-key: mapping-number
+          items:
+            type: object
+            required:
+              - mapping-number
+              - queue-name
+              - drop-precedence-inside-queue
+              - value-of-priority-bits
+            properties:
+              mapping-number:
+                type: integer
+                format: int8
+              queue-name:
+                type: string
+                enum:
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_BEST_EFFORT_QUEUE'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE1'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE2'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE3'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE4'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_EXPEDITED_FORWARDING_QUEUE'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE6'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE7'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_NOT_YET_DEFINED'
+              drop-precedence-inside-queue:
+                type: string
+                enum:
+                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_NONE'
+                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_LOW'
+                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_MEDIUM'
+                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_HIGH'
+                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_NOT_YET_DEFINED'
+              value-of-priority-bits:
+                type: integer
+                format: int8
+        writing-per-hop-behavior-into-ip-dscp-is-on:
+          type: boolean
+        egress-per-hop-behavior-to-ip-dscp-mapping-list:
+          type: array
+          minItems: 24
+          maxItems: 24
+          x-key: mapping-number
+          items:
+            type: object
+            required:
+              - mapping-number
+              - queue-name
+              - drop-precedence-inside-queue
+              - value-of-priority-bits
+            properties:
+              mapping-number:
+                type: integer
+                format: int8
+              queue-name:
+                type: string
+                enum:
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_BEST_EFFORT_QUEUE'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE1'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE2'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE3'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE4'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_EXPEDITED_FORWARDING_QUEUE'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE6'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE7'
+                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_NOT_YET_DEFINED'
+              drop-precedence-inside-queue:
+                type: string
+                enum:
+                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_NONE'
+                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_LOW'
+                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_MEDIUM'
+                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_HIGH'
+                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_NOT_YET_DEFINED'
+              value-of-priority-bits:
+                type: integer
+                format: int8
+    scheduler-profile-capability:
+      type: object
+      required:
+        - scheduler-kind-configuration-is-avail
+        - available-queue-list
+      properties:
+        scheduler-kind-configuration-is-avail:
+          type: boolean
+        available-queue-list:
+          type: array
+          minItems: 1
+          maxItems: 8
+          x-key: queue-name
+          items:
+            type: object
+            required:
+              - queue-name
+              - available-scheduling-kind-list
+            properties:
+              queue-name:
+                type: string
+                enum:
+                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_BEST_EFFORT_QUEUE'
+                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE1'
+                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE2'
+                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE3'
+                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE4'
+                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_EXPEDITED_FORWARDING_QUEUE'
+                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE6'
+                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE7'
+                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_QUEUENAME_NOT_YET_DEFINED'
+              available-scheduling-kind-list:
+                type: array
+                minItems: 1
+                items:
+                  type: string
+                  enum:
+                    - 'scheduler-profile-1-0:SCHEDULER_KIND_TYPE_STRICT'
+                    - 'scheduler-profile-1-0:SCHEDULER_KIND_TYPE_WFQ'
+                    - 'scheduler-profile-1-0:SCHEDULER_KIND_TYPE_WRR'
+                    - 'scheduler-profile-1-0:SCHEDULER_KIND_TYPE_DWRR'
+                    - 'scheduler-profile-1-0:SCHEDULER_KIND_TYPE_NOT_YET_DEFINED'
+    scheduler-profile-configuration:
+      type: object
+      required:
+        - queue-behavior-list
+      properties:
+        queue-behavior-list:
+          type: array
+          minItems: 1
+          maxItems: 8
+          x-key: queue-name
+          items:
+            type: object
+            required:
+              - queue-name
+              - scheduler-kind
+              - weighting
+            properties:
+              queue-name:
+                type: string
+                enum:
+                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_BEST_EFFORT_QUEUE'
+                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE1'
+                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE2'
+                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE3'
+                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE4'
+                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_EXPEDITED_FORWARDING_QUEUE'
+                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE6'
+                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE7'
+                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_QUEUENAME_NOT_YET_DEFINED'
+              scheduler-kind:
+                type: string
+                enum:
+                  - 'scheduler-profile-1-0:SCHEDULER_KIND_TYPE_STRICT'
+                  - 'scheduler-profile-1-0:SCHEDULER_KIND_TYPE_WFQ'
+                  - 'scheduler-profile-1-0:SCHEDULER_KIND_TYPE_WRR'
+                  - 'scheduler-profile-1-0:SCHEDULER_KIND_TYPE_DWRR'
+                  - 'scheduler-profile-1-0:SCHEDULER_KIND_TYPE_NOT_YET_DEFINED'
+              weighting:
+                type: integer
+                format: int8
+    wred-profile-capability:
+      type: object
+      required:
+        - available-buffer-size
+        - drop-probability-at-threshold-low-is-avail
+        - gentle-wred-is-avail
+        - sensitivity-setting-is-avail
+        - coloring-is-avail
+      properties:
+        available-buffer-size:
+          type: integer
+          format: int32
+        drop-probability-at-threshold-low-is-avail:
+          type: boolean
+        gentle-wred-is-avail:
+          type: boolean
+        sensitivity-setting-is-avail:
+          type: boolean
+        coloring-is-avail:
+          type: boolean
+    wred-profile-configuration:
+      type: object
+      required:
+        - external-label
+        - threshold-low
+        - drop-probability-at-threshold-low
+        - threshold-high
+        - drop-probability-at-threshold-high
+        - gentle-wred-is-on
+        - threshold-gentle
+        - sensitivity
+        - coloring-is-on
+      properties:
+        external-label:
+          type: string
+        threshold-low:
+          type: integer
+          format: int32
+        drop-probability-at-threshold-low:
+          type: integer
+          format: int8
+        threshold-high:
+          type: integer
+          format: int32
+        drop-probability-at-threshold-high:
+          type: integer
+          format: int8
+        gentle-wred-is-on:
+          type: boolean
+        threshold-gentle:
+          type: integer
+          format: int32
+        sensitivity:
+          type: integer
+          format: int8
+        coloring-is-on:
+          type: boolean
+    wred-template-profile-capability:
+      type: object
+      required:
+        - available-buffer-size
+        - drop-probability-at-threshold-low-is-avail
+        - gentle-wred-is-avail
+        - sensitivity-setting-is-avail
+        - coloring-is-avail
+        - supported-wred-protocol-list
+        - available-drop-precedence-kind-list
+      properties:
+        available-buffer-size:
+          type: integer
+          format: int32
+        drop-probability-at-threshold-low-is-avail:
+          type: boolean
+        gentle-wred-is-avail:
+          type: boolean
+        sensitivity-setting-is-avail:
+          type: boolean
+        coloring-is-avail:
+          type: boolean
+        supported-wred-protocol-list:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            enum:
+              - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_NONE'
+              - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_ETHERNET_MAC'
+              - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_VLAN'
+              - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_Q_IN_Q'
+              - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_MPLS'
+              - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_IPV4'
+              - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_IPV6'
+              - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_TCP'
+              - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_UDP'
+              - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_RTP'
+              - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_GTP_U'
+              - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_OTHERS'
+              - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_NOT_YET_DEFINED'
+        available-drop-precedence-kind-list:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            enum:
+              - 'wred-template-profile-1-0:DROP_PRECEDENCE_TYPE_ALL'
+              - 'wred-template-profile-1-0:DROP_PRECEDENCE_TYPE_LOW'
+              - 'wred-template-profile-1-0:DROP_PRECEDENCE_TYPE_MEDIUM'
+              - 'wred-template-profile-1-0:DROP_PRECEDENCE_TYPE_HIGH'
+              - 'wred-template-profile-1-0:DROP_PRECEDENCE_TYPE_NOT_YET_DEFINED'
+    wred-template-profile-configuration:
+      type: object
+      properties:
+        wred-template-list:
+          type: array
+          minItems: 0
+          x-key: affected-protocol affected-drop-precedence
+          items:
+            type: object
+            required:
+              - affected-protocol
+              - affected-drop-precedence
+              - wred-configuration
+            properties:
+              affected-protocol:
+                type: string
+                enum:
+                  - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_NONE'
+                  - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_ETHERNET_MAC'
+                  - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_VLAN'
+                  - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_Q_IN_Q'
+                  - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_MPLS'
+                  - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_IPV4'
+                  - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_IPV6'
+                  - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_TCP'
+                  - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_UDP'
+                  - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_RTP'
+                  - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_GTP_U'
+                  - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_OTHERS'
+                  - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_NOT_YET_DEFINED'
+              affected-drop-precedence:
+                type: string
+                enum:
+                  - 'wred-template-profile-1-0:DROP_PRECEDENCE_TYPE_ALL'
+                  - 'wred-template-profile-1-0:DROP_PRECEDENCE_TYPE_LOW'
+                  - 'wred-template-profile-1-0:DROP_PRECEDENCE_TYPE_MEDIUM'
+                  - 'wred-template-profile-1-0:DROP_PRECEDENCE_TYPE_HIGH'
+                  - 'wred-template-profile-1-0:DROP_PRECEDENCE_TYPE_NOT_YET_DEFINED'
+              wred-configuration:
+                type: object
+                required:
+                  - external-label
+                  - threshold-low
+                  - drop-probability-at-threshold-low
+                  - threshold-high
+                  - drop-probability-at-threshold-high
+                  - gentle-wred-is-on
+                  - threshold-gentle
+                  - sensitivity
+                  - coloring-is-on
+                properties:
+                  external-label:
+                    type: string
+                  threshold-low:
+                    type: integer
+                    format: int32
+                  drop-probability-at-threshold-low:
+                    type: integer
+                    format: int8
+                  threshold-high:
+                    type: integer
+                    format: int32
+                  drop-probability-at-threshold-high:
+                    type: integer
+                    format: int8
+                  gentle-wred-is-on:
+                    type: boolean
+                  threshold-gentle:
+                    type: integer
+                    format: int32
+                  sensitivity:
+                    type: integer
+                    format: int8
+                  coloring-is-on:
+                    type: boolean
+
+    logical-termination-point:
+      type: object
+    ethernetContainerCapability:
+      type: object
+      required:
+        - available-queue-list
+        - dropping-behavior-configuration-is-avail
+        - wred-profile-is-avail
+        - wred-profile-configuration-is-avail
+        - wred-template-profile-is-avail
+        - wred-template-profile-configuration-is-avail
+        - scheduler-kind-configuration-is-avail
+        - scheduler-profile-configuration-is-avail
+        - supported-wred-protocol-list
+        - explicit-congestion-notification-is-avail
+        - ingress-policing-is-avail
+        - egress-shaping-is-avail
+        - supported-maximum-information-rate-list
+        - supported-maximum-burst-size-list
+        - bundling-is-avail
+        - bundling-group-size-max
+        - support-of-management-frames-without-preamble-is-avail
+        - supported-header-compression-kind-list
+        - fec-is-avail
+        - fec-word-size-max
+        - supported-fec-redundancy-size-list
+        - supported-fec-interleaver-kind-list
+        - supported-fec-interleaver-depth-list
+        - encryption-is-avail
+        - admin-shut-down-is-avail
+        - supported-loop-back-kind-list
+        - maintenance-timer-range
+        - statistics-is-avail
+        - performance-monitoring-is-avail
+      properties:
+        available-queue-list:
+          type: array
+          minItems: 1
+          maxItems: 8
+          items:
+            type: object
+            properties:
+              queue-name:
+                enum:
+                  - 'ethernet-container-2-0:QUEUE_NAME_TYPE_BEST_EFFORT_QUEUE'
+                  - 'ethernet-container-2-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE1'
+                  - 'ethernet-container-2-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE2'
+                  - 'ethernet-container-2-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE3'
+                  - 'ethernet-container-2-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE4'
+                  - 'ethernet-container-2-0:QUEUE_NAME_TYPE_EXPEDITED_FORWARDING_QUEUE'
+                  - 'ethernet-container-2-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE6'
+                  - 'ethernet-container-2-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE7'
+                  - 'ethernet-container-2-0:QUEUE_NAME_TYPE_QUEUENAME_NOT_YET_DEFINED'
+              supported-queue-depth-list:
+                type: array
+                items:
+                  type: integer
+              available-dropping-behavior-kind-list:
+                type: array
+                items:
+                  enum:
+                    - 'ethernet-container-2-0:DROPPING_BEHAVIOR_KIND_TYPE_DROP_TAIL'
+                    - 'ethernet-container-2-0:DROPPING_BEHAVIOR_KIND_TYPE_RED'
+                    - 'ethernet-container-2-0:DROPPING_BEHAVIOR_KIND_TYPE_WRED'
+                    - 'ethernet-container-2-0:DROPPING_BEHAVIOR_KIND_TYPE_NOT_YET_DEFINED'
+              available-drop-precedence-kind-list:
+                type: array
+                items:
+                  enum:
+                    - 'ethernet-container-2-0:DROP_PRECEDENCE_TYPE_ALL'
+                    - 'ethernet-container-2-0:DROP_PRECEDENCE_TYPE_LOW'
+                    - 'ethernet-container-2-0:DROP_PRECEDENCE_TYPE_MEDIUM'
+                    - 'ethernet-container-2-0:DROP_PRECEDENCE_TYPE_HIGH'
+                    - 'ethernet-container-2-0:DROP_PRECEDENCE_TYPE_NOT_YET_DEFINED'
+              wred-profile-per-drop-precedence-is-available:
+                type: boolean
+              available-scheduling-kind-list:
+                type: array
+                items:
+                  enum:
+                    - 'ethernet-container-2-0:SCHEDULER_KIND_TYPE_STRICT'
+                    - 'ethernet-container-2-0:SCHEDULER_KIND_TYPE_WFQ'
+                    - 'ethernet-container-2-0:SCHEDULER_KIND_TYPE_WRR'
+                    - 'ethernet-container-2-0:SCHEDULER_KIND_TYPE_DWRR'
+                    - 'ethernet-container-2-0:SCHEDULER_KIND_TYPE_NOT_YET_DEFINED'
+            required:
+              - queue-name
+              - supported-queue-depth-list
+              - available-dropping-behavior-kind-list
+              - available-drop-precedence-kind-list
+              - wred-profile-per-drop-precedence-is-available
+              - available-scheduling-kind-list
+        dropping-behavior-configuration-is-avail:
+          type: boolean
+        wred-profile-is-avail:
+          type: boolean
+        wred-profile-configuration-is-avail:
+          type: boolean
+        wred-template-profile-is-avail:
+          type: boolean
+        wred-template-profile-configuration-is-avail:
+          type: boolean
+        scheduler-kind-configuration-is-avail:
+          type: boolean
+        scheduler-profile-configuration-is-avail:
+          type: boolean
+        supported-wred-protocol-list:
+          type: array
+          items:
+            enum:
+              - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_NONE'
+              - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_ETHERNET_MAC'
+              - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_VLAN'
+              - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_Q_IN_Q'
+              - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_MPLS'
+              - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_IPV4'
+              - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_IPV6'
+              - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_TCP'
+              - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_UDP'
+              - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_RTP'
+              - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_GTP_U'
+              - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_OTHERS'
+              - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_NOT_YET_DEFINED'
+        explicit-congestion-notification-is-avail:
+          type: boolean
+        ingress-policing-is-avail:
+          type: boolean
+        egress-shaping-is-avail:
+          type: boolean
+        supported-maximum-information-rate-list:
+          type: array
+          items:
+            type: integer
+        supported-maximum-burst-size-list:
+          type: array
+          items:
+            type: integer
+        bundling-is-avail:
+          type: boolean
+        bundling-group-size-max:
+          type: integer
+        support-of-management-frames-without-preamble-is-avail:
+          type: boolean
+        supported-header-compression-kind-list:
+          type: array
+          items:
+            type: object
+            required:
+              - header-compression-name
+              - header-compression-mode
+              - compressed-protocol-layer-list
+              - mpls-payload-kind-list
+              - compressed-header-length
+            properties:
+              header-compression-name:
+                type: string
+              header-compression-mode:
+                enum:
+                  - 'ethernet-container-2-0:HEADER_COMPRESSION_MODE_TYPE_AUTO'
+                  - 'ethernet-container-2-0:HEADER_COMPRESSION_MODE_TYPE_PROTOCOL_BASED'
+                  - 'ethernet-container-2-0:HEADER_COMPRESSION_MODE_TYPE_LENGTH_BASED'
+                  - 'ethernet-container-2-0:HEADER_COMPRESSION_MODE_TYPE_NO_COMPRESSION'
+                  - 'ethernet-container-2-0:HEADER_COMPRESSION_MODE_TYPE_NOT_YET_DEFINED'
+              compressed-protocol-layer-list:
+                type: array
+                items:
+                  enum:
+                    - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_NONE'
+                    - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_ETHERNET_MAC'
+                    - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_VLAN'
+                    - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_Q_IN_Q'
+                    - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_MPLS'
+                    - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_IPV4'
+                    - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_IPV6'
+                    - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_TCP'
+                    - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_UDP'
+                    - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_RTP'
+                    - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_GTP_U'
+                    - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_OTHERS'
+                    - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_NOT_YET_DEFINED'
+              mpls-payload-kind-list:
+                type: array
+                items:
+                  enum:
+                    - 'ethernet-container-2-0:MPLS_PAYLOAD_KIND_TYPE_NONE'
+                    - 'ethernet-container-2-0:MPLS_PAYLOAD_KIND_TYPE_AUTO'
+                    - 'ethernet-container-2-0:MPLS_PAYLOAD_KIND_TYPE_ETH_O_MPLS'
+                    - 'ethernet-container-2-0:MPLS_PAYLOAD_KIND_TYPE_IP_O_MPLS'
+                    - 'ethernet-container-2-0:MPLS_PAYLOAD_KIND_TYPE_NOT_YET_DEFINED'
+              compressed-header-length:
+                type: integer
+
+        fec-is-avail:
+          type: boolean
+        fec-word-size-max:
+          type: integer
+        supported-fec-redundancy-size-list:
+          type: array
+          items:
+            enum:
+              - 'ethernet-container-2-0:FEC_REDUNDANCY_SIZE_TYPE_2'
+              - 'ethernet-container-2-0:FEC_REDUNDANCY_SIZE_TYPE_4'
+              - 'ethernet-container-2-0:FEC_REDUNDANCY_SIZE_TYPE_8'
+              - 'ethernet-container-2-0:FEC_REDUNDANCY_SIZE_TYPE_16'
+              - 'ethernet-container-2-0:FEC_REDUNDANCY_SIZE_TYPE_20'
+              - 'ethernet-container-2-0:FEC_REDUNDANCY_SIZE_TYPE_NOT_YET_DEFINED'
+        supported-fec-interleaver-kind-list:
+          type: array
+          items:
+            enum:
+              - 'ethernet-container-2-0:FEC_INTERLEAVER_KIND_TYPE_NONE'
+              - 'ethernet-container-2-0:FEC_INTERLEAVER_KIND_TYPE_BLOCK'
+              - 'ethernet-container-2-0:FEC_INTERLEAVER_KIND_TYPE_CONVOLUTION'
+              - 'ethernet-container-2-0:FEC_INTERLEAVER_KIND_TYPE_NOT_YET_DEFINED'
+        supported-fec-interleaver-depth-list:
+          type: array
+          items:
+            enum:
+              - 'ethernet-container-2-0:FEC_INTERLEAVER_DEPTH_TYPE_1'
+              - 'ethernet-container-2-0:FEC_INTERLEAVER_DEPTH_TYPE_2'
+              - 'ethernet-container-2-0:FEC_INTERLEAVER_DEPTH_TYPE_3'
+              - 'ethernet-container-2-0:FEC_INTERLEAVER_DEPTH_TYPE_4'
+              - 'ethernet-container-2-0:FEC_INTERLEAVER_DEPTH_TYPE_6'
+              - 'ethernet-container-2-0:FEC_INTERLEAVER_DEPTH_TYPE_8'
+              - 'ethernet-container-2-0:FEC_INTERLEAVER_DEPTH_TYPE_12'
+              - 'ethernet-container-2-0:FEC_INTERLEAVER_DEPTH_TYPE_16'
+              - 'ethernet-container-2-0:FEC_INTERLEAVER_DEPTH_TYPE_24'
+              - 'ethernet-container-2-0:FEC_INTERLEAVER_DEPTH_TYPE_32'
+              - 'ethernet-container-2-0:FEC_INTERLEAVER_DEPTH_TYPE_48'
+              - 'ethernet-container-2-0:FEC_INTERLEAVER_DEPTH_TYPE_96'
+              - 'ethernet-container-2-0:FEC_INTERLEAVER_DEPTH_TYPE_NOT_YET_DEFINED'
+        encryption-is-avail:
+          type: boolean
+        admin-shut-down-is-avail:
+          type: boolean
+        supported-loop-back-kind-list:
+          type: array
+          items:
+            enum:
+              - 'ethernet-container-2-0:LOOP_BACK_TYPE_NONE'
+              - 'ethernet-container-2-0:LOOP_BACK_TYPE_BACK_TO_LOCAL'
+              - 'ethernet-container-2-0:LOOP_BACK_TYPE_BACK_TO_REMOTE'
+              - 'ethernet-container-2-0:LOOP_BACK_TYPE_NOT_YET_DEFINED'
+        maintenance-timer-range:
+          type: string
+          pattern: '^(Range of the maintenance timer not yet defined\.)$|^([0-9]{1,}){1,1}([,]{1,1}[ ]{1,1}[1-9]{1,1}[0-9]{0,}){0,}$|^([0-9]{1,}){1,1}(-){1,1}([1-9]{1,1}[0-9]{0,}){1,1}$'
+        statistics-is-avail:
+          type: boolean
+        performance-monitoring-is-avail:
+          type: boolean
+
+    forwarding-domain:
+      type: object
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: operation-key
+    basicAuth:
+      type: http
+      scheme: basic

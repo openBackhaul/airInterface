@@ -1,0 +1,1583 @@
+module air-interface-2-0 {
+  yang-version 1.1;
+  namespace "urn:onf:yang:air-interface-2-0";
+  prefix air-interface;
+
+  import ietf-yang-types {
+    prefix yang;
+  }
+  import core-model-1-4 {
+    prefix core-model;
+  }
+
+  organization
+    "openBackhaul.com proposal to Open Networking Foundation (ONF)";
+  contact
+    "WG Web : https://github.com/openBackhaul/Overview
+     WG List: AirInterface@openBackhaul.com
+     Editor : Thorsten Heinze
+     Email  : Thorsten.Heinze@openBackhaul.com";
+  description
+    "Copyright 2024 openBackhaul.com
+
+     Licensed under the Apache License, Version 2.0 (the 'License');
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+     http://www.apache.org/licenses/LICENSE-2.0
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an 'AS IS' BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.";
+
+  revision 2024-01-02 {
+    description
+      "Model for the Transport SDN Introduction at Telefonica Germany.
+       Please view https://github.com/openBackhaul/airInterface/issues for changes.";
+    reference
+      "https://github.com/openBackhaul/airInterface/tree/tsi: Model definition
+       https://github.com/openBackhaul/onfCoreIm/tree/tsi: ONF TR-512 Core IM incl. Profile and enhanced Equipment definition";
+  }
+  revision 2023-10-16 {
+    description
+      "Model for the Transport SDN Introduction at Telefonica Germany.
+       Please view https://github.com/openBackhaul/airInterface/issues for changes.";
+    reference
+      "https://github.com/openBackhaul/airInterface/tree/tsi: Model definition
+       https://github.com/openBackhaul/onfCoreIm/tree/tsi: ONF TR-512 Core IM incl. Profile and enhanced Equipment definition";
+  }
+  revision 2022-03-28 {
+    description
+      "Model for the Transport SDN Pilot at Telefonica Germany.
+       Please view https://github.com/openBackhaul/airInterface/issues for changes.";
+    reference
+      "https://github.com/openBackhaul/airInterface/tree/tsi: Model definition
+       https://github.com/openBackhaul/onfCoreIm/tree/tsi: ONF TR-512 Core IM incl. Profile and enhanced Equipment definition";
+  }
+  revision 2020-01-21 {
+    description
+      "Model for the Transport SDN Pilot at Telefonica Germany.
+       Please view https://github.com/openBackhaul/airInterface/issues for changes.";
+    reference
+      "https://github.com/openBackhaul/airInterface/tree/tsi: Model definition
+       https://github.com/openBackhaul/onfCoreIm/tree/tsi: ONF TR-512 Core IM incl. Profile and enhanced Equipment definition";
+  }
+  revision 2019-11-22 {
+    description
+      "Model for the Transport SDN Pilot at Telefonica Germany.
+       Please view https://github.com/openBackhaul/airInterface/issues for changes.";
+    reference
+      "https://github.com/openBackhaul/airInterface/tree/tsi: Model definition
+       https://github.com/openBackhaul/onfCoreIm/tree/tsi: ONF TR-512 Core IM incl. Profile and enhanced Equipment definition";
+  }
+  revision 2019-07-11 {
+    description
+      "Model for the Transport SDN Pilot at Telefonica Germany.
+       Please view https://github.com/openBackhaul/airInterface/issues for changes.";
+    reference
+      "https://github.com/openBackhaul/airInterface/tree/tsi: Model definition
+       https://github.com/openBackhaul/onfCoreIm/tree/tsi: ONF TR-512 Core IM incl. Profile and enhanced Equipment definition";
+  }
+
+  identity LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER {
+    base core-model:LAYER_PROTOCOL_NAME_TYPE;
+    description
+      "none";
+  }
+
+  /*********************************************
+   * grouping statements for complex data types
+   *******************************************/ 
+
+  identity RADIO_SIGNAL_ID_DATATYPE_TYPE {
+    description
+      "none";
+  }
+
+  identity RADIO_SIGNAL_ID_DATATYPE_TYPE_INTEGER {
+    base RADIO_SIGNAL_ID_DATATYPE_TYPE;
+    description
+      "none";
+  }
+
+  identity RADIO_SIGNAL_ID_DATATYPE_TYPE_STRING {
+    base RADIO_SIGNAL_ID_DATATYPE_TYPE;
+    description
+      "none";
+  }
+
+  identity RADIO_SIGNAL_ID_DATATYPE_TYPE_NOT_YET_DEFINED {
+    base RADIO_SIGNAL_ID_DATATYPE_TYPE;
+    description
+      "none";
+  }
+
+  identity LOOP_BACK_TYPE {
+    description
+      "none";
+  }
+
+  identity LOOP_BACK_TYPE_RF_TO_REMOTE {
+    base LOOP_BACK_TYPE;
+    description
+      "Returning the header information of the remote site back to the remote site on the radio interface between both outdoor units.";
+  }
+
+  identity LOOP_BACK_TYPE_RF_TO_LOCAL {
+    base LOOP_BACK_TYPE;
+    description
+      "Returning the header information of the local site back to the local site on the radio interface between both outdoor units.";
+  }
+
+  identity LOOP_BACK_TYPE_IF_TO_REMOTE {
+    base LOOP_BACK_TYPE;
+    description
+      "Returning the header information of the remote site back to the remote site on the intermediate frequency interface between local indoor unit and outdoor unit.";
+  }
+
+  identity LOOP_BACK_TYPE_IF_TO_LOCAL {
+    base LOOP_BACK_TYPE;
+    description
+      "Returning the header information of the local site back to the local site on the intermediate frequency interface between local indoor unit and outdoor unit.";
+  }
+
+  identity LOOP_BACK_TYPE_NONE {
+    base LOOP_BACK_TYPE;
+    description
+      "none";
+  }
+
+  identity DIRECTION_TYPE {
+    description
+      "none";
+  }
+
+  identity DIRECTION_TYPE_TX {
+    base DIRECTION_TYPE;
+    description
+      "none";
+  }
+
+  identity DIRECTION_TYPE_RX {
+    base DIRECTION_TYPE;
+    description
+      "none";
+  }
+
+  identity DIRECTION_TYPE_NONE {
+    base DIRECTION_TYPE;
+    description
+      "none";
+  }
+
+  identity G_826_TYPE {
+    description
+      "none";
+  }
+
+  identity G_826_TYPE_ES {
+    base G_826_TYPE;
+    description
+      "Errored Seconds. Threshold cross alarm will relate to TypeDefinitions::AirInterfacePerformanceType::es .";
+  }
+
+  identity G_826_TYPE_SES {
+    base G_826_TYPE;
+    description
+      "Severely Errored Seconds. Threshold cross alarm will relate to TypeDefinitions::AirInterfacePerformanceType::ses .";
+  }
+
+  identity G_826_TYPE_CSES {
+    base G_826_TYPE;
+    description
+      "Consecutive Severely Errored Seconds. Threshold cross alarm will relate to TypeDefinitions::AirInterfacePerformanceType::cses .";
+  }
+
+  identity G_826_TYPE_UAS {
+    base G_826_TYPE;
+    description
+      "Unavailable Seconds. Threshold cross alarm will relate to TypeDefinitions::AirInterfacePerformanceType::unavailability.";
+  }
+
+  identity G_826_TYPE_NOT_SPECIFIED {
+    base G_826_TYPE;
+    description
+      "none";
+  }
+
+  identity XLEVEL_THRESHOLD_SECOND_KIND_TYPE {
+    description
+      "none";
+  }
+
+  identity XLEVEL_THRESHOLD_SECOND_KIND_TYPE_RLTS {
+    base XLEVEL_THRESHOLD_SECOND_KIND_TYPE;
+    description
+      "none";
+  }
+
+  identity XLEVEL_THRESHOLD_SECOND_KIND_TYPE_TLTS {
+    base XLEVEL_THRESHOLD_SECOND_KIND_TYPE;
+    description
+      "none";
+  }
+
+  identity XLEVEL_THRESHOLD_SECOND_KIND_TYPE_NOT_YET_DEFINED {
+    base XLEVEL_THRESHOLD_SECOND_KIND_TYPE;
+    description
+      "none";
+  }
+
+  identity GRANULARITY_PERIOD_TYPE {
+    description
+      "none";
+  }
+
+  identity GRANULARITY_PERIOD_TYPE_UNKNOWN {
+    base GRANULARITY_PERIOD_TYPE;
+    description
+      "none";
+  }
+
+  identity GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN {
+    base GRANULARITY_PERIOD_TYPE;
+    description
+      "none";
+  }
+
+  identity GRANULARITY_PERIOD_TYPE_PERIOD-24-HOURS {
+    base GRANULARITY_PERIOD_TYPE;
+    description
+      "none";
+  }
+
+  identity GRANULARITY_PERIOD_TYPE_NOT_YET_DEFINED {
+    base GRANULARITY_PERIOD_TYPE;
+    description
+      "none";
+  }
+
+  identity INTERFACE_STATUS_TYPE {
+    description
+      "none";
+  }
+
+  identity INTERFACE_STATUS_TYPE_UP {
+    base INTERFACE_STATUS_TYPE;
+    description
+      "Ready to pass packets. It is expected that the LogicalTerminationPoint::operationalState attribute is expressing this logical layer being available for use (means: ENABLED), while this value occurs.";
+  }
+
+  identity INTERFACE_STATUS_TYPE_DOWN {
+    base INTERFACE_STATUS_TYPE;
+    description
+      "The interface does not pass any packets. It is expected that the LogicalTerminationPoint::operationalState attribute is expressing this logical layer being NOT available for use (means: DISABLED), while this value occurs.";
+  }
+
+  identity INTERFACE_STATUS_TYPE_TESTING {
+    base INTERFACE_STATUS_TYPE;
+    description
+      "In some test mode.  No operational packets can be passed. It is expected that the LogicalTerminationPoint::operationalState attribute is expressing this logical layer being NOT available for use (means: DISABLED), while this value occurs.";
+  }
+
+  identity INTERFACE_STATUS_TYPE_UNKNOWN {
+    base INTERFACE_STATUS_TYPE;
+    description
+      "Status cannot be determined for some reason. While this value occurs, the LogicalTerminationPoint::operationalState attribute, which is expressing the availability of the logical layer for being used, might have either ENABLED or DISABLED as value.";
+  }
+
+  identity INTERFACE_STATUS_TYPE_DORMANT {
+    base INTERFACE_STATUS_TYPE;
+    description
+      "Waiting for some external event. It is expected that the LogicalTerminationPoint::operationalState attribute is expressing this logical layer being available for use (means: ENABLED), while this value occurs.";
+  }
+
+  identity INTERFACE_STATUS_TYPE_NOT_PRESENT {
+    base INTERFACE_STATUS_TYPE;
+    description
+      "Some component (typically hardware) is missing. It is expected that the LogicalTerminationPoint::operationalState attribute is expressing this logical layer being NOT available for use (means: DISABLED), while this value occurs.";
+  }
+
+  identity INTERFACE_STATUS_TYPE_NOT_YET_DEFINED {
+    base INTERFACE_STATUS_TYPE;
+    description
+      "While this value occurs, the LogicalTerminationPoint::operationalState attribute, which is expressing the availability of the logical layer for being used, might have either ENABLED or DISABLED as value.";
+  }
+
+  /****************************************
+   * typedef statements
+   **************************************/ 
+
+  typedef radio-signal-id-datatype-type {
+    type identityref {
+      base RADIO_SIGNAL_ID_DATATYPE_TYPE;
+    }
+    description
+      "none";
+  }
+
+  typedef loop-back-type {
+    type identityref {
+      base LOOP_BACK_TYPE;
+    }
+    description
+      "none";
+  }
+
+  typedef direction-type {
+    type identityref {
+      base DIRECTION_TYPE;
+    }
+    description
+      "none";
+  }
+
+  typedef g-826-type {
+    type identityref {
+      base G_826_TYPE;
+    }
+    description
+      "none";
+  }
+
+  typedef xlevel-threshold-second-kind-type {
+    type identityref {
+      base XLEVEL_THRESHOLD_SECOND_KIND_TYPE;
+    }
+    description
+      "According to ETSI EN 301 129 V1.1.2 (1999-05) chapter B.1.1";
+  }
+
+  /****************************************
+   * package super-types
+   **************************************/ 
+
+  typedef granularity-period-type {
+    type identityref {
+      base GRANULARITY_PERIOD_TYPE;
+    }
+    description
+      "The enumeration with the options for granularity period of the performance data.";
+  }
+
+  typedef interface-status-type {
+    type identityref {
+      base INTERFACE_STATUS_TYPE;
+    }
+    description
+      "Current Interface Status";
+  }
+
+  /****************************************
+   * grouping statements for object classes
+   **************************************/ 
+  /****************************************
+   * package super-classes
+   **************************************/ 
+
+  grouping current-performance {
+    description
+      "none";
+    leaf timestamp {
+      type yang:date-and-time;
+      default "2010-11-20T14:00:00+01:00";
+      config false;
+      description
+        "The timestamp associated with when the current data was collected.";
+    }
+    leaf suspect-interval-flag {
+      type boolean;
+      default "false";
+      config false;
+      description
+        "This attribute is used to indicate that the performance data for the current period may not be reliable. Some reasons for this to occur are:
+            - Suspect data were detected by the actual resource doing data collection.
+            - Transition of the administrativeState attribute to/from the 'lock' state.
+            - Transition of the operationalState to/from the 'disabled' state.
+            - Scheduler setting that inhibits the collection function.
+            - The performance counters were reset during the interval.
+            - The currentData (or subclass) object instance was created during the monitoring period.";
+    }
+    leaf elapsed-time {
+      type int64;
+      units "s";
+      default "-1";
+      config false;
+      description
+        "Number of seconds that elapsed since the last reset of the counter.";
+    }
+    leaf scanner-id {
+      type string;
+      default "Scanner ID not defined.";
+      config false;
+      description
+        "none";
+    }
+    leaf granularity-period {
+      type granularity-period-type;
+      config false;
+      mandatory true;
+      description
+        "Time period between reset of the underlying counter.";
+    }
+  }
+
+  grouping historical-performance {
+    description
+      "none";
+    leaf suspect-interval-flag {
+      type boolean;
+      default "false";
+      config false;
+      description
+        "This attribute indicates that the data collected during the interval is suspect.";
+    }
+    leaf history-data-id {
+      type string;
+      default "History Data ID not defined.";
+      config false;
+      description
+        "none";
+    }
+    leaf granularity-period {
+      type granularity-period-type;
+      config false;
+      mandatory true;
+      description
+        "Time period between reset of the underlying counter.";
+    }
+    leaf period-end-time {
+      type yang:date-and-time;
+      config false;
+      mandatory true;
+      description
+        "Time when the counter values have been recorded and the counter reset.";
+    }
+  }
+
+  grouping air-interface-lp-spec {
+    description
+      "none";
+    container air-interface-pac {
+      description
+        "none";
+      uses air-interface-pac;
+    }
+  }
+
+  grouping air-interface-pac {
+    description
+      "none";
+    container air-interface-capability {
+      config false;
+      description
+        "none";
+      uses air-interface-capability;
+    }
+    container air-interface-configuration {
+      description
+        "none";
+      uses air-interface-configuration;
+    }
+    container air-interface-status {
+      config false;
+      description
+        "none";
+      uses air-interface-status;
+    }
+    container air-interface-current-performance {
+      config false;
+      description
+        "none";
+      uses air-interface-current-performance;
+    }
+    container air-interface-historical-performances {
+      config false;
+      description
+        "none";
+      uses air-interface-historical-performances;
+    }
+  }
+
+  grouping air-interface-capability {
+    description
+      "Describes the 'analog' capabilities of modem and transmitter of the microwave device. Value ranges of attributes are not independently (e.g. min. and max. transmit power depends on modulation). Legal combinations of values are expressed in transmissionModeTypes.";
+    leaf type-of-equipment {
+      type string;
+      default "Type of equipment not yet defined.";
+      config false;
+      description
+        "This parameter indicates the equipment type. Instead of uploading the complete set of capabilities, capabilities of the same equipment type could be reused. Should be unique for a combination of modem, radio and their respective firmware.";
+    }
+    leaf tx-frequency-min {
+      type int32;
+      units "kHz";
+      default "-1";
+      config false;
+      description
+        "Value of the minimum transmit frequency tunable at the air interface.";
+    }
+    leaf tx-frequency-max {
+      type int32;
+      units "kHz";
+      default "-1";
+      config false;
+      description
+        "Value of the maximum transmit frequency tunable at the air interface.";
+    }
+    leaf rx-frequency-min {
+      type int32;
+      units "kHz";
+      default "-1";
+      config false;
+      description
+        "Value of the minimum receive frequency tunable at the air interface.";
+    }
+    leaf rx-frequency-max {
+      type int32;
+      units "kHz";
+      default "-1";
+      config false;
+      description
+        "Value of the maximum receive frequency tunable at the air interface.";
+    }
+    leaf duplex-distance-is-freely-configurable {
+      type boolean;
+      default "false";
+      config false;
+      description
+        "true = Transmitted and received frequency can be freely chosen between the given minimum and maximum values.";
+    }
+    leaf-list duplex-distance-list {
+      type int32;
+      units "kHz";
+      default "-1";
+      config false;
+      description
+        "Only relevant if (duplexDistanceIsFreelyConfigurable==false). Lists all supported distances between transmitted and received frequency.";
+    }
+    list transmission-mode-list {
+      key "transmission-mode-name";
+      config false;
+      min-elements 1;
+      description
+        "List of supported Transmission Modes.";
+      uses transmission-mode;
+    }
+    leaf auto-freq-select-is-avail {
+      type boolean;
+      default "false";
+      config false;
+      description
+        "In case the microwave radio is capable of automatically selecting the transmit frequency in unlicensed bands, this field shall contain a 'true'.";
+    }
+    leaf receiver-on-off-is-avail {
+      type boolean;
+      default "false";
+      config false;
+      description
+        "In case switching on/off the receiver is available at the device, this field shall contain a 'true'.";
+    }
+    leaf adaptive-modulation-is-avail {
+      type boolean;
+      default "false";
+      config false;
+      description
+        "In case the device is capable of adaptive modulation, this field shall contain a 'true'.";
+    }
+    leaf atpc-is-avail {
+      type boolean;
+      default "false";
+      config false;
+      description
+        "In case the microwave radio is capable of ATPC, this field shall contain a 'true'.";
+    }
+    leaf atpc-range {
+      type int8;
+      units "dB";
+      default "0";
+      config false;
+      description
+        "Extent of the ATPC range. This value represents a device specific maximum value. The actual range of the ATPC at a specific link might be limited by the difference between configured transmit power (AirInterface::AirInterfaceConfiguration::txPower) and minimum transmit power of the device (TypeDefinitions::TransmissionModeType::txPowerMin).";
+    }
+    leaf supported-radio-signal-id-datatype {
+      type radio-signal-id-datatype-type;
+      default "RADIO_SIGNAL_ID_DATATYPE_TYPE_NOT_YET_DEFINED";
+      config false;
+      description
+        "This attribute is for expressing the datatype, which is supported as a Radio Signal ID by the device.";
+    }
+    leaf supported-radio-signal-id-length {
+      type int16;
+      default "-1";
+      config false;
+      description
+        "If (supportedRadioSignalIdDatatype==INTEGER): Maximum value of the Radio Signal ID supported by the device; If (supportedRadioSignalIdDatatype==STRING): Maximum number of letters supported by the device.";
+    }
+    leaf expected-equals-transmitted-radio-signal-id {
+      type boolean;
+      default "false";
+      config false;
+      description
+        "true = It is not possible to configure an expectedRadioSignalID different from the transmittedRadioSignalID.";
+    }
+    leaf encryption-is-avail {
+      type boolean;
+      default "false";
+      config false;
+      description
+        "Shall be marked 'true', if payload encryption is available.";
+    }
+    leaf-list supported-loop-back-kind-list {
+      type loop-back-type;
+      config false;
+      min-elements 1;
+      max-elements 4;
+      description
+        "List of supported kinds of looping back of header information to the remote site.";
+    }
+    leaf maintenance-timer-range {
+      type string;
+      default "Range of the maintenance timer not yet defined.";
+      config false;
+      description
+        "Available time periods for maintenance configurations (e.g. the loop back of microwave header information) to be described. Concrete values shall be separated by commas (e.g. '10, 60, 360'). Ranges shall be expressed as two values separated by a minus (e.g. '10-360').";
+    }
+    leaf acm-threshold-cross-alarms-is-avail {
+      type boolean;
+      default "false";
+      config false;
+      description
+        "true = Threshold cross alarms on performance of adaptive code modulation are available.";
+    }
+    leaf clearing-threshold-cross-alarms-is-avail {
+      type boolean;
+      default "false";
+      config false;
+      description
+        "true = Clearing threshold cross alarms by calling clearThresholdCrossAlarms() operation is available at the device.";
+    }
+    leaf performance-monitoring-is-avail {
+      type boolean;
+      default "false";
+      config false;
+      description
+        "true = Collection and aggregation of performance values is available.";
+    }
+    leaf direction-of-acm-performance-values {
+      type direction-type;
+      default "DIRECTION_TYPE_NONE";
+      config false;
+      description
+        "Expresses, whether the ACM performance values (timeXStatesList) are measured at the transmitter (TX) or at the receiver (RX).";
+    }
+  }
+
+  grouping air-interface-configuration {
+    description
+      "Configuration of the radio link.";
+    leaf air-interface-name {
+      type string;
+      default "Air interface ID not yet defined.";
+      description
+        "Operator specific microwave link ID (often used for coding area, type of element and sequential number).";
+    }
+    leaf remote-air-interface-name {
+      type string;
+      default "Air interface ID at the remote site not yet defined.";
+      description
+        "Name of the air interface, which belongs to the same link, at the remote site.";
+    }
+    container transmitted-radio-signal-id {
+      description
+        "Transmitted radio signal ID for synchronizing the remote receiver.";
+      uses radio-signal-id-type;
+    }
+    container expected-radio-signal-id {
+      description
+        "Only relevant, if expectedEqualsTransmittedRadioSignalID==false. Received radio signal ID for identifying the correct transmitter to synchronize on.";
+      uses radio-signal-id-type;
+    }
+    leaf tx-frequency {
+      type int32;
+      units "kHz";
+      default "-1";
+      description
+        "Center frequency of the transmit channel. The values to be configured have to exactly match the values listed in the international agreement referenced in channelPlanID. In case of automated selection of the transmit frequency this field shall describe the lowest center frequency selectable.";
+    }
+    leaf rx-frequency {
+      type int32;
+      units "kHz";
+      default "-1";
+      description
+        "Only configurable, if (duplexDistanceIsFreelyConfigurable==true). Allows configuring of the center frequency of the receive channel.";
+    }
+    leaf duplex-distance {
+      type int32;
+      units "kHz";
+      default "-1";
+      description
+        "Only configurable, if (duplexDistanceIsFreelyConfigurable==false) AND (duplexDistanceList contains more than one value). Allows configuring one of the values represented in AirInterfaceCapability::duplexDistanceList.";
+    }
+    leaf transmission-mode-min {
+      type leafref {
+        path "/core-model:control-construct/core-model:logical-termination-point[core-model:uuid = current()/../../../../core-model:uuid]/core-model:layer-protocol[core-model:local-id = current()/../../../core-model:local-id]/air-interface:air-interface-pac/air-interface:air-interface-capability/air-interface:transmission-mode-list/air-interface:transmission-mode-name";
+        require-instance false;
+      }
+      mandatory true;
+      description
+        "Minimum transmission mode to be configured (in case adaptive modulation is not used, this value represents also the fixed transmission mode).";
+    }
+    leaf transmission-mode-max {
+      type leafref {
+        path "/core-model:control-construct/core-model:logical-termination-point[core-model:uuid = current()/../../../../core-model:uuid]/core-model:layer-protocol[core-model:local-id = current()/../../../core-model:local-id]/air-interface:air-interface-pac/air-interface:air-interface-capability/air-interface:transmission-mode-list/air-interface:transmission-mode-name";
+        require-instance false;
+      }
+      description
+        "Maximum transmission mode to be configured.";
+    }
+    leaf power-is-on {
+      type boolean;
+      default "true";
+      description
+        "true = The power to all physical components required for this AirInterface instance is turned on.";
+    }
+    leaf transmitter-is-on {
+      type boolean;
+      default "false";
+      description
+        "Activation of the transmitter inside the radio shall be expressed as a 'true'.";
+    }
+    leaf receiver-is-on {
+      type boolean;
+      default "true";
+      description
+        "Maintenance Feature. Activation of the receiver inside the radio shall be expressed as a 'true'. Attribute shall also be used for RX main and RX diversity squelches in case of diversity configurations.";
+    }
+    leaf tx-power {
+      type int8;
+      units "dBm";
+      default "99";
+      description
+        "Transmit power to be configured on the microwave link. Signed Byte is required. The actually operated transmit power might be lower depending on adaptive modulation and ATPC.";
+    }
+    leaf adaptive-modulation-is-on {
+      type boolean;
+      default "false";
+      description
+        "Adaptive Modulation. Activation of adaptive modulation shall be expressed as a 'true'.";
+    }
+    leaf xpic-is-on {
+      type boolean;
+      default "false";
+      description
+        "Activation of Cross Polarization Interference Cancelation shall be expressed as a 'true'. In case XPIC is not available for the current combination of channel bandwidth and modulation or the hardware in general, this parameter shall always be set to 'false'.";
+    }
+    leaf mimo-is-on {
+      type boolean;
+      default "false";
+      description
+        "Activation of Multiple Input Multiple Output (MIMO) shall be expressed as a 'true'.";
+    }
+    leaf alic-is-on {
+      type boolean;
+      default "false";
+      description
+        "Activation of Adjacent Link Interference Cancelation (ALIC) shall be expressed as a 'true'.";
+    }
+    leaf atpc-is-on {
+      type boolean;
+      default "false";
+      description
+        "ATPC. Activation of Automated Transmit Power Control shall be expressed as a 'true'.";
+    }
+    leaf atpc-thresh-upper {
+      type int16;
+      units "dBm";
+      default "99";
+      description
+        "If the receive level at the local/remote site is higher than the upper threshold value, the transmitter at the remote/local site is notified to decrease transmit power. In case the device does not know upper and lower threshold values, but only a single reference value, the atpcThreshUpper shall not be available for configuration and constantly represent the default value.";
+    }
+    leaf atpc-thresh-lower {
+      type int16;
+      units "dBm";
+      default "99";
+      description
+        "If the receive level at the local/remote site is lower than the lower threshold value, the transmitter at the remote/local site is notified to increase transmit power. In case the device does not know upper and lower threshold values, but only a single reference value, the atpcThreshLower shall represent this reference value.";
+    }
+    leaf atpc-tx-power-min {
+      type int8;
+      units "dBm";
+      default "-99";
+      description
+        "Transmit power, which is not to be undercut, while operating ATPC.";
+    }
+    leaf auto-freq-select-is-on {
+      type boolean;
+      default "false";
+      description
+        "Activation of automatically selecting the transmit frequency in unlicensed bands shall be expressed as a 'true'.";
+    }
+    leaf auto-freq-select-range {
+      type int8;
+      units "channels";
+      default "-1";
+      description
+        "Number of transmit channels (starting at the center frequency defined in txFrequency and with channel bandwidth according to txChannelBandwidth) that define the range within the transmit frequency can automatically been chosen. ";
+    }
+    leaf modulation-is-on {
+      type boolean;
+      default "true";
+      description
+        "Maintenance Feature. De-activation of the modulation of the carrier signal for fault management shall be expressed as a 'false'.";
+    }
+    leaf encryption-is-on {
+      type boolean;
+      default "false";
+      description
+        "Activates encryption of the payload.";
+    }
+    leaf cryptographic-key {
+      type string;
+      default "Cryptographic key not yet defined.";
+      description
+        "Key for transforming plaintext into ciphertext data.";
+    }
+    leaf loop-back-kind-on {
+      type loop-back-type;
+      default "LOOP_BACK_TYPE_NONE";
+      description
+        "Maintenance Feature. The currently configured type of looping back of the air interface header shall be expressed here. The received header is returned to the remote site.";
+    }
+    leaf maintenance-timer {
+      type int32;
+      units "s";
+      default "-1";
+      description
+        "Time of existence of any maintenance configuration (e.g. the loop back of microwave header information). 0 = maintenance timer is switched off. Valid values are defined in AirInterface::AirInterfaceCapability::maintenanceTimerRange. ";
+    }
+    list g-826-threshold-cross-alarm-list {
+      key "g-826-value-kind granularity-period";
+      description
+        "List of G826 related threshold cross alarms to be configured.";
+      uses g-826-threshold-cross-alarm-type;
+    }
+    list xlts-threshold-cross-alarm-list {
+      key "level-threshold-second-kind granularity-period xlts-threshold-cross-alarm-definition-number";
+      description
+        "List of RLTS or TLTS (ETSI EN 301 129) related threshold cross alarms to be configured.";
+      uses xlts-threshold-cross-alarm-type;
+    }
+    list acm-threshold-cross-alarm-list {
+      key "acm-threshold-cross-alarm-definition-number granularity-period";
+      description
+        "List threshold cross alarms, which relate to the time period of operation of a specific transmission mode.";
+      uses acm-threshold-cross-alarm-type;
+    }
+    leaf performance-monitoring-is-on {
+      type boolean;
+      default "false";
+      description
+        "Enables measurement, collection, storage and access to performance data.";
+    }
+  }
+
+  grouping air-interface-status {
+    description
+      "Measurements of current values on the air interface and operational status of the device.";
+    leaf interface-status {
+      type interface-status-type;
+      default "INTERFACE_STATUS_TYPE_NOT_YET_DEFINED";
+      config false;
+      description
+        "Operational status of the interface.";
+    }
+    leaf tx-frequency-cur {
+      type int32;
+      units "kHz";
+      default "-1";
+      config false;
+      description
+        "Center frequency of the currently operated transmit channel.";
+    }
+    leaf rx-frequency-cur {
+      type int32;
+      units "kHz";
+      default "-1";
+      config false;
+      description
+        "Center frequency of the currently operated receive channel.";
+    }
+    leaf transmission-mode-cur {
+      type leafref {
+        path "/core-model:control-construct/core-model:logical-termination-point/core-model:layer-protocol/air-interface:air-interface-pac/air-interface:air-interface-capability/air-interface:transmission-mode-list/air-interface:transmission-mode-name";
+        require-instance false;
+      }
+      config false;
+      description
+        "Currently operated transmission mode according to definitions in Capabilities.";
+    }
+    container received-radio-signal-id {
+      config false;
+      description
+        "Radio signal ID of the signal, which the receiver is currently synchronized on.";
+      uses radio-signal-id-type;
+    }
+    leaf link-is-up {
+      type boolean;
+      default "false";
+      config false;
+      description
+        "If connection is established to the remote site with the same linkID, this shall be expressed as a 'true'.";
+    }
+    leaf xpic-is-up {
+      type boolean;
+      default "false";
+      config false;
+      description
+        "If XPIC is currently actually working (not just configured), this shall be expressed as a 'true'.";
+    }
+    leaf mimo-is-up {
+      type boolean;
+      default "false";
+      config false;
+      description
+        "If MIMO is currently actually working (not just configured), this shall be expressed as a 'true'.";
+    }
+    leaf alic-is-up {
+      type boolean;
+      default "false";
+      config false;
+      description
+        "If Adjacent Link Interference Cancelation (ALIC) is currently actually working (not just configured), this shall be expressed as a 'true'.";
+    }
+    leaf atpc-is-up {
+      type boolean;
+      default "false";
+      config false;
+      description
+        "If ATPC is currently actually working (not just configured), this shall be expressed as a 'true'.";
+    }
+    leaf auto-freq-select-is-up {
+      type boolean;
+      default "false";
+      config false;
+      description
+        "If automated frequency selection is currently actually working (not just configured), this shall be expressed as a 'true'.";
+    }
+    leaf local-end-point-id {
+      type string;
+      default "not-supported";
+      config false;
+      description
+        "The value of the localEndPointId is a vendor specific identifier of the air interface, used by the node to discover a microwave radio link.";
+    }
+    leaf remote-end-point-id {
+      type string;
+      default "not-supported";
+      config false;
+      description
+        "The value of the remoteEndPointId is a vendor specific identifier of the airinterface at the remote side, used to by the node to discover a microwave radio link.";
+    }
+    leaf loop-back-kind-up {
+      type loop-back-type;
+      default "LOOP_BACK_TYPE_NONE";
+      config false;
+      description
+        "The currently active (not just configured) type of looping back of the air interface header shall be expressed here. The received header is returned to the remote site.";
+    }
+    leaf performance-monitoring-is-up {
+      type boolean;
+      default "false";
+      config false;
+      description
+        "true = Performance values are currently collected and aggregated.";
+    }
+    leaf rx-level-cur {
+      type int8;
+      units "dBm";
+      default "99";
+      config false;
+      description
+        "Current receive level.";
+    }
+    leaf tx-level-cur {
+      type int8;
+      units "dBm";
+      default "99";
+      config false;
+      description
+        "Current transmit level.";
+    }
+    leaf snir-cur {
+      type int8;
+      units "dB";
+      default "-99";
+      config false;
+      description
+        "Currently measured signal to (noise+interference) ratio.";
+    }
+    leaf xpd-cur {
+      type int8;
+      units "dB";
+      default "-99";
+      config false;
+      description
+        "Currently measured cross polarization discrimination.";
+    }
+    leaf rf-temp-cur {
+      type int8;
+      units "Celsius";
+      default "-99";
+      config false;
+      description
+        "Current temperature (in degree Celsius) of the radio module inside the outdoor unit.";
+    }
+  }
+
+  grouping air-interface-current-performance {
+    description
+      "Aggregated performance information of the air interface at a particular moment.";
+    list current-performance-data-list {
+      key "granularity-period";
+      config false;
+      min-elements 1;
+      max-elements 2;
+      description
+        "At least values of the counters, which are reset every 15 minutes, are to be provided. If available, the current values of the counters, which are reset every 24 hour, can be provided, too.";
+      uses air-interface-current-performance-type;
+    }
+    leaf number-of-current-performance-sets {
+      type int8;
+      default "-1";
+      config false;
+      description
+        "Number of sets of current performance values, which are provided in the list.";
+    }
+  }
+
+  grouping air-interface-historical-performances {
+    description
+      "Aggregated performance information of the air interface for a pre-defined measurement interval.";
+    list historical-performance-data-list {
+      key "granularity-period period-end-time";
+      config false;
+      description
+        "none";
+      uses air-interface-historical-performance-type;
+    }
+    leaf number-of-historical-performance-sets {
+      type int16;
+      default "-1";
+      config false;
+      description
+        "Number of sets of historical performance values, which are provided in the list.";
+    }
+    leaf time-of-latest-change {
+      type yang:date-and-time;
+      default "2010-11-20T14:00:00+01:00";
+      config false;
+      description
+        "Date and time when the list of sets of historical performance values has been changed for the last time (e.g. new one added or existing one deleted).";
+    }
+  }
+
+  grouping transmission-mode {
+    description
+      "none";
+    leaf transmission-mode-name {
+      type string;
+      config false;
+      mandatory true;
+      description
+        "Name of the transmission mode. BBBB-m*-i*/t*-r*. B=four digits of channel bandwidth in MHz. m*=required number of digits for modulation name. (i*/t*=code rate.) i*=required number of digits for number of information bits. t*=required number of digits for total bits. r*=required number of digits for rate reduction factor. Example: 0028-4QAM-188/204-1";
+    }
+    leaf transmission-mode-rank {
+      type int32;
+      default "-1";
+      config false;
+      description
+        "Configuring adaptive modulation by selecting _transmissionModeMin and _transmissionModeMin requires the transmission modes to be ordered. The vendor shall rank all available transmission modes according to the respective payload data rate. The application providers shall order the transmission modes according to the rank.";
+    }
+    leaf channel-bandwidth {
+      type int32;
+      units "kHz";
+      default "-1";
+      config false;
+      description
+        "Bandwidth of the transmit channel. The value shall be expressed explicitly (means in kHz) not as a reference to an international agreement. The values shall be chosen from the following _list: 3.500, 7.000, 14.000, 27.500, 28.000, 29.000, 29.650, 30.000, 40.000, 50.000, 55.000, 56.000, 59.300, 60.000, 80.000, 100.000, 112.000, 120.000, 150.000, 200.000, 250.000, 500.000, 750.000, 1.000.000, 1.250.000, 1.500.000, 1.750.000, 2.000.000;";
+    }
+    leaf modulation-scheme {
+      type int16;
+      units "symbols";
+      default "-1";
+      config false;
+      description
+        "Modulation scheme, which is base to the other characteristics described in the same transmissionModeType data type. The modulation scheme shall be described by the number of states in the phase diagram (e.g. BPSK->'2' or 256QAM->'256').";
+    }
+    leaf code-rate {
+      type int8;
+      units "%";
+      default "-1";
+      config false;
+      description
+        "Code rate of the coding scheme in % (Net bit rate is either smaller or equal to (Gross bit rate mulitplied with code rate) ).";
+    }
+    leaf symbol-rate-reduction-factor {
+      type int8;
+      default "1";
+      config false;
+      description
+        "Reduction factor for the symbol rate. Example: value would be 4 for 1/4BPSK.";
+    }
+    leaf tx-power-min {
+      type int8;
+      units "dBm";
+      default "99";
+      config false;
+      description
+        "Value of the minimum transmit power the modem can operate in dBm.";
+    }
+    leaf tx-power-max {
+      type int8;
+      units "dBm";
+      default "99";
+      config false;
+      description
+        "Value of the maximum transmit power the modem can operate in dBm.";
+    }
+    leaf rx-threshold {
+      type int16;
+      units "dBm";
+      default "99";
+      config false;
+      description
+        "Value of the receive level required to decode the received signal with a Bit Error Rate of 1e-6 or less.";
+    }
+    leaf am-upshift-level {
+      type int8;
+      units "dBm";
+      default "99";
+      config false;
+      description
+        "Value of the receive level that has to be exceeded to shift into a higher modulation scheme.";
+    }
+    leaf am-downshift-level {
+      type int8;
+      units "dBm";
+      default "99";
+      config false;
+      description
+        "Value of the receive level that has to be exceeded for not shifting into a lower modulation scheme.";
+    }
+    leaf xpic-is-avail {
+      type boolean;
+      default "false";
+      config false;
+      description
+        "In case this transmission mode is capable of XPIC, this attribute shall contain a 'true' value. This information shall strictly relate to the capability of setting an administrative state (xpic-is-on attribute could be configured to have a 'true' value) and is independent of a potential instantaneous operational status change. For example, this attribute might contain a 'true' value, even if an additional cable would have been required to actually operate XPIC at a specific microwave link.";
+    }
+    leaf supported-as-fixed-configuration {
+      type boolean;
+      default "false";
+      config false;
+      description
+        "true = This transmission mode is available for manual configuration when Adaptive Modulation is switched off.";
+    }
+    leaf modulation-scheme-name-at-lct {
+      type string;
+      default "Modulation scheme name not yet defined.";
+      config false;
+      description
+        "Modulation scheme name, which is together with the applied channel bandwidth identifying this transmission mode at the graphical user interface of the local craft terminal.";
+    }
+  }
+
+  grouping radio-signal-id-type {
+    description
+      "none";
+    leaf numeric-radio-signal-id {
+      type int32;
+      default "-1";
+      description
+        "Only relevant if (supportedRadioSignalIdDatatype==INTEGER): 0 = the receiver ignores the signal ID of the received signal. Any other value = the receiver exclusively synchronizes on signals with the same signal ID. -1 = to be used, if numericRadioSignalID is not supported or for expectedRadioSignalID, if it has to equal transmittedRadioSignalID.";
+    }
+    leaf alphanumeric-radio-signal-id {
+      type string;
+      default "Not yet defined.";
+      description
+        "Only relevant if (supportedRadioSignalIdDatatype==STRING): Empty String = the receiver synchronizes on the received signal regardless of the signal ID of the received signal. Any other entry = the receiver exclusively synchronizes on signals with the same signal ID. Not yet defined. = to be used, if alphanumericRadioSignalID is not supported or for expectedRadioSignalID, if it has to equal transmittedRadioSignalID.";
+    }
+  }
+
+  grouping g-826-threshold-cross-alarm-type {
+    description
+      "Allows defining a threshold cross alarm.";
+    leaf g-826-value-kind {
+      type g-826-type;
+      mandatory true;
+      description
+        "Kind of performance value that shall be equipped with a threshold alarm.";
+    }
+    leaf alarm-raising-threshold {
+      type int32;
+      units "s";
+      default "-1";
+      description
+        "Number of events required for raising the threshold cross alarm.";
+    }
+    leaf alarm-clearing-threshold {
+      type int32;
+      units "s";
+      default "-1";
+      description
+        "Number of events required for clearing the threshold cross alarm.";
+    }
+    leaf granularity-period {
+      type granularity-period-type;
+      mandatory true;
+      description
+        "Period of the performance data collection.";
+    }
+  }
+
+  grouping xlts-threshold-cross-alarm-type {
+    description
+      "none";
+    leaf level-threshold-second-kind {
+      type xlevel-threshold-second-kind-type;
+      mandatory true;
+      description
+        "Defines whether receive (RLTS) or transmit (TLTS) level triggers the threshold cross alarm.";
+    }
+    leaf xlts-level {
+      type int8;
+      units "dBm";
+      default "99";
+      description
+        "If (LevelThresholdSecondKindType==RLTS): Receive level, which has to be undercut, for the performance counter incrementing the number of seconds. If (LevelThresholdSecondKindType==TLTS): Transmit level, which has to be exceeded, for the performance counter incrementing the number of seconds. See also ETSI EN 301 129 V1.1.2 (1999-05).";
+    }
+    leaf amount-of-seconds {
+      type int32;
+      units "s";
+      default "-1";
+      description
+        "Number of seconds, which has to be exceeded for causing the threshold cross alarm to raise for this period.";
+    }
+    leaf granularity-period {
+      type granularity-period-type;
+      mandatory true;
+      description
+        "Period of the performance data collection.";
+    }
+    leaf xlts-threshold-cross-alarm-definition-number {
+      type int8;
+      mandatory true;
+      description
+        "Sequence number of the definitions.";
+    }
+  }
+
+  grouping acm-threshold-cross-alarm-type {
+    description
+      "none";
+    leaf acm-threshold-cross-alarm-definition-number {
+      type int8;
+      mandatory true;
+      description
+        "Sequence number of the definitions.";
+    }
+    leaf transmission-mode {
+      type leafref {
+        path "/core-model:control-construct/core-model:logical-termination-point[core-model:uuid = current()/../../../../../core-model:uuid]/core-model:layer-protocol[core-model:local-id = current()/../../../../core-model:local-id]/air-interface:air-interface-pac/air-interface:air-interface-capability/air-interface:transmission-mode-list/air-interface:transmission-mode-name";
+        require-instance false;
+      }
+      mandatory true;
+      description
+        "none";
+    }
+    leaf seconds-for-raising-alarm {
+      type int32;
+      units "s";
+      default "-1";
+      description
+        "Number of seconds, in which the referenced transmission mode has to be operated until the threshold cross alarm is raised for this 15min or 24hour period.";
+    }
+    leaf seconds-for-clearing-alarm {
+      type int32;
+      units "s";
+      default "-1";
+      description
+        "Number of seconds, in which the referenced transmission mode has to be operated until the threshold cross alarm is cleared for this 15min or 24hour period.";
+    }
+    leaf granularity-period {
+      type granularity-period-type;
+      mandatory true;
+      description
+        "Period of the performance data collection.";
+    }
+  }
+
+  grouping time-xstates-type {
+    description
+      "none";
+    leaf time-xstate-sequence-number {
+      type int8;
+      units "s";
+      config false;
+      mandatory true;
+      description
+        "Sequence number of the performance value.";
+    }
+    leaf transmission-mode {
+      type leafref {
+        path "/core-model:control-construct/core-model:logical-termination-point/core-model:layer-protocol/air-interface:air-interface-pac/air-interface:air-interface-capability/air-interface:transmission-mode-list/air-interface:transmission-mode-name";
+        require-instance false;
+      }
+      config false;
+      mandatory true;
+      description
+        "Operated transmission mode.";
+    }
+    leaf time {
+      type int32;
+      units "s";
+      default "-1";
+      config false;
+      description
+        "Sum of all seconds the transmitter operated the transmission mode.";
+    }
+  }
+
+  grouping air-interface-performance-type {
+    description
+      "Consolidated performance information of the air interface.";
+    leaf es {
+      type int32;
+      units "s";
+      default "-1";
+      config false;
+      description
+        "Number of errored seconds.";
+    }
+    leaf ses {
+      type int32;
+      units "s";
+      default "-1";
+      config false;
+      description
+        "Number of severely errored seconds.";
+    }
+    leaf cses {
+      type int32;
+      units "s";
+      default "-1";
+      config false;
+      description
+        "Number of consecutive severely errored seconds.";
+    }
+    leaf unavailability {
+      type int32;
+      units "s";
+      default "-1";
+      config false;
+      description
+        "Total time of unavailability in seconds.";
+    }
+    leaf tx-level-min {
+      type int8;
+      units "dBm";
+      default "99";
+      config false;
+      description
+        "Minimum transmit power. Signed integers are required.";
+    }
+    leaf tx-level-max {
+      type int8;
+      units "dBm";
+      default "99";
+      config false;
+      description
+        "Maximum transmit power. Signed integers are required.";
+    }
+    leaf tx-level-avg {
+      type int8;
+      units "dBm";
+      default "99";
+      config false;
+      description
+        "Averaged transmit power. Signed integers are required.";
+    }
+    leaf rx-level-min {
+      type int8;
+      units "dBm";
+      default "99";
+      config false;
+      description
+        "Minimum receive level. Signed integers are required.";
+    }
+    leaf rx-level-max {
+      type int8;
+      units "dBm";
+      default "99";
+      config false;
+      description
+        "Maximum receive level. Signed integers are required.";
+    }
+    leaf rx-level-avg {
+      type int8;
+      units "dBm";
+      default "99";
+      config false;
+      description
+        "Averaged receive level. Signed integers are required.";
+    }
+    list time-xstates-list {
+      key "time-xstate-sequence-number";
+      config false;
+      min-elements 1;
+      description
+        "Time period the transmitter operated in the respective transmission mode.";
+      uses time-xstates-type;
+    }
+    leaf snir-min {
+      type int8;
+      units "dB";
+      default "-99";
+      config false;
+      description
+        "Minimum signal to (noise+interference) ratio.";
+    }
+    leaf snir-max {
+      type int8;
+      units "dB";
+      default "-99";
+      config false;
+      description
+        "Maximum signal to (noise+interference) ratio.";
+    }
+    leaf snir-avg {
+      type int8;
+      units "dB";
+      default "-99";
+      config false;
+      description
+        "Averaged signal to (noise+interference) ratio.";
+    }
+    leaf xpd-min {
+      type int8;
+      units "dB";
+      default "-99";
+      config false;
+      description
+        "Minimum cross polarization discrimination.";
+    }
+    leaf xpd-max {
+      type int8;
+      units "dB";
+      default "-99";
+      config false;
+      description
+        "Maximum cross polarization discrimination.";
+    }
+    leaf xpd-avg {
+      type int8;
+      units "dB";
+      default "-99";
+      config false;
+      description
+        "Averaged cross polarization discrimination.";
+    }
+    leaf rf-temp-min {
+      type int8;
+      units "Celsius";
+      default "-99";
+      config false;
+      description
+        "Lowest temperature (in degree Celsius) of the radio module inside the outdoor unit.";
+    }
+    leaf rf-temp-max {
+      type int8;
+      units "Celsius";
+      default "-99";
+      config false;
+      description
+        "Highest temperature (in degree Celsius) of the radio module inside the outdoor unit.";
+    }
+    leaf rf-temp-avg {
+      type int8;
+      units "Celsius";
+      default "-99";
+      config false;
+      description
+        "Averaged temperature (in degree Celsius) of the radio module inside the outdoor unit.";
+    }
+    leaf defect-blocks-sum {
+      type int16;
+      units "blocks";
+      default "-1";
+      config false;
+      description
+        "Total number of blocks that were defect after receiving and could not be corrected by the FEC.";
+    }
+    leaf time-period {
+      type int32;
+      units "s";
+      default "-1";
+      config false;
+      description
+        "Total length of the measurement period.";
+    }
+  }
+
+  grouping air-interface-current-performance-type {
+    description
+      "Turns performance information into current performance information by inheriting from OTN_CurrentData.";
+    container performance-data {
+      config false;
+      description
+        "none";
+      uses air-interface-performance-type;
+    }
+    uses current-performance;
+  }
+
+  grouping air-interface-historical-performance-type {
+    description
+      "Turns performance information into historical performance information by inheriting from OTN_HistoryData.";
+    container performance-data {
+      config false;
+      description
+        "none";
+      uses air-interface-performance-type;
+    }
+    uses historical-performance;
+  }
+
+  /****************************************
+   * package interfaces
+   **************************************/ 
+
+  rpc clear-threshold-cross-alarms {
+    description
+      "Clearing all the currently active threshold cross alarms at the referenced AirInterface.";
+    input {
+      leaf affected-air-interface {
+        type leafref {
+          path "/core-model:control-construct/core-model:logical-termination-point/core-model:uuid";
+          require-instance false;
+        }
+        mandatory true;
+        description
+          "LogicalTerminationPoint with LayerProtocol::layerProtocolName==LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER.";
+      }
+    }
+  }
+
+  augment "/core-model:control-construct/core-model:logical-termination-point/core-model:layer-protocol" {
+    when "derived-from-or-self(./core-model:layer-protocol-name, 'air-interface:LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER')";
+    description
+      "none";
+    uses air-interface-lp-spec;
+  }
+}

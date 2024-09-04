@@ -17,25 +17,25 @@
 - When statement in Augmentation statement demands for LayerProtocol::layerProtocolName==LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER
 
 ### YANG File
-- [AirInterface_2.0.0-tsi.240102.1740+yang.1](./AirInterface_2.0.0-tsi.240102.1740+yang.1.zip)
+- [AirInterface_2.0.0-tsi.240102.1740+yang.1](./AirInterface_2.0.0-tsi.240102.1740+yang/air-interface-2-0.yang)
 
-### JSON Schema
-- to be provided
+### Schema
+- [AirInterface_2.0.0-tsi.240102.1740+schema](./AirInterface_2.0.0-tsi.240102.1740+schema/)
 
 ### Interface Simulator
-- to be provided
+- [AirInterface_2.0.0-tsi.240102.1740+simulator](./AirInterface_2.0.0-tsi.240102.1740+simulator/)
 
 ### Interface Validator
-- [AirInterface_2.0.0-tsi.240102.1740+validator.1](./AirInterface_2.0.0-tsi.240102.1740+validator.1.zip)
+- [AirInterface_2.0.0-tsi.240102.1740+validator](./AirInterface_2.0.0-tsi.240102.1740+validator/)
 
 ### Publication
-- Candidate for ONF TR-532 v2.0 
+- Published as a part of ONF TR-532 v2.0  
 
-### Aspired Model Classification
-- Live Network
+### Model Classification
+- Operational in Live Network
 
 ### Open Issue List
-- [airInterface/issues](../../issues)
+- [wredProfile/issues](../../issues)
 
 ### Comments
 ./.

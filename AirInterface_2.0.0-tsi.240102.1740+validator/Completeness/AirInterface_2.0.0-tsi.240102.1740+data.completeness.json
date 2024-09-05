@@ -13,9 +13,39 @@
 				"authorizationCode": "YOUR_BASIC_AUTH_CODE"
 			},
 			{
-				"serverName": "AirInterface_2.0.0-tsi.240102.1740+simulator.completeness",
+				"serverName": "controllerRpc",
+				"server": "https://IP_ADRESS:PORT",
+				"pathToControlConstruct": "/rests/operations/network-topology:network-topology/topology=topology-netconf/node={mountName}/yang-ext:mount",
+				"authorizationCode": "YOUR_BASIC_AUTH_CODE"
+			},
+			{
+				"serverName": "mwdi",
+				"server": "https://IP_ADRESS:PORT",
+				"pathToControlConstruct": "/core-model-1-4:network-control-domain=cache/control-construct={mountName}",
+				"authorizationCode": "YOUR_BASIC_AUTH_CODE",
+				"operationKey": "Operation key not yet provided.",
+				"userName": "Thorsten Heinze",
+				"originator": "InterfaceValidator_TR532v2.0",
+				"xCorrelator": "00000000-0000-0000-0000-000000000532",
+				"traceIndicator": "1",
+				"customerJourney": ""
+			},
+			{
+				"serverName": "Application in AirInterface_2.0.0-tsi.240102.1740+simulator.completeness",
 				"server": "http://localhost:3002",
 				"pathToControlConstruct": "/core-model-1-4:network-control-domain=cache/control-construct={mountName}",
+				"authorizationCode": "",
+				"operationKey": "Operation key not yet provided.",
+				"userName": "Thorsten Heinze",
+				"originator": "InterfaceValidator_TR532v2.0",
+				"xCorrelator": "00000000-0000-0000-0000-000000000532",
+				"traceIndicator": "1",
+				"customerJourney": ""
+			},
+			{
+				"serverName": "Controller in AirInterface_2.0.0-tsi.240102.1740+simulator.completeness",
+				"server": "http://localhost:3002",
+				"pathToControlConstruct": "/rests/data/network-topology:network-topology/topology=topology-netconf/node={mountName}/yang-ext:mount/core-model-1-4:control-construct",
 				"authorizationCode": "",
 				"operationKey": "Operation key not yet provided.",
 				"userName": "Thorsten Heinze",

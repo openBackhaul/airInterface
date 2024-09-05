@@ -1,0 +1,1046 @@
+{
+  "/air-interface-capability": {
+      "type": "object",
+      "required": [
+          "air-interface-2-0:air-interface-capability"
+      ],
+      "properties": {
+          "air-interface-2-0:air-interface-capability": {
+              "type": "object",
+              "required": [
+                  "type-of-equipment",
+                  "tx-frequency-min",
+                  "tx-frequency-max",
+                  "rx-frequency-min",
+                  "rx-frequency-max",
+                  "duplex-distance-is-freely-configurable",
+                  "duplex-distance-list",
+                  "transmission-mode-list",
+                  "auto-freq-select-is-avail",
+                  "receiver-on-off-is-avail",
+                  "adaptive-modulation-is-avail",
+                  "atpc-is-avail",
+                  "atpc-range",
+                  "supported-radio-signal-id-datatype",
+                  "supported-radio-signal-id-length",
+                  "expected-equals-transmitted-radio-signal-id",
+                  "encryption-is-avail",
+                  "supported-loop-back-kind-list",
+                  "maintenance-timer-range",
+                  "acm-threshold-cross-alarms-is-avail",
+                  "clearing-threshold-cross-alarms-is-avail",
+                  "performance-monitoring-is-avail",
+                  "direction-of-acm-performance-values"
+              ],
+              "properties": {
+                  "type-of-equipment": {
+                      "type": "string"
+                  },
+                  "tx-frequency-min": {
+                      "type": "integer",
+                      "format": "int32"
+                  },
+                  "tx-frequency-max": {
+                      "type": "integer",
+                      "format": "int32"
+                  },
+                  "rx-frequency-min": {
+                      "type": "integer",
+                      "format": "int32"
+                  },
+                  "rx-frequency-max": {
+                      "type": "integer",
+                      "format": "int32"
+                  },
+                  "duplex-distance-is-freely-configurable": {
+                      "type": "boolean"
+                  },
+                  "duplex-distance-list": {
+                      "type": "array",
+                      "items": {
+                          "type": "integer",
+                          "format": "int32"
+                      }
+                  },
+                  "transmission-mode-list": {
+                      "type": "array",
+                      "x-key": "transmission-mode-name",
+                      "items": {
+                          "type": "object",
+                          "required": [
+                              "transmission-mode-name",
+                              "transmission-mode-rank",
+                              "channel-bandwidth",
+                              "modulation-scheme",
+                              "code-rate",
+                              "symbol-rate-reduction-factor",
+                              "tx-power-min",
+                              "tx-power-max",
+                              "rx-threshold",
+                              "am-upshift-level",
+                              "am-downshift-level",
+                              "xpic-is-avail",
+                              "supported-as-fixed-configuration",
+                              "modulation-scheme-name-at-lct"
+                          ],
+                          "properties": {
+                              "transmission-mode-name": {
+                                  "type": "string"
+                              },
+                              "transmission-mode-rank": {
+                                  "type": "integer",
+                                  "format": "int32"
+                              },
+                              "channel-bandwidth": {
+                                  "type": "integer",
+                                  "format": "int32"
+                              },
+                              "modulation-scheme": {
+                                  "type": "integer",
+                                  "format": "int16"
+                              },
+                              "code-rate": {
+                                  "type": "integer",
+                                  "format": "int8"
+                              },
+                              "symbol-rate-reduction-factor": {
+                                  "type": "integer",
+                                  "format": "int8"
+                              },
+                              "tx-power-min": {
+                                  "type": "integer",
+                                  "format": "int8"
+                              },
+                              "tx-power-max": {
+                                  "type": "integer",
+                                  "format": "int8"
+                              },
+                              "rx-threshold": {
+                                  "type": "integer",
+                                  "format": "int16"
+                              },
+                              "am-upshift-level": {
+                                  "type": "integer",
+                                  "format": "int8"
+                              },
+                              "am-downshift-level": {
+                                  "type": "integer",
+                                  "format": "int8"
+                              },
+                              "xpic-is-avail": {
+                                  "type": "boolean"
+                              },
+                              "supported-as-fixed-configuration": {
+                                  "type": "boolean"
+                              },
+                              "modulation-scheme-name-at-lct": {
+                                  "type": "string"
+                              }
+                          }
+                      }
+                  },
+                  "auto-freq-select-is-avail": {
+                      "type": "boolean"
+                  },
+                  "receiver-on-off-is-avail": {
+                      "type": "boolean"
+                  },
+                  "adaptive-modulation-is-avail": {
+                      "type": "boolean"
+                  },
+                  "atpc-is-avail": {
+                      "type": "boolean"
+                  },
+                  "atpc-range": {
+                      "type": "integer",
+                      "format": "int8"
+                  },
+                  "supported-radio-signal-id-datatype": {
+                      "type": "string",
+                      "enum": [
+                          "air-interface-2-0:RADIO_SIGNAL_ID_DATATYPE_TYPE_INTEGER",
+                          "air-interface-2-0:RADIO_SIGNAL_ID_DATATYPE_TYPE_STRING",
+                          "air-interface-2-0:RADIO_SIGNAL_ID_DATATYPE_TYPE_NOT_YET_DEFINED"
+                      ]
+                  },
+                  "supported-radio-signal-id-length": {
+                      "type": "integer",
+                      "format": "int16"
+                  },
+                  "expected-equals-transmitted-radio-signal-id": {
+                      "type": "boolean"
+                  },
+                  "encryption-is-avail": {
+                      "type": "boolean"
+                  },
+                  "supported-loop-back-kind-list": {
+                      "type": "array",
+                      "items": {
+                          "type": "string",
+                          "enum": [
+                              "air-interface-2-0:LOOP_BACK_TYPE_RF_TO_REMOTE",
+                              "air-interface-2-0:LOOP_BACK_TYPE_RF_TO_LOCAL",
+                              "air-interface-2-0:LOOP_BACK_TYPE_IF_TO_REMOTE",
+                              "air-interface-2-0:LOOP_BACK_TYPE_IF_TO_LOCAL",
+                              "air-interface-2-0:LOOP_BACK_TYPE_NONE"
+                          ]
+                      }
+                  },
+                  "maintenance-timer-range": {
+                      "type": "string"
+                  },
+                  "acm-threshold-cross-alarms-is-avail": {
+                      "type": "boolean"
+                  },
+                  "clearing-threshold-cross-alarms-is-avail": {
+                      "type": "boolean"
+                  },
+                  "performance-monitoring-is-avail": {
+                      "type": "boolean"
+                  },
+                  "direction-of-acm-performance-values": {
+                      "type": "string",
+                      "enum": [
+                          "air-interface-2-0:DIRECTION_TYPE_TX",
+                          "air-interface-2-0:DIRECTION_TYPE_RX",
+                          "air-interface-2-0:DIRECTION_TYPE_NONE"
+                      ]
+                  }
+              }
+          }
+      }
+  },
+  "/air-interface-configuration": {
+      "type": "object",
+      "required": [
+          "air-interface-2-0:air-interface-configuration"
+      ],
+      "properties": {
+          "air-interface-2-0:air-interface-configuration": {
+              "type": "object",
+              "required": [
+                  "air-interface-name",
+                  "remote-air-interface-name",
+                  "transmitted-radio-signal-id",
+                  "expected-radio-signal-id",
+                  "tx-frequency",
+                  "rx-frequency",
+                  "duplex-distance",
+                  "transmission-mode-min",
+                  "transmission-mode-max",
+                  "power-is-on",
+                  "transmitter-is-on",
+                  "receiver-is-on",
+                  "tx-power",
+                  "adaptive-modulation-is-on",
+                  "xpic-is-on",
+                  "mimo-is-on",
+                  "alic-is-on",
+                  "atpc-is-on",
+                  "atpc-thresh-upper",
+                  "atpc-thresh-lower",
+                  "atpc-tx-power-min",
+                  "auto-freq-select-is-on",
+                  "auto-freq-select-range",
+                  "modulation-is-on",
+                  "encryption-is-on",
+                  "cryptographic-key",
+                  "loop-back-kind-on",
+                  "maintenance-timer",
+                  "g-826-threshold-cross-alarm-list",
+                  "xlts-threshold-cross-alarm-list",
+                  "acm-threshold-cross-alarm-list",
+                  "performance-monitoring-is-on"
+              ],
+              "properties": {
+                  "air-interface-name": {
+                      "type": "string"
+                  },
+                  "remote-air-interface-name": {
+                      "type": "string"
+                  },
+                  "transmitted-radio-signal-id": {
+                      "type": "object",
+                      "required": [
+                          "numeric-radio-signal-id",
+                          "alphanumeric-radio-signal-id"
+                      ],
+                      "properties": {
+                          "numeric-radio-signal-id": {
+                              "type": "integer",
+                              "format": "int32"
+                          },
+                          "alphanumeric-radio-signal-id": {
+                              "type": "string"
+                          }
+                      }
+                  },
+                  "expected-radio-signal-id": {
+                      "type": "object",
+                      "required": [
+                          "numeric-radio-signal-id",
+                          "alphanumeric-radio-signal-id"
+                      ],
+                      "properties": {
+                          "numeric-radio-signal-id": {
+                              "type": "integer",
+                              "format": "int32"
+                          },
+                          "alphanumeric-radio-signal-id": {
+                              "type": "string"
+                          }
+                      }
+                  },
+                  "tx-frequency": {
+                      "type": "integer",
+                      "format": "int32"
+                  },
+                  "rx-frequency": {
+                      "type": "integer",
+                      "format": "int32"
+                  },
+                  "duplex-distance": {
+                      "type": "integer",
+                      "format": "int32"
+                  },
+                  "transmission-mode-min": {
+                      "type": "string"
+                  },
+                  "transmission-mode-max": {
+                      "type": "string"
+                  },
+                  "power-is-on": {
+                      "type": "boolean"
+                  },
+                  "transmitter-is-on": {
+                      "type": "boolean"
+                  },
+                  "receiver-is-on": {
+                      "type": "boolean"
+                  },
+                  "tx-power": {
+                      "type": "integer",
+                      "format": "int8"
+                  },
+                  "adaptive-modulation-is-on": {
+                      "type": "boolean"
+                  },
+                  "xpic-is-on": {
+                      "type": "boolean"
+                  },
+                  "mimo-is-on": {
+                      "type": "boolean"
+                  },
+                  "alic-is-on": {
+                      "type": "boolean"
+                  },
+                  "atpc-is-on": {
+                      "type": "boolean"
+                  },
+                  "atpc-thresh-upper": {
+                      "type": "integer",
+                      "format": "int16"
+                  },
+                  "atpc-thresh-lower": {
+                      "type": "integer",
+                      "format": "int16"
+                  },
+                  "atpc-tx-power-min": {
+                      "type": "integer",
+                      "format": "int8"
+                  },
+                  "auto-freq-select-is-on": {
+                      "type": "boolean"
+                  },
+                  "auto-freq-select-range": {
+                      "type": "integer",
+                      "format": "int8"
+                  },
+                  "modulation-is-on": {
+                      "type": "boolean"
+                  },
+                  "encryption-is-on": {
+                      "type": "boolean"
+                  },
+                  "cryptographic-key": {
+                      "type": "string"
+                  },
+                  "loop-back-kind-on": {
+                      "type": "string",
+                      "enum": [
+                          "air-interface-2-0:LOOP_BACK_TYPE_RF_TO_REMOTE",
+                          "air-interface-2-0:LOOP_BACK_TYPE_RF_TO_LOCAL",
+                          "air-interface-2-0:LOOP_BACK_TYPE_IF_TO_REMOTE",
+                          "air-interface-2-0:LOOP_BACK_TYPE_IF_TO_LOCAL",
+                          "air-interface-2-0:LOOP_BACK_TYPE_NONE"
+                      ]
+                  },
+                  "maintenance-timer": {
+                      "type": "integer",
+                      "format": "int32"
+                  },
+                  "g-826-threshold-cross-alarm-list": {
+                      "type": "array",
+                      "x-key": "g-826-value-kind granularity-period",
+                      "items": {
+                          "type": "object",
+                          "required": [
+                              "g-826-value-kind",
+                              "alarm-raising-threshold",
+                              "alarm-clearing-threshold",
+                              "granularity-period"
+                          ],
+                          "properties": {
+                              "g-826-value-kind": {
+                                  "type": "string",
+                                  "enum": [
+                                      "air-interface-2-0:G_826_TYPE_ES",
+                                      "air-interface-2-0:G_826_TYPE_SES",
+                                      "air-interface-2-0:G_826_TYPE_CSES",
+                                      "air-interface-2-0:G_826_TYPE_UAS",
+                                      "air-interface-2-0:G_826_TYPE_NOT_SPECIFIED"
+                                  ]
+                              },
+                              "alarm-raising-threshold": {
+                                  "type": "integer",
+                                  "format": "int32"
+                              },
+                              "alarm-clearing-threshold": {
+                                  "type": "integer",
+                                  "format": "int32"
+                              },
+                              "granularity-period": {
+                                  "type": "string",
+                                  "enum": [
+                                      "air-interface-2-0:GRANULARITY_PERIOD_TYPE_UNKNOWN",
+                                      "air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN",
+                                      "air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-24-HOURS",
+                                      "air-interface-2-0:GRANULARITY_PERIOD_TYPE_NOT_YET_DEFINED"
+                                  ]
+                              }
+                          }
+                      }
+                  },
+                  "xlts-threshold-cross-alarm-list": {
+                      "type": "array",
+                      "x-key": "level-threshold-second-kind granularity-period xlts-threshold-cross-alarm-definition-number",
+                      "items": {
+                          "type": "object",
+                          "required": [
+                              "level-threshold-second-kind",
+                              "xlts-level",
+                              "amount-of-seconds",
+                              "granularity-period",
+                              "xlts-threshold-cross-alarm-definition-number"
+                          ],
+                          "properties": {
+                              "level-threshold-second-kind": {
+                                  "type": "string",
+                                  "enum": [
+                                      "air-interface-2-0:XLEVEL_THRESHOLD_SECOND_KIND_TYPE_RLTS",
+                                      "air-interface-2-0:XLEVEL_THRESHOLD_SECOND_KIND_TYPE_TLTS",
+                                      "air-interface-2-0:XLEVEL_THRESHOLD_SECOND_KIND_TYPE_NOT_YET_DEFINED"
+                                  ]
+                              },
+                              "xlts-level": {
+                                  "type": "integer",
+                                  "format": "int8"
+                              },
+                              "amount-of-seconds": {
+                                  "type": "integer",
+                                  "format": "int32"
+                              },
+                              "granularity-period": {
+                                  "type": "string",
+                                  "enum": [
+                                      "air-interface-2-0:GRANULARITY_PERIOD_TYPE_UNKNOWN",
+                                      "air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN",
+                                      "air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-24-HOURS",
+                                      "air-interface-2-0:GRANULARITY_PERIOD_TYPE_NOT_YET_DEFINED"
+                                  ]
+                              },
+                              "xlts-threshold-cross-alarm-definition-number": {
+                                  "type": "integer",
+                                  "format": "int8"
+                              }
+                          }
+                      }
+                  },
+                  "acm-threshold-cross-alarm-list": {
+                      "type": "array",
+                      "x-key": "acm-threshold-cross-alarm-definition-number granularity-period",
+                      "items": {
+                          "type": "object",
+                          "required": [
+                              "acm-threshold-cross-alarm-definition-number",
+                              "transmission-mode",
+                              "seconds-for-raising-alarm",
+                              "seconds-for-clearing-alarm",
+                              "granularity-period"
+                          ],
+                          "properties": {
+                              "acm-threshold-cross-alarm-definition-number": {
+                                  "type": "integer",
+                                  "format": "int8"
+                              },
+                              "transmission-mode": {
+                                  "type": "string"
+                              },
+                              "seconds-for-raising-alarm": {
+                                  "type": "integer",
+                                  "format": "int32"
+                              },
+                              "seconds-for-clearing-alarm": {
+                                  "type": "integer",
+                                  "format": "int32"
+                              },
+                              "granularity-period": {
+                                  "type": "string",
+                                  "enum": [
+                                      "air-interface-2-0:GRANULARITY_PERIOD_TYPE_UNKNOWN",
+                                      "air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN",
+                                      "air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-24-HOURS",
+                                      "air-interface-2-0:GRANULARITY_PERIOD_TYPE_NOT_YET_DEFINED"
+                                  ]
+                              }
+                          }
+                      }
+                  },
+                  "performance-monitoring-is-on": {
+                      "type": "boolean"
+                  }
+              }
+          }
+      }
+  },
+  "/air-interface-status": {
+      "type": "object",
+      "required": [
+          "air-interface-2-0:air-interface-status"
+      ],
+      "properties": {
+          "air-interface-2-0:air-interface-status": {
+              "type": "object",
+              "required": [
+                  "interface-status",
+                  "tx-frequency-cur",
+                  "rx-frequency-cur",
+                  "transmission-mode-cur",
+                  "received-radio-signal-id",
+                  "link-is-up",
+                  "xpic-is-up",
+                  "mimo-is-up",
+                  "alic-is-up",
+                  "atpc-is-up",
+                  "auto-freq-select-is-up",
+                  "local-end-point-id",
+                  "remote-end-point-id",
+                  "loop-back-kind-up",
+                  "performance-monitoring-is-up",
+                  "rx-level-cur",
+                  "tx-level-cur",
+                  "snir-cur",
+                  "xpd-cur",
+                  "rf-temp-cur"
+              ],
+              "properties": {
+                  "interface-status": {
+                      "type": "string",
+                      "enum": [
+                          "air-interface-2-0:INTERFACE_STATUS_TYPE_UP",
+                          "air-interface-2-0:INTERFACE_STATUS_TYPE_DOWN",
+                          "air-interface-2-0:INTERFACE_STATUS_TYPE_TESTING",
+                          "air-interface-2-0:INTERFACE_STATUS_TYPE_UNKNOWN",
+                          "air-interface-2-0:INTERFACE_STATUS_TYPE_DORMANT",
+                          "air-interface-2-0:INTERFACE_STATUS_TYPE_NOT_PRESENT",
+                          "air-interface-2-0:INTERFACE_STATUS_TYPE_NOT_YET_DEFINED"
+                      ]
+                  },
+                  "tx-frequency-cur": {
+                      "type": "integer",
+                      "format": "int32"
+                  },
+                  "rx-frequency-cur": {
+                      "type": "integer",
+                      "format": "int32"
+                  },
+                  "transmission-mode-cur": {
+                      "type": "string"
+                  },
+                  "received-radio-signal-id": {
+                      "type": "object",
+                      "required": [
+                          "numeric-radio-signal-id",
+                          "alphanumeric-radio-signal-id"
+                      ],
+                      "properties": {
+                          "numeric-radio-signal-id": {
+                              "type": "integer",
+                              "format": "int32"
+                          },
+                          "alphanumeric-radio-signal-id": {
+                              "type": "string"
+                          }
+                      }
+                  },
+                  "link-is-up": {
+                      "type": "boolean"
+                  },
+                  "xpic-is-up": {
+                      "type": "boolean"
+                  },
+                  "mimo-is-up": {
+                      "type": "boolean"
+                  },
+                  "alic-is-up": {
+                      "type": "boolean"
+                  },
+                  "atpc-is-up": {
+                      "type": "boolean"
+                  },
+                  "auto-freq-select-is-up": {
+                      "type": "boolean"
+                  },
+                  "local-end-point-id": {
+                      "type": "string"
+                  },
+                  "remote-end-point-id": {
+                      "type": "string"
+                  },
+                  "loop-back-kind-up": {
+                      "type": "string",
+                      "enum": [
+                          "air-interface-2-0:LOOP_BACK_TYPE_RF_TO_REMOTE",
+                          "air-interface-2-0:LOOP_BACK_TYPE_RF_TO_LOCAL",
+                          "air-interface-2-0:LOOP_BACK_TYPE_IF_TO_REMOTE",
+                          "air-interface-2-0:LOOP_BACK_TYPE_IF_TO_LOCAL",
+                          "air-interface-2-0:LOOP_BACK_TYPE_NONE"
+                      ]
+                  },
+                  "performance-monitoring-is-up": {
+                      "type": "boolean"
+                  },
+                  "rx-level-cur": {
+                      "type": "integer",
+                      "format": "int8"
+                  },
+                  "tx-level-cur": {
+                      "type": "integer",
+                      "format": "int8"
+                  },
+                  "snir-cur": {
+                      "type": "integer",
+                      "format": "int8"
+                  },
+                  "xpd-cur": {
+                      "type": "integer",
+                      "format": "int8"
+                  },
+                  "rf-temp-cur": {
+                      "type": "integer",
+                      "format": "int8"
+                  }
+              }
+          }
+      }
+  },
+  "/air-interface-current-performance": {
+      "type": "object",
+      "required": [
+          "air-interface-2-0:air-interface-current-performance"
+      ],
+      "properties": {
+          "air-interface-2-0:air-interface-current-performance": {
+              "type": "object",
+              "required": [
+                  "number-of-current-performance-sets",
+                  "current-performance-data-list"
+              ],
+              "properties": {
+                  "number-of-current-performance-sets": {
+                      "type": "integer",
+                      "format": "int8"
+                  },
+                  "current-performance-data-list": {
+                      "type": "array",
+                      "items": {
+                          "type": "object",
+                          "required": [
+                              "timestamp",
+                              "suspect-interval-flag",
+                              "elapsed-time",
+                              "scanner-id",
+                              "granularity-period",
+                              "performance-data"
+                          ],
+                          "properties": {
+                              "timestamp": {
+                                  "type": "string",
+                                  "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})$"
+                              },
+                              "suspect-interval-flag": {
+                                  "type": "boolean"
+                              },
+                              "elapsed-time": {
+                                  "type": "string"
+                              },
+                              "scanner-id": {
+                                  "type": "string"
+                              },
+                              "granularity-period": {
+                                  "type": "string",
+                                  "enum": [
+                                      "air-interface-2-0:GRANULARITY_PERIOD_TYPE_UNKNOWN",
+                                      "air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN",
+                                      "air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-24-HOURS",
+                                      "air-interface-2-0:GRANULARITY_PERIOD_TYPE_NOT_YET_DEFINED"
+                                  ]
+                              },
+                              "performance-data": {
+                                  "type": "object",
+                                  "required": [
+                                      "es",
+                                      "ses",
+                                      "cses",
+                                      "unavailability",
+                                      "tx-level-min",
+                                      "tx-level-max",
+                                      "tx-level-avg",
+                                      "rx-level-min",
+                                      "rx-level-max",
+                                      "rx-level-avg",
+                                      "time-xstates-list",
+                                      "snir-min",
+                                      "snir-max",
+                                      "snir-avg",
+                                      "xpd-min",
+                                      "xpd-max",
+                                      "xpd-avg",
+                                      "rf-temp-min",
+                                      "rf-temp-max",
+                                      "rf-temp-avg",
+                                      "defect-blocks-sum",
+                                      "time-period"
+                                  ],
+                                  "properties": {
+                                      "es": {
+                                          "type": "integer",
+                                          "format": "int32"
+                                      },
+                                      "ses": {
+                                          "type": "integer",
+                                          "format": "int32"
+                                      },
+                                      "cses": {
+                                          "type": "integer",
+                                          "format": "int32"
+                                      },
+                                      "unavailability": {
+                                          "type": "integer",
+                                          "format": "int32"
+                                      },
+                                      "tx-level-min": {
+                                          "type": "integer",
+                                          "format": "int8"
+                                      },
+                                      "tx-level-max": {
+                                          "type": "integer",
+                                          "format": "int8"
+                                      },
+                                      "tx-level-avg": {
+                                          "type": "integer",
+                                          "format": "int8"
+                                      },
+                                      "rx-level-min": {
+                                          "type": "integer",
+                                          "format": "int8"
+                                      },
+                                      "rx-level-max": {
+                                          "type": "integer",
+                                          "format": "int8"
+                                      },
+                                      "rx-level-avg": {
+                                          "type": "integer",
+                                          "format": "int8"
+                                      },
+                                      "time-xstates-list": {
+                                          "type": "array",
+                                          "x-key": "time-xstate-sequence-number",
+                                          "items": {
+                                              "type": "object",
+                                              "required": [
+                                                  "time-xstate-sequence-number",
+                                                  "transmission-mode",
+                                                  "time"
+                                              ],
+                                              "properties": {
+                                                  "time-xstate-sequence-number": {
+                                                      "type": "integer",
+                                                      "format": "int8"
+                                                  },
+                                                  "transmission-mode": {
+                                                      "type": "string"
+                                                  },
+                                                  "time": {
+                                                      "type": "integer",
+                                                      "format": "int32"
+                                                  }
+                                              }
+                                          }
+                                      },
+                                      "snir-min": {
+                                          "type": "integer",
+                                          "format": "int8"
+                                      },
+                                      "snir-max": {
+                                          "type": "integer",
+                                          "format": "int8"
+                                      },
+                                      "snir-avg": {
+                                          "type": "integer",
+                                          "format": "int8"
+                                      },
+                                      "xpd-min": {
+                                          "type": "integer",
+                                          "format": "int8"
+                                      },
+                                      "xpd-max": {
+                                          "type": "integer",
+                                          "format": "int8"
+                                      },
+                                      "xpd-avg": {
+                                          "type": "integer",
+                                          "format": "int8"
+                                      },
+                                      "rf-temp-min": {
+                                          "type": "integer",
+                                          "format": "int8"
+                                      },
+                                      "rf-temp-max": {
+                                          "type": "integer",
+                                          "format": "int8"
+                                      },
+                                      "rf-temp-avg": {
+                                          "type": "integer",
+                                          "format": "int8"
+                                      },
+                                      "defect-blocks-sum": {
+                                          "type": "integer",
+                                          "format": "int16"
+                                      },
+                                      "time-period": {
+                                          "type": "integer",
+                                          "format": "int32"
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      }
+  },
+  "/air-interface-historical-performances": {
+      "type": "object",
+      "required": [
+          "air-interface-2-0:air-interface-historical-performances"
+      ],
+      "properties": {
+          "air-interface-2-0:air-interface-historical-performances": {
+              "type": "object",
+              "required": [
+                  "number-of-historical-performance-sets",
+                  "time-of-latest-change",
+                  "historical-performance-data-list"
+              ],
+              "properties": {
+                  "number-of-historical-performance-sets": {
+                      "type": "integer",
+                      "format": "int16"
+                  },
+                  "time-of-latest-change": {
+                      "type": "string",
+                      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})$"
+                  },
+                  "historical-performance-data-list": {
+                      "type": "array",
+                      "x-key": "granularity-period period-end-time",
+                      "items": {
+                          "type": "object",
+                          "required": [
+                              "suspect-interval-flag",
+                              "history-data-id",
+                              "granularity-period",
+                              "period-end-time",
+                              "performance-data"
+                          ],
+                          "properties": {
+                              "suspect-interval-flag": {
+                                  "type": "boolean"
+                              },
+                              "history-data-id": {
+                                  "type": "string"
+                              },
+                              "granularity-period": {
+                                  "type": "string",
+                                  "enum": [
+                                      "air-interface-2-0:GRANULARITY_PERIOD_TYPE_UNKNOWN",
+                                      "air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN",
+                                      "air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-24-HOURS",
+                                      "air-interface-2-0:GRANULARITY_PERIOD_TYPE_NOT_YET_DEFINED"
+                                  ]
+                              },
+                              "period-end-time": {
+                                  "type": "string",
+                                  "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[\\+\\-]\\d{2}:\\d{2})$"
+                              },
+                              "performance-data": {
+                                  "type": "object",
+                                  "required": [
+                                      "es",
+                                      "ses",
+                                      "cses",
+                                      "unavailability",
+                                      "tx-level-min",
+                                      "tx-level-max",
+                                      "tx-level-avg",
+                                      "rx-level-min",
+                                      "rx-level-max",
+                                      "rx-level-avg",
+                                      "time-xstates-list",
+                                      "snir-min",
+                                      "snir-max",
+                                      "snir-avg",
+                                      "xpd-min",
+                                      "xpd-max",
+                                      "xpd-avg",
+                                      "rf-temp-min",
+                                      "rf-temp-max",
+                                      "rf-temp-avg",
+                                      "defect-blocks-sum",
+                                      "time-period"
+                                  ],
+                                  "properties": {
+                                      "es": {
+                                          "type": "integer",
+                                          "format": "int32"
+                                      },
+                                      "ses": {
+                                          "type": "integer",
+                                          "format": "int32"
+                                      },
+                                      "cses": {
+                                          "type": "integer",
+                                          "format": "int32"
+                                      },
+                                      "unavailability": {
+                                          "type": "integer",
+                                          "format": "int32"
+                                      },
+                                      "tx-level-min": {
+                                          "type": "integer",
+                                          "format": "int8"
+                                      },
+                                      "tx-level-max": {
+                                          "type": "integer",
+                                          "format": "int8"
+                                      },
+                                      "tx-level-avg": {
+                                          "type": "integer",
+                                          "format": "int8"
+                                      },
+                                      "rx-level-min": {
+                                          "type": "integer",
+                                          "format": "int8"
+                                      },
+                                      "rx-level-max": {
+                                          "type": "integer",
+                                          "format": "int8"
+                                      },
+                                      "rx-level-avg": {
+                                          "type": "integer",
+                                          "format": "int8"
+                                      },
+                                      "time-xstates-list": {
+                                          "type": "array",
+                                          "x-key": "time-xstate-sequence-number",
+                                          "items": {
+                                              "type": "object",
+                                              "required": [
+                                                  "time-xstate-sequence-number",
+                                                  "transmission-mode",
+                                                  "time"
+                                              ],
+                                              "properties": {
+                                                  "time-xstate-sequence-number": {
+                                                      "type": "integer",
+                                                      "format": "int8"
+                                                  },
+                                                  "transmission-mode": {
+                                                      "type": "string"
+                                                  },
+                                                  "time": {
+                                                      "type": "integer",
+                                                      "format": "int32"
+                                                  }
+                                              }
+                                          }
+                                      },
+                                      "snir-min": {
+                                          "type": "integer",
+                                          "format": "int8"
+                                      },
+                                      "snir-max": {
+                                          "type": "integer",
+                                          "format": "int8"
+                                      },
+                                      "snir-avg": {
+                                          "type": "integer",
+                                          "format": "int8"
+                                      },
+                                      "xpd-min": {
+                                          "type": "integer",
+                                          "format": "int8"
+                                      },
+                                      "xpd-max": {
+                                          "type": "integer",
+                                          "format": "int8"
+                                      },
+                                      "xpd-avg": {
+                                          "type": "integer",
+                                          "format": "int8"
+                                      },
+                                      "rf-temp-min": {
+                                          "type": "integer",
+                                          "format": "int8"
+                                      },
+                                      "rf-temp-max": {
+                                          "type": "integer",
+                                          "format": "int8"
+                                      },
+                                      "rf-temp-avg": {
+                                          "type": "integer",
+                                          "format": "int8"
+                                      },
+                                      "defect-blocks-sum": {
+                                          "type": "integer",
+                                          "format": "int16"
+                                      },
+                                      "time-period": {
+                                          "type": "integer",
+                                          "format": "int32"
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      }
+  },
+  "/clear-threshold-cross-alarms": {
+      "air-interface-2-0:clear-threshold-cross-alarms": null
+  }
+}

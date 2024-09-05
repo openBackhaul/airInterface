@@ -1,18 +1,18 @@
 openapi: 3.0.1
 info:
-  title: AirInterface_2.0.0-tsi.240102.1740+simulator
-  version: 1.0.0
+  title: AirInterface_2.0.0-tsi.240102.1740+simulator.completeness
+  version: 2.0.0
 
 paths:
 ########################################################################################################################
-#   Device 0001 for AirInterface_2.0.0-tsi.240102.1740+validator.completeness in static reference mode
+#   AirInterface_2.0.0-tsi.240102.1740+simulator.completeness in static reference mode
 ########################################################################################################################
-
-
-########################################################################################################################
-#   Generic Paths
-########################################################################################################################
-  /generic/place-holder:
+#
+# At Application
+# ==============
+#
+# Preparation => MountName=305250001, UUID=airInt1, LocalID=1
+  /core-model-1-4:network-control-domain=cache/control-construct=305250001:
     parameters:
       - $ref: '#/components/parameters/user'
       - $ref: '#/components/parameters/originator'
@@ -22,15 +22,15 @@ paths:
       - $ref: '#/components/parameters/mountName'
       - $ref: '#/components/parameters/fields'
     get:
-      operationId: getCachedControlConstruct
-      summary: 'Provides ControlConstruct from cache'
+      operationId: getLtpList
+      summary: 'Provides list of LTPs from cache'
       tags:
         - IndividualServices
       security:
         - apiKeyAuth: []
       responses:
         '200':
-          description: 'ControlConstruct provided from cache'
+          description: 'List of LTPs provided from cache'
           content:
             application/json:
               schema:
@@ -41,26 +41,45 @@ paths:
                   core-model-1-4:control-construct:
                     type: array
                     items:
-                      $ref: '#/components/schemas/control-construct'
+                      type: object
+                      required:
+                        - logical-termination-point
+                      properties:
+                        logical-termination-point:
+                          type: array
+                          items:
+                            type: object
+                            required:
+                              - uuid
+                              - layer-protocol
+                            properties:
+                              uuid:
+                                type: string
+                                enum:
+                                  - 'airInt1'
+                              layer-protocol:
+                                type: array
+                                items:
+                                  type: object
+                                  required:
+                                    - local-id
+                                    - layer-protocol-name
+                                  properties:
+                                    local-id:
+                                      type: string
+                                      enum:
+                                        - '1'
+                                    layer-protocol-name:
+                                      type: string
+                                      enum:
+                                        - 'air-interface-2-0:LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER'
                 example:
                   core-model-1-4:control-construct:
                     - logical-termination-point:
-                        - uuid: 'TdmContainerUuid'
+                        - uuid: 'airInt1'
                           layer-protocol:
-                            - local-id: 'TdmContainerLocalId'
-                              layer-protocol-name: 'tdm-container-2-0:LAYER_PROTOCOL_NAME_TYPE_TDM_CONTAINER_LAYER'
-                        - uuid: 'SyncUuid'
-                          layer-protocol:
-                            - local-id: 'SyncLocalId'
-                              layer-protocol-name: 'synchronization-1-0:LAYER_PROTOCOL_NAME_TYPE_SYNCHRONIZATION_LAYER'
-                        - uuid: 'EthernetContainerUuid'
-                          layer-protocol:
-                            - local-id: 'EthernetContainerLocalId'
-                              layer-protocol-name: 'ethernet-container-2-0:LAYER_PROTOCOL_NAME_TYPE_ETHERNET_CONTAINER_LAYER'
-                        - uuid: 'EthernetContainerUuid2'
-                          layer-protocol:
-                            - local-id: 'EthernetContainerLocalId2'
-                              layer-protocol-name: 'ethernet-container-2-0:LAYER_PROTOCOL_NAME_TYPE_ETHERNET_CONTAINER_LAYER'
+                            - local-id: '1'
+                              layer-protocol-name: 'air-interface-2-0:LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER'
           headers:
             x-correlator:
               $ref: '#/components/headers/x-correlator'
@@ -70,6 +89,1464 @@ paths:
               $ref: '#/components/headers/backend-time'
             life-cycle-state:
               $ref: '#/components/headers/life-cycle-state'
+  
+# Completeness of GET 200
+  /core-model-1-4:network-control-domain=cache/control-construct=305250001/logical-termination-point=airInt1/layer-protocol=1/air-interface-2-0:air-interface-pac/air-interface-capability:
+    parameters:
+      - $ref: '#/components/parameters/user'
+      - $ref: '#/components/parameters/originator'
+      - $ref: '#/components/parameters/x-correlator'
+      - $ref: '#/components/parameters/trace-indicator'
+      - $ref: '#/components/parameters/customer-journey'
+      - $ref: '#/components/parameters/mountName'
+      - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/fields'
+    get:
+      operationId: getCachedAirInterfaceCapability
+      summary: 'Provides AirInterfaceCapability from cache'
+      tags:
+        - IndividualServices
+      security:
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: 'AirInterfaceCapability provided from cache'
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - air-interface-2-0:air-interface-capability
+                properties:
+                  air-interface-2-0:air-interface-capability:
+                    $ref: '#/components/schemas/air-interface-capability'
+                example:
+                  air-interface-2-0:air-interface-capability:
+                    type-of-equipment: 'RadioUnit 21'
+                    tx-frequency-min: 23282250
+                    tx-frequency-max: 23598500
+                    rx-frequency-min: 22274250
+                    rx-frequency-max: 22590500
+                    duplex-distance-is-freely-configurable: true
+                    duplex-distance-list:
+                      - 1008000
+                      - 1015000
+                      - 1022000
+                    transmission-mode-list:
+                      - transmission-mode-name: '56000-4'
+                        transmission-mode-rank: 0
+                        channel-bandwidth: 56000
+                        modulation-scheme: 4
+                        code-rate: 90
+                        symbol-rate-reduction-factor: 1
+                        tx-power-min: -20
+                        tx-power-max: 24
+                        rx-threshold: -80
+                        am-upshift-level: -60
+                        am-downshift-level: -70
+                        xpic-is-avail: true
+                        supported-as-fixed-configuration: true
+                        modulation-scheme-name-at-lct: '4 QAM'
+                      - transmission-mode-name: '56000-64'
+                        transmission-mode-rank: 1
+                        channel-bandwidth: 56000
+                        modulation-scheme: 64
+                        code-rate: 90
+                        symbol-rate-reduction-factor: 1
+                        tx-power-min: -20
+                        tx-power-max: 20
+                        rx-threshold: -70
+                        am-upshift-level: -50
+                        am-downshift-level: -60
+                        xpic-is-avail: true
+                        supported-as-fixed-configuration: true
+                        modulation-scheme-name-at-lct: '64 QAM'
+                    auto-freq-select-is-avail: false
+                    receiver-on-off-is-avail: true
+                    adaptive-modulation-is-avail: true
+                    atpc-is-avail: true
+                    atpc-range: 20
+                    supported-radio-signal-id-datatype: 'air-interface-2-0:RADIO_SIGNAL_ID_DATATYPE_TYPE_INTEGER'
+                    supported-radio-signal-id-length: 256
+                    expected-equals-transmitted-radio-signal-id: true
+                    encryption-is-avail: true
+                    supported-loop-back-kind-list:
+                      - 'air-interface-2-0:LOOP_BACK_TYPE_RF_TO_LOCAL'
+                      - 'air-interface-2-0:LOOP_BACK_TYPE_IF_TO_REMOTE'
+                      - 'air-interface-2-0:LOOP_BACK_TYPE_IF_TO_LOCAL'
+                    maintenance-timer-range: '60-600'
+                    acm-threshold-cross-alarms-is-avail: true
+                    clearing-threshold-cross-alarms-is-avail: true
+                    performance-monitoring-is-avail: true
+                    direction-of-acm-performance-values: 'air-interface-2-0:DIRECTION_TYPE_TX'
+          headers:
+            x-correlator:
+              $ref: '#/components/headers/x-correlator'
+            exec-time:
+              $ref: '#/components/headers/exec-time'
+            backend-time:
+              $ref: '#/components/headers/backend-time'
+            life-cycle-state:
+              $ref: '#/components/headers/life-cycle-state'
+  /core-model-1-4:network-control-domain=cache/control-construct=305250001/logical-termination-point=airInt1/layer-protocol=1/air-interface-2-0:air-interface-pac/air-interface-configuration:
+    parameters:
+      - $ref: '#/components/parameters/user'
+      - $ref: '#/components/parameters/originator'
+      - $ref: '#/components/parameters/x-correlator'
+      - $ref: '#/components/parameters/trace-indicator'
+      - $ref: '#/components/parameters/customer-journey'
+      - $ref: '#/components/parameters/mountName'
+      - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/fields'
+    get:
+      operationId: getCachedAirInterfaceConfiguration
+      summary: 'Provides AirInterfaceConfiguration from cache'
+      tags:
+        - IndividualServices
+      security:
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: 'AirInterfaceConfiguration provided from cache'
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - air-interface-2-0:air-interface-configuration
+                properties:
+                  air-interface-2-0:air-interface-configuration:
+                    $ref: '#/components/schemas/air-interface-configuration'
+                example:
+                  air-interface-2-0:air-interface-configuration:
+                    air-interface-name: '305550001A'
+                    remote-air-interface-name: '305550001B'
+                    transmitted-radio-signal-id:
+                      numeric-radio-signal-id: 177
+                      alphanumeric-radio-signal-id: 'Not yet defined.'
+                    expected-radio-signal-id:
+                      numeric-radio-signal-id: 177
+                      alphanumeric-radio-signal-id: 'Not yet defined.'
+                    tx-frequency: 23290250
+                    rx-frequency: 22282250
+                    duplex-distance: 1008000
+                    transmission-mode-min: '56000-4'
+                    transmission-mode-max: '56000-64'
+                    power-is-on: true
+                    transmitter-is-on: true
+                    receiver-is-on: true
+                    tx-power: 10
+                    adaptive-modulation-is-on: true
+                    xpic-is-on: true
+                    mimo-is-on: false
+                    alic-is-on: false
+                    atpc-is-on: true
+                    atpc-thresh-upper: -45
+                    atpc-thresh-lower: -47
+                    atpc-tx-power-min: -20
+                    auto-freq-select-is-on: false
+                    auto-freq-select-range: -1
+                    modulation-is-on: true
+                    encryption-is-on: true
+                    cryptographic-key: 'r4nd0m5ting4coding'
+                    loop-back-kind-on: 'air-interface-2-0:LOOP_BACK_TYPE_IF_TO_LOCAL'
+                    maintenance-timer: 300
+                    g-826-threshold-cross-alarm-list:
+                      - g-826-value-kind: 'air-interface-2-0:G_826_TYPE_ES'
+                        alarm-raising-threshold: 180
+                        alarm-clearing-threshold: 10
+                        granularity-period: 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN'
+                      - g-826-value-kind: 'air-interface-2-0:G_826_TYPE_SES'
+                        alarm-raising-threshold: 15
+                        alarm-clearing-threshold: 1
+                        granularity-period: 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN'
+                    xlts-threshold-cross-alarm-list:
+                      - level-threshold-second-kind: 'air-interface-2-0:XLEVEL_THRESHOLD_SECOND_KIND_TYPE_RLTS'
+                        xlts-level: -90
+                        amount-of-seconds: 150
+                        granularity-period: 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN'
+                        xlts-threshold-cross-alarm-definition-number: 0
+                      - level-threshold-second-kind: 'air-interface-2-0:XLEVEL_THRESHOLD_SECOND_KIND_TYPE_TLTS'
+                        xlts-level: 8
+                        amount-of-seconds: 180
+                        granularity-period: 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN'
+                        xlts-threshold-cross-alarm-definition-number: 1
+                    acm-threshold-cross-alarm-list:
+                      - acm-threshold-cross-alarm-definition-number: 0
+                        transmission-mode: '56000-4'
+                        seconds-for-raising-alarm: 600
+                        seconds-for-clearing-alarm: 60
+                        granularity-period: 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN'
+                    performance-monitoring-is-on: true
+          headers:
+            x-correlator:
+              $ref: '#/components/headers/x-correlator'
+            exec-time:
+              $ref: '#/components/headers/exec-time'
+            backend-time:
+              $ref: '#/components/headers/backend-time'
+            life-cycle-state:
+              $ref: '#/components/headers/life-cycle-state'
+  /core-model-1-4:network-control-domain=cache/control-construct=305250001/logical-termination-point=airInt1/layer-protocol=1/air-interface-2-0:air-interface-pac/air-interface-status:
+    parameters:
+      - $ref: '#/components/parameters/user'
+      - $ref: '#/components/parameters/originator'
+      - $ref: '#/components/parameters/x-correlator'
+      - $ref: '#/components/parameters/trace-indicator'
+      - $ref: '#/components/parameters/customer-journey'
+      - $ref: '#/components/parameters/mountName'
+      - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/fields'
+    get:
+      operationId: getCachedAirInterfaceStatus
+      summary: 'Provides AirInterfaceStatus from cache'
+      tags:
+        - IndividualServices
+      security:
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: 'AirInterfaceStatus provided from cache'
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - air-interface-2-0:air-interface-status
+                properties:
+                  air-interface-2-0:air-interface-status:
+                    $ref: '#/components/schemas/air-interface-status'
+                example:
+                  air-interface-2-0:air-interface-status:
+                    interface-status: 'air-interface-2-0:INTERFACE_STATUS_TYPE_UP'
+                    tx-frequency-cur: 23290250
+                    rx-frequency-cur: 22282250
+                    transmission-mode-cur: '56000-64'
+                    received-radio-signal-id:
+                      numeric-radio-signal-id: 177
+                      alphanumeric-radio-signal-id: 'Not yet defined.'
+                    link-is-up: true
+                    xpic-is-up: true
+                    mimo-is-up: false
+                    alic-is-up: false
+                    atpc-is-up: true
+                    auto-freq-select-is-up: false
+                    local-end-point-id: '4321'
+                    remote-end-point-id: '1234'
+                    loop-back-kind-up: 'air-interface-2-0:LOOP_BACK_TYPE_IF_TO_LOCAL'
+                    performance-monitoring-is-up: true
+                    rx-level-cur: -68
+                    tx-level-cur: 2
+                    snir-cur: 4
+                    xpd-cur: -99
+                    rf-temp-cur: 28
+          headers:
+            x-correlator:
+              $ref: '#/components/headers/x-correlator'
+            exec-time:
+              $ref: '#/components/headers/exec-time'
+            backend-time:
+              $ref: '#/components/headers/backend-time'
+            life-cycle-state:
+              $ref: '#/components/headers/life-cycle-state'
+  /core-model-1-4:network-control-domain=cache/control-construct=305250001/logical-termination-point=airInt1/layer-protocol=1/air-interface-2-0:air-interface-pac/air-interface-current-performance:
+    parameters:
+      - $ref: '#/components/parameters/user'
+      - $ref: '#/components/parameters/originator'
+      - $ref: '#/components/parameters/x-correlator'
+      - $ref: '#/components/parameters/trace-indicator'
+      - $ref: '#/components/parameters/customer-journey'
+      - $ref: '#/components/parameters/mountName'
+      - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/fields'
+    get:
+      operationId: getCachedAirInterfaceCurrentPerformance
+      summary: 'Provides AirInterfaceCurrentPerformance from cache'
+      tags:
+        - IndividualServices
+      security:
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: 'AirInterfaceCurrentPerformance provided from cache'
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - air-interface-2-0:air-interface-current-performance
+                properties:
+                  air-interface-2-0:air-interface-current-performance:
+                    $ref: '#/components/schemas/air-interface-current-performance'
+                example:
+                  air-interface-2-0:air-interface-current-performance:
+                    number-of-current-performance-sets: 0
+                    current-performance-data-list:
+                      - timestamp: '2010-11-20T14:00:00+01:00'
+                        suspect-interval-flag: true
+                        elapsed-time: '726'
+                        scanner-id: 'string'
+                        granularity-period: 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN'
+                        performance-data:
+                          es: 140
+                          ses: 10
+                          cses: 5
+                          unavailability: 5
+                          tx-level-min: 2
+                          tx-level-max: 10
+                          tx-level-avg: 3
+                          rx-level-min: -91
+                          rx-level-max: -68
+                          rx-level-avg: -74
+                          time-xstates-list:
+                            - time-xstate-sequence-number: 0
+                              transmission-mode: '56000-64'
+                              time: 641
+                            - time-xstate-sequence-number: 1
+                              transmission-mode: '56000-4'
+                              time: 80
+                          snir-min: -10
+                          snir-max: 4
+                          snir-avg: 3
+                          xpd-min: -99
+                          xpd-max: -99
+                          xpd-avg: -99
+                          rf-temp-min: 28
+                          rf-temp-max: 28
+                          rf-temp-avg: 28
+                          defect-blocks-sum: 24231
+                          time-period: 726
+          headers:
+            x-correlator:
+              $ref: '#/components/headers/x-correlator'
+            exec-time:
+              $ref: '#/components/headers/exec-time'
+            backend-time:
+              $ref: '#/components/headers/backend-time'
+            life-cycle-state:
+              $ref: '#/components/headers/life-cycle-state'
+  /core-model-1-4:network-control-domain=cache/control-construct=305250001/logical-termination-point=airInt1/layer-protocol=1/air-interface-2-0:air-interface-pac/air-interface-historical-performances:
+    parameters:
+      - $ref: '#/components/parameters/user'
+      - $ref: '#/components/parameters/originator'
+      - $ref: '#/components/parameters/x-correlator'
+      - $ref: '#/components/parameters/trace-indicator'
+      - $ref: '#/components/parameters/customer-journey'
+      - $ref: '#/components/parameters/mountName'
+      - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/fields'
+    get:
+      operationId: getCachedAirInterfaceHistoricalPerformances
+      summary: 'Provides AirInterfaceHistoricalPerformances from cache'
+      tags:
+        - IndividualServices
+      security:
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: 'AirInterfaceHistoricalPerformances provided from cache'
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - air-interface-2-0:air-interface-historical-performances
+                properties:
+                  air-interface-2-0:air-interface-historical-performances:
+                    $ref: '#/components/schemas/air-interface-historical-performances'
+                example:
+                  air-interface-2-0:air-interface-historical-performances:
+                    number-of-historical-performance-sets: 1
+                    time-of-latest-change: '2010-11-20T14:00:00+01:00'
+                    historical-performance-data-list:
+                      - suspect-interval-flag: false
+                        history-data-id: 'History Data ID not defined.'
+                        granularity-period: 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN'
+                        period-end-time: '2010-11-20T14:00:00+01:00'
+                        performance-data:
+                          es: 140
+                          ses: 10
+                          cses: 5
+                          unavailability: 5
+                          tx-level-min: 2
+                          tx-level-max: 10
+                          tx-level-avg: 3
+                          rx-level-min: -91
+                          rx-level-max: -68
+                          rx-level-avg: -72
+                          time-xstates-list:
+                            - time-xstate-sequence-number: 0
+                              transmission-mode: '56000-64'
+                              time: 815
+                            - time-xstate-sequence-number: 1
+                              transmission-mode: '56000-4'
+                              time: 80
+                          snir-min: -10
+                          snir-max: 4
+                          snir-avg: 3
+                          xpd-min: -99
+                          xpd-max: -99
+                          xpd-avg: -99
+                          rf-temp-min: 28
+                          rf-temp-max: 28
+                          rf-temp-avg: 28
+                          defect-blocks-sum: 24553
+                          time-period: 900
+          headers:
+            x-correlator:
+              $ref: '#/components/headers/x-correlator'
+            exec-time:
+              $ref: '#/components/headers/exec-time'
+            backend-time:
+              $ref: '#/components/headers/backend-time'
+            life-cycle-state:
+              $ref: '#/components/headers/life-cycle-state'
+
+# Completeness of RPC
+  # /core-model-1-4:network-control-domain=live/control-construct=305250001/air-interface-2-0:clear-threshold-cross-alarms
+  /core-model-1-4:network-control-domain=live/control-construct=305250001/air-interface-2-0%3Aclear-threshold-cross-alarms:
+    parameters:
+      - $ref: '#/components/parameters/user'
+      - $ref: '#/components/parameters/originator'
+      - $ref: '#/components/parameters/x-correlator'
+      - $ref: '#/components/parameters/trace-indicator'
+      - $ref: '#/components/parameters/customer-journey'
+      - $ref: '#/components/parameters/mountName'
+    post:
+      operationId: postClearThresholdCrossAlarms
+      summary: 'Clears all currently active threshold cross alarms at the referenced AirInterface'
+      tags:
+        - IndividualServices
+      security:
+        - apiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - input
+              properties:
+                input:
+                  type: object
+                  required:
+                    - affected-air-interface
+                  properties:
+                    affected-air-interface:
+                      type: string
+      responses:
+        '204':
+          description: 'Threshold cross alarms cleared'
+          headers:
+            x-correlator:
+              $ref: '#/components/headers/x-correlator'
+            exec-time:
+              $ref: '#/components/headers/exec-time'
+            backend-time:
+              $ref: '#/components/headers/backend-time'
+            life-cycle-state:
+              $ref: '#/components/headers/life-cycle-state'
+
+
+#
+# At Controller (copy from above, just different paths)
+# =============
+#
+# Preparation => MountName=305250001, UUID=airInt1, LocalID=1
+  /rests/data/network-topology:network-topology/topology=topology-netconf/node=305250001/yang-ext:mount/core-model-1-4:control-construct:
+    parameters:
+      - $ref: '#/components/parameters/user'
+      - $ref: '#/components/parameters/originator'
+      - $ref: '#/components/parameters/x-correlator'
+      - $ref: '#/components/parameters/trace-indicator'
+      - $ref: '#/components/parameters/customer-journey'
+    get:
+      operationId: getLtpList
+      summary: 'Provides list of LTPs from cache'
+      tags:
+        - IndividualServices
+      security:
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: 'List of LTPs provided from cache'
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - core-model-1-4:control-construct
+                properties:
+                  core-model-1-4:control-construct:
+                    type: object
+                    required:
+                      - logical-termination-point
+                    properties:
+                      logical-termination-point:
+                        type: array
+                        items:
+                          type: object
+                          required:
+                            - uuid
+                            - layer-protocol
+                          properties:
+                            uuid:
+                              type: string
+                              enum:
+                                - 'airInt1'
+                            layer-protocol:
+                              type: array
+                              items:
+                                type: object
+                                required:
+                                  - local-id
+                                  - layer-protocol-name
+                                properties:
+                                  local-id:
+                                    type: string
+                                    enum:
+                                      - '1'
+                                  layer-protocol-name:
+                                    type: string
+                                    enum:
+                                      - 'air-interface-2-0:LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER'
+                example:
+                  core-model-1-4:control-construct:
+                    logical-termination-point:
+                      - uuid: 'airInt1'
+                        layer-protocol:
+                          - local-id: '1'
+                            layer-protocol-name: 'air-interface-2-0:LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER'
+          headers:
+            x-correlator:
+              $ref: '#/components/headers/x-correlator'
+            exec-time:
+              $ref: '#/components/headers/exec-time'
+            backend-time:
+              $ref: '#/components/headers/backend-time'
+            life-cycle-state:
+              $ref: '#/components/headers/life-cycle-state'
+
+# Completeness of GET 200
+  /rests/data/network-topology:network-topology/topology=topology-netconf/node=305250001/yang-ext:mount/core-model-1-4:control-construct/logical-termination-point=airInt1/layer-protocol=1/air-interface-2-0:air-interface-pac/air-interface-capability:
+    parameters:
+      - $ref: '#/components/parameters/user'
+      - $ref: '#/components/parameters/originator'
+      - $ref: '#/components/parameters/x-correlator'
+      - $ref: '#/components/parameters/trace-indicator'
+      - $ref: '#/components/parameters/customer-journey'
+      - $ref: '#/components/parameters/mountName'
+      - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/fields'
+    get:
+      operationId: getCachedAirInterfaceCapability
+      summary: 'Provides AirInterfaceCapability from cache'
+      tags:
+        - IndividualServices
+      security:
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: 'AirInterfaceCapability provided from cache'
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - air-interface-2-0:air-interface-capability
+                properties:
+                  air-interface-2-0:air-interface-capability:
+                    $ref: '#/components/schemas/air-interface-capability'
+                example:
+                  air-interface-2-0:air-interface-capability:
+                    type-of-equipment: 'RadioUnit 21'
+                    tx-frequency-min: 23282250
+                    tx-frequency-max: 23598500
+                    rx-frequency-min: 22274250
+                    rx-frequency-max: 22590500
+                    duplex-distance-is-freely-configurable: true
+                    duplex-distance-list:
+                      - 1008000
+                      - 1015000
+                      - 1022000
+                    transmission-mode-list:
+                      - transmission-mode-name: '56000-4'
+                        transmission-mode-rank: 0
+                        channel-bandwidth: 56000
+                        modulation-scheme: 4
+                        code-rate: 90
+                        symbol-rate-reduction-factor: 1
+                        tx-power-min: -20
+                        tx-power-max: 24
+                        rx-threshold: -80
+                        am-upshift-level: -60
+                        am-downshift-level: -70
+                        xpic-is-avail: true
+                        supported-as-fixed-configuration: true
+                        modulation-scheme-name-at-lct: '4 QAM'
+                      - transmission-mode-name: '56000-64'
+                        transmission-mode-rank: 1
+                        channel-bandwidth: 56000
+                        modulation-scheme: 64
+                        code-rate: 90
+                        symbol-rate-reduction-factor: 1
+                        tx-power-min: -20
+                        tx-power-max: 20
+                        rx-threshold: -70
+                        am-upshift-level: -50
+                        am-downshift-level: -60
+                        xpic-is-avail: true
+                        supported-as-fixed-configuration: true
+                        modulation-scheme-name-at-lct: '64 QAM'
+                    auto-freq-select-is-avail: false
+                    receiver-on-off-is-avail: true
+                    adaptive-modulation-is-avail: true
+                    atpc-is-avail: true
+                    atpc-range: 20
+                    supported-radio-signal-id-datatype: 'air-interface-2-0:RADIO_SIGNAL_ID_DATATYPE_TYPE_INTEGER'
+                    supported-radio-signal-id-length: 256
+                    expected-equals-transmitted-radio-signal-id: true
+                    encryption-is-avail: true
+                    supported-loop-back-kind-list:
+                      - 'air-interface-2-0:LOOP_BACK_TYPE_RF_TO_LOCAL'
+                      - 'air-interface-2-0:LOOP_BACK_TYPE_IF_TO_REMOTE'
+                      - 'air-interface-2-0:LOOP_BACK_TYPE_IF_TO_LOCAL'
+                    maintenance-timer-range: '60-600'
+                    acm-threshold-cross-alarms-is-avail: true
+                    clearing-threshold-cross-alarms-is-avail: true
+                    performance-monitoring-is-avail: true
+                    direction-of-acm-performance-values: 'air-interface-2-0:DIRECTION_TYPE_TX'
+          headers:
+            x-correlator:
+              $ref: '#/components/headers/x-correlator'
+            exec-time:
+              $ref: '#/components/headers/exec-time'
+            backend-time:
+              $ref: '#/components/headers/backend-time'
+            life-cycle-state:
+              $ref: '#/components/headers/life-cycle-state'
+  /rests/data/network-topology:network-topology/topology=topology-netconf/node=305250001/yang-ext:mount/core-model-1-4:control-construct/logical-termination-point=airInt1/layer-protocol=1/air-interface-2-0:air-interface-pac/air-interface-configuration:
+    parameters:
+      - $ref: '#/components/parameters/user'
+      - $ref: '#/components/parameters/originator'
+      - $ref: '#/components/parameters/x-correlator'
+      - $ref: '#/components/parameters/trace-indicator'
+      - $ref: '#/components/parameters/customer-journey'
+      - $ref: '#/components/parameters/mountName'
+      - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/fields'
+    get:
+      operationId: getCachedAirInterfaceConfiguration
+      summary: 'Provides AirInterfaceConfiguration from cache'
+      tags:
+        - IndividualServices
+      security:
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: 'AirInterfaceConfiguration provided from cache'
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - air-interface-2-0:air-interface-configuration
+                properties:
+                  air-interface-2-0:air-interface-configuration:
+                    $ref: '#/components/schemas/air-interface-configuration'
+                example:
+                  air-interface-2-0:air-interface-configuration:
+                    air-interface-name: '305550001A'
+                    remote-air-interface-name: '305550001B'
+                    transmitted-radio-signal-id:
+                      numeric-radio-signal-id: 177
+                      alphanumeric-radio-signal-id: 'Not yet defined.'
+                    expected-radio-signal-id:
+                      numeric-radio-signal-id: 177
+                      alphanumeric-radio-signal-id: 'Not yet defined.'
+                    tx-frequency: 23290250
+                    rx-frequency: 22282250
+                    duplex-distance: 1008000
+                    transmission-mode-min: '56000-4'
+                    transmission-mode-max: '56000-64'
+                    power-is-on: true
+                    transmitter-is-on: true
+                    receiver-is-on: true
+                    tx-power: 10
+                    adaptive-modulation-is-on: true
+                    xpic-is-on: true
+                    mimo-is-on: false
+                    alic-is-on: false
+                    atpc-is-on: true
+                    atpc-thresh-upper: -45
+                    atpc-thresh-lower: -47
+                    atpc-tx-power-min: -20
+                    auto-freq-select-is-on: false
+                    auto-freq-select-range: -1
+                    modulation-is-on: true
+                    encryption-is-on: true
+                    cryptographic-key: 'r4nd0m5ting4coding'
+                    loop-back-kind-on: 'air-interface-2-0:LOOP_BACK_TYPE_IF_TO_LOCAL'
+                    maintenance-timer: 300
+                    g-826-threshold-cross-alarm-list:
+                      - g-826-value-kind: 'air-interface-2-0:G_826_TYPE_ES'
+                        alarm-raising-threshold: 180
+                        alarm-clearing-threshold: 10
+                        granularity-period: 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN'
+                      - g-826-value-kind: 'air-interface-2-0:G_826_TYPE_SES'
+                        alarm-raising-threshold: 15
+                        alarm-clearing-threshold: 1
+                        granularity-period: 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN'
+                    xlts-threshold-cross-alarm-list:
+                      - level-threshold-second-kind: 'air-interface-2-0:XLEVEL_THRESHOLD_SECOND_KIND_TYPE_RLTS'
+                        xlts-level: -90
+                        amount-of-seconds: 150
+                        granularity-period: 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN'
+                        xlts-threshold-cross-alarm-definition-number: 0
+                      - level-threshold-second-kind: 'air-interface-2-0:XLEVEL_THRESHOLD_SECOND_KIND_TYPE_TLTS'
+                        xlts-level: 8
+                        amount-of-seconds: 180
+                        granularity-period: 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN'
+                        xlts-threshold-cross-alarm-definition-number: 1
+                    acm-threshold-cross-alarm-list:
+                      - acm-threshold-cross-alarm-definition-number: 0
+                        transmission-mode: '56000-4'
+                        seconds-for-raising-alarm: 600
+                        seconds-for-clearing-alarm: 60
+                        granularity-period: 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN'
+                    performance-monitoring-is-on: true
+          headers:
+            x-correlator:
+              $ref: '#/components/headers/x-correlator'
+            exec-time:
+              $ref: '#/components/headers/exec-time'
+            backend-time:
+              $ref: '#/components/headers/backend-time'
+            life-cycle-state:
+              $ref: '#/components/headers/life-cycle-state'
+  /rests/data/network-topology:network-topology/topology=topology-netconf/node=305250001/yang-ext:mount/core-model-1-4:control-construct/logical-termination-point=airInt1/layer-protocol=1/air-interface-2-0:air-interface-pac/air-interface-status:
+    parameters:
+      - $ref: '#/components/parameters/user'
+      - $ref: '#/components/parameters/originator'
+      - $ref: '#/components/parameters/x-correlator'
+      - $ref: '#/components/parameters/trace-indicator'
+      - $ref: '#/components/parameters/customer-journey'
+      - $ref: '#/components/parameters/mountName'
+      - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/fields'
+    get:
+      operationId: getCachedAirInterfaceStatus
+      summary: 'Provides AirInterfaceStatus from cache'
+      tags:
+        - IndividualServices
+      security:
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: 'AirInterfaceStatus provided from cache'
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - air-interface-2-0:air-interface-status
+                properties:
+                  air-interface-2-0:air-interface-status:
+                    $ref: '#/components/schemas/air-interface-status'
+                example:
+                  air-interface-2-0:air-interface-status:
+                    interface-status: 'air-interface-2-0:INTERFACE_STATUS_TYPE_UP'
+                    tx-frequency-cur: 23290250
+                    rx-frequency-cur: 22282250
+                    transmission-mode-cur: '56000-64'
+                    received-radio-signal-id:
+                      numeric-radio-signal-id: 177
+                      alphanumeric-radio-signal-id: 'Not yet defined.'
+                    link-is-up: true
+                    xpic-is-up: true
+                    mimo-is-up: false
+                    alic-is-up: false
+                    atpc-is-up: true
+                    auto-freq-select-is-up: false
+                    local-end-point-id: '4321'
+                    remote-end-point-id: '1234'
+                    loop-back-kind-up: 'air-interface-2-0:LOOP_BACK_TYPE_IF_TO_LOCAL'
+                    performance-monitoring-is-up: true
+                    rx-level-cur: -68
+                    tx-level-cur: 2
+                    snir-cur: 4
+                    xpd-cur: -99
+                    rf-temp-cur: 28
+          headers:
+            x-correlator:
+              $ref: '#/components/headers/x-correlator'
+            exec-time:
+              $ref: '#/components/headers/exec-time'
+            backend-time:
+              $ref: '#/components/headers/backend-time'
+            life-cycle-state:
+              $ref: '#/components/headers/life-cycle-state'
+  /rests/data/network-topology:network-topology/topology=topology-netconf/node=305250001/yang-ext:mount/core-model-1-4:control-construct/logical-termination-point=airInt1/layer-protocol=1/air-interface-2-0:air-interface-pac/air-interface-current-performance:
+    parameters:
+      - $ref: '#/components/parameters/user'
+      - $ref: '#/components/parameters/originator'
+      - $ref: '#/components/parameters/x-correlator'
+      - $ref: '#/components/parameters/trace-indicator'
+      - $ref: '#/components/parameters/customer-journey'
+      - $ref: '#/components/parameters/mountName'
+      - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/fields'
+    get:
+      operationId: getCachedAirInterfaceCurrentPerformance
+      summary: 'Provides AirInterfaceCurrentPerformance from cache'
+      tags:
+        - IndividualServices
+      security:
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: 'AirInterfaceCurrentPerformance provided from cache'
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - air-interface-2-0:air-interface-current-performance
+                properties:
+                  air-interface-2-0:air-interface-current-performance:
+                    $ref: '#/components/schemas/air-interface-current-performance'
+                example:
+                  air-interface-2-0:air-interface-current-performance:
+                    number-of-current-performance-sets: 0
+                    current-performance-data-list:
+                      - timestamp: '2010-11-20T14:00:00+01:00'
+                        suspect-interval-flag: true
+                        elapsed-time: '726'
+                        scanner-id: 'string'
+                        granularity-period: 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN'
+                        performance-data:
+                          es: 140
+                          ses: 10
+                          cses: 5
+                          unavailability: 5
+                          tx-level-min: 2
+                          tx-level-max: 10
+                          tx-level-avg: 3
+                          rx-level-min: -91
+                          rx-level-max: -68
+                          rx-level-avg: -74
+                          time-xstates-list:
+                            - time-xstate-sequence-number: 0
+                              transmission-mode: '56000-64'
+                              time: 641
+                            - time-xstate-sequence-number: 1
+                              transmission-mode: '56000-4'
+                              time: 80
+                          snir-min: -10
+                          snir-max: 4
+                          snir-avg: 3
+                          xpd-min: -99
+                          xpd-max: -99
+                          xpd-avg: -99
+                          rf-temp-min: 28
+                          rf-temp-max: 28
+                          rf-temp-avg: 28
+                          defect-blocks-sum: 24231
+                          time-period: 726
+          headers:
+            x-correlator:
+              $ref: '#/components/headers/x-correlator'
+            exec-time:
+              $ref: '#/components/headers/exec-time'
+            backend-time:
+              $ref: '#/components/headers/backend-time'
+            life-cycle-state:
+              $ref: '#/components/headers/life-cycle-state'
+  /rests/data/network-topology:network-topology/topology=topology-netconf/node=305250001/yang-ext:mount/core-model-1-4:control-construct/logical-termination-point=airInt1/layer-protocol=1/air-interface-2-0:air-interface-pac/air-interface-historical-performances:
+    parameters:
+      - $ref: '#/components/parameters/user'
+      - $ref: '#/components/parameters/originator'
+      - $ref: '#/components/parameters/x-correlator'
+      - $ref: '#/components/parameters/trace-indicator'
+      - $ref: '#/components/parameters/customer-journey'
+      - $ref: '#/components/parameters/mountName'
+      - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/fields'
+    get:
+      operationId: getCachedAirInterfaceHistoricalPerformances
+      summary: 'Provides AirInterfaceHistoricalPerformances from cache'
+      tags:
+        - IndividualServices
+      security:
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: 'AirInterfaceHistoricalPerformances provided from cache'
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - air-interface-2-0:air-interface-historical-performances
+                properties:
+                  air-interface-2-0:air-interface-historical-performances:
+                    $ref: '#/components/schemas/air-interface-historical-performances'
+                example:
+                  air-interface-2-0:air-interface-historical-performances:
+                    number-of-historical-performance-sets: 1
+                    time-of-latest-change: '2010-11-20T14:00:00+01:00'
+                    historical-performance-data-list:
+                      - suspect-interval-flag: false
+                        history-data-id: 'History Data ID not defined.'
+                        granularity-period: 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN'
+                        period-end-time: '2010-11-20T14:00:00+01:00'
+                        performance-data:
+                          es: 140
+                          ses: 10
+                          cses: 5
+                          unavailability: 5
+                          tx-level-min: 2
+                          tx-level-max: 10
+                          tx-level-avg: 3
+                          rx-level-min: -91
+                          rx-level-max: -68
+                          rx-level-avg: -72
+                          time-xstates-list:
+                            - time-xstate-sequence-number: 0
+                              transmission-mode: '56000-64'
+                              time: 815
+                            - time-xstate-sequence-number: 1
+                              transmission-mode: '56000-4'
+                              time: 80
+                          snir-min: -10
+                          snir-max: 4
+                          snir-avg: 3
+                          xpd-min: -99
+                          xpd-max: -99
+                          xpd-avg: -99
+                          rf-temp-min: 28
+                          rf-temp-max: 28
+                          rf-temp-avg: 28
+                          defect-blocks-sum: 24553
+                          time-period: 900
+          headers:
+            x-correlator:
+              $ref: '#/components/headers/x-correlator'
+            exec-time:
+              $ref: '#/components/headers/exec-time'
+            backend-time:
+              $ref: '#/components/headers/backend-time'
+            life-cycle-state:
+              $ref: '#/components/headers/life-cycle-state'
+
+# Completeness of RPC
+  # /rests/operations/network-topology:network-topology/topology=topology-netconf/node=305250001/yang-ext:mount/air-interface-2-0:clear-threshold-cross-alarms
+  /rests/operations/network-topology:network-topology/topology=topology-netconf/node=305250001/yang-ext:mount/air-interface-2-0%3Aclear-threshold-cross-alarms:
+    parameters:
+      - $ref: '#/components/parameters/user'
+      - $ref: '#/components/parameters/originator'
+      - $ref: '#/components/parameters/x-correlator'
+      - $ref: '#/components/parameters/trace-indicator'
+      - $ref: '#/components/parameters/customer-journey'
+      - $ref: '#/components/parameters/mountName'
+    post:
+      operationId: postClearThresholdCrossAlarms
+      summary: 'Clears all currently active threshold cross alarms at the referenced AirInterface'
+      tags:
+        - IndividualServices
+      security:
+        - apiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - input
+              properties:
+                input:
+                  type: object
+                  required:
+                    - affected-air-interface
+                  properties:
+                    affected-air-interface:
+                      type: string
+      responses:
+        '204':
+          description: 'Threshold cross alarms cleared'
+          headers:
+            x-correlator:
+              $ref: '#/components/headers/x-correlator'
+            exec-time:
+              $ref: '#/components/headers/exec-time'
+            backend-time:
+              $ref: '#/components/headers/backend-time'
+            life-cycle-state:
+              $ref: '#/components/headers/life-cycle-state'
+
+
+########################################################################################################################
+#   Generic Paths
+########################################################################################################################
+  /generic/core-model-1-4:network-control-domain=cache/control-construct={mountName}/logical-termination-point={uuid}/layer-protocol={localId}/air-interface-2-0:air-interface-pac/air-interface-capability:
+    parameters:
+      - $ref: '#/components/parameters/user'
+      - $ref: '#/components/parameters/originator'
+      - $ref: '#/components/parameters/x-correlator'
+      - $ref: '#/components/parameters/trace-indicator'
+      - $ref: '#/components/parameters/customer-journey'
+      - $ref: '#/components/parameters/mountName'
+      - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/fields'
+    get:
+      operationId: getCachedAirInterfaceCapability
+      summary: 'Provides AirInterfaceCapability from cache'
+      tags:
+        - IndividualServices
+      security:
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: 'AirInterfaceCapability provided from cache'
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - air-interface-2-0:air-interface-capability
+                properties:
+                  air-interface-2-0:air-interface-capability:
+                    $ref: '#/components/schemas/air-interface-capability'
+                example:
+                  air-interface-2-0:air-interface-capability:
+                    type-of-equipment: 'string'
+                    tx-frequency-min: 0
+                    tx-frequency-max: 0
+                    rx-frequency-min: 0
+                    rx-frequency-max: 0
+                    duplex-distance-is-freely-configurable: true
+                    duplex-distance-list:
+                      - 0
+                    transmission-mode-list:
+                      - transmission-mode-name: 'string'
+                        transmission-mode-rank: 0
+                        channel-bandwidth: 0
+                        modulation-scheme: 0
+                        code-rate: 0
+                        symbol-rate-reduction-factor: 0
+                        tx-power-min: 0
+                        tx-power-max: 0
+                        rx-threshold: 0
+                        am-upshift-level: 0
+                        am-downshift-level: 0
+                        xpic-is-avail: true
+                        supported-as-fixed-configuration: true
+                        modulation-scheme-name-at-lct: 'string'
+                    auto-freq-select-is-avail: true
+                    receiver-on-off-is-avail: true
+                    adaptive-modulation-is-avail: true
+                    atpc-is-avail: true
+                    atpc-range: 0
+                    supported-radio-signal-id-datatype: 'air-interface-2-0:RADIO_SIGNAL_ID_DATATYPE_TYPE_INTEGER'
+                    supported-radio-signal-id-length: 0
+                    expected-equals-transmitted-radio-signal-id: true
+                    encryption-is-avail: true
+                    supported-loop-back-kind-list:
+                      - 'air-interface-2-0:LOOP_BACK_TYPE_RF_TO_REMOTE'
+                    maintenance-timer-range: 'string'
+                    acm-threshold-cross-alarms-is-avail: true
+                    clearing-threshold-cross-alarms-is-avail: true
+                    performance-monitoring-is-avail: true
+                    direction-of-acm-performance-values: 'air-interface-2-0:DIRECTION_TYPE_TX'
+          headers:
+            x-correlator:
+              $ref: '#/components/headers/x-correlator'
+            exec-time:
+              $ref: '#/components/headers/exec-time'
+            backend-time:
+              $ref: '#/components/headers/backend-time'
+            life-cycle-state:
+              $ref: '#/components/headers/life-cycle-state'
+        '4XX':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        '500':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        default:
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+  /generic/core-model-1-4:network-control-domain=cache/control-construct={mountName}/logical-termination-point={uuid}/layer-protocol={localId}/air-interface-2-0:air-interface-pac/air-interface-configuration:
+    parameters:
+      - $ref: '#/components/parameters/user'
+      - $ref: '#/components/parameters/originator'
+      - $ref: '#/components/parameters/x-correlator'
+      - $ref: '#/components/parameters/trace-indicator'
+      - $ref: '#/components/parameters/customer-journey'
+      - $ref: '#/components/parameters/mountName'
+      - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/fields'
+    get:
+      operationId: getCachedAirInterfaceConfiguration
+      summary: 'Provides AirInterfaceConfiguration from cache'
+      tags:
+        - IndividualServices
+      security:
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: 'AirInterfaceConfiguration provided from cache'
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - air-interface-2-0:air-interface-configuration
+                properties:
+                  air-interface-2-0:air-interface-configuration:
+                    $ref: '#/components/schemas/air-interface-configuration'
+                example:
+                  air-interface-2-0:air-interface-configuration:
+                    air-interface-name: 'string'
+                    remote-air-interface-name: 'string'
+                    transmitted-radio-signal-id:
+                      numeric-radio-signal-id: 0
+                      alphanumeric-radio-signal-id: 'string'
+                    expected-radio-signal-id:
+                      numeric-radio-signal-id: 0
+                      alphanumeric-radio-signal-id: 'string'
+                    tx-frequency: 0
+                    rx-frequency: 0
+                    duplex-distance: 0
+                    transmission-mode-min: 'string'
+                    transmission-mode-max: 'string'
+                    power-is-on: true
+                    transmitter-is-on: true
+                    receiver-is-on: true
+                    tx-power: 0
+                    adaptive-modulation-is-on: true
+                    xpic-is-on: true
+                    mimo-is-on: true
+                    alic-is-on: true
+                    atpc-is-on: true
+                    atpc-thresh-upper: 0
+                    atpc-thresh-lower: 0
+                    atpc-tx-power-min: 0
+                    auto-freq-select-is-on: true
+                    auto-freq-select-range: 0
+                    modulation-is-on: true
+                    encryption-is-on: true
+                    cryptographic-key: 'string'
+                    loop-back-kind-on: 'air-interface-2-0:LOOP_BACK_TYPE_RF_TO_REMOTE'
+                    maintenance-timer: 0
+                    g-826-threshold-cross-alarm-list:
+                      - g-826-value-kind: 'air-interface-2-0:G_826_TYPE_ES'
+                        alarm-raising-threshold: 0
+                        alarm-clearing-threshold: 0
+                        granularity-period: 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_UNKNOWN'
+                    xlts-threshold-cross-alarm-list:
+                      - level-threshold-second-kind: 'air-interface-2-0:XLEVEL_THRESHOLD_SECOND_KIND_TYPE_RLTS'
+                        xlts-level: 0
+                        amount-of-seconds: 0
+                        granularity-period: 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_UNKNOWN'
+                        xlts-threshold-cross-alarm-definition-number: 0
+                    acm-threshold-cross-alarm-list:
+                      - acm-threshold-cross-alarm-definition-number: 0
+                        transmission-mode: 'string'
+                        seconds-for-raising-alarm: 0
+                        seconds-for-clearing-alarm: 0
+                        granularity-period: 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_UNKNOWN'
+                    performance-monitoring-is-on: true
+          headers:
+            x-correlator:
+              $ref: '#/components/headers/x-correlator'
+            exec-time:
+              $ref: '#/components/headers/exec-time'
+            backend-time:
+              $ref: '#/components/headers/backend-time'
+            life-cycle-state:
+              $ref: '#/components/headers/life-cycle-state'
+        '4XX':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        '500':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        default:
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+  /generic/core-model-1-4:network-control-domain=cache/control-construct={mountName}/logical-termination-point={uuid}/layer-protocol={localId}/air-interface-2-0:air-interface-pac/air-interface-status:
+    parameters:
+      - $ref: '#/components/parameters/user'
+      - $ref: '#/components/parameters/originator'
+      - $ref: '#/components/parameters/x-correlator'
+      - $ref: '#/components/parameters/trace-indicator'
+      - $ref: '#/components/parameters/customer-journey'
+      - $ref: '#/components/parameters/mountName'
+      - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/fields'
+    get:
+      operationId: getCachedAirInterfaceStatus
+      summary: 'Provides AirInterfaceStatus from cache'
+      tags:
+        - IndividualServices
+      security:
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: 'AirInterfaceStatus provided from cache'
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - air-interface-2-0:air-interface-status
+                properties:
+                  air-interface-2-0:air-interface-status:
+                    $ref: '#/components/schemas/air-interface-status'
+                example:
+                  air-interface-2-0:air-interface-status:
+                    interface-status: 'air-interface-2-0:INTERFACE_STATUS_TYPE_UP'
+                    tx-frequency-cur: 0
+                    rx-frequency-cur: 0
+                    transmission-mode-cur: 'string'
+                    received-radio-signal-id:
+                      numeric-radio-signal-id: 0
+                      alphanumeric-radio-signal-id: 'string'
+                    link-is-up: true
+                    xpic-is-up: true
+                    mimo-is-up: true
+                    alic-is-up: true
+                    atpc-is-up: true
+                    auto-freq-select-is-up: true
+                    local-end-point-id: 'string'
+                    remote-end-point-id: 'string'
+                    loop-back-kind-up: 'air-interface-2-0:LOOP_BACK_TYPE_RF_TO_REMOTE'
+                    performance-monitoring-is-up: true
+                    rx-level-cur: 0
+                    tx-level-cur: 0
+                    snir-cur: 0
+                    xpd-cur: 0
+                    rf-temp-cur: 0
+          headers:
+            x-correlator:
+              $ref: '#/components/headers/x-correlator'
+            exec-time:
+              $ref: '#/components/headers/exec-time'
+            backend-time:
+              $ref: '#/components/headers/backend-time'
+            life-cycle-state:
+              $ref: '#/components/headers/life-cycle-state'
+        '4XX':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        '500':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        default:
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+  /generic/core-model-1-4:network-control-domain=cache/control-construct={mountName}/logical-termination-point={uuid}/layer-protocol={localId}/air-interface-2-0:air-interface-pac/air-interface-current-performance:
+    parameters:
+      - $ref: '#/components/parameters/user'
+      - $ref: '#/components/parameters/originator'
+      - $ref: '#/components/parameters/x-correlator'
+      - $ref: '#/components/parameters/trace-indicator'
+      - $ref: '#/components/parameters/customer-journey'
+      - $ref: '#/components/parameters/mountName'
+      - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/fields'
+    get:
+      operationId: getCachedAirInterfaceCurrentPerformance
+      summary: 'Provides AirInterfaceCurrentPerformance from cache'
+      tags:
+        - IndividualServices
+      security:
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: 'AirInterfaceCurrentPerformance provided from cache'
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - air-interface-2-0:air-interface-current-performance
+                properties:
+                  air-interface-2-0:air-interface-current-performance:
+                    $ref: '#/components/schemas/air-interface-current-performance'
+                example:
+                  air-interface-2-0:air-interface-current-performance:
+                    number-of-current-performance-sets: 0
+                    current-performance-data-list:
+                      - timestamp: '2010-11-20T14:00:00+01:00'
+                        suspect-interval-flag: true
+                        elapsed-time: 'string'
+                        scanner-id: 'string'
+                        granularity-period: 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_UNKNOWN'
+                        performance-data:
+                          es: 0
+                          ses: 0
+                          cses: 0
+                          unavailability: 0
+                          tx-level-min: 0
+                          tx-level-max: 0
+                          tx-level-avg: 0
+                          rx-level-min: 0
+                          rx-level-max: 0
+                          rx-level-avg: 0
+                          time-xstates-list:
+                            - time-xstate-sequence-number: 0
+                              transmission-mode: 'string'
+                              time: 0
+                          snir-min: 0
+                          snir-max: 0
+                          snir-avg: 0
+                          xpd-min: 0
+                          xpd-max: 0
+                          xpd-avg: 0
+                          rf-temp-min: 0
+                          rf-temp-max: 0
+                          rf-temp-avg: 0
+                          defect-blocks-sum: 0
+                          time-period: 0
+          headers:
+            x-correlator:
+              $ref: '#/components/headers/x-correlator'
+            exec-time:
+              $ref: '#/components/headers/exec-time'
+            backend-time:
+              $ref: '#/components/headers/backend-time'
+            life-cycle-state:
+              $ref: '#/components/headers/life-cycle-state'
+        '4XX':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        '500':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        default:
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+  /generic/core-model-1-4:network-control-domain=cache/control-construct={mountName}/logical-termination-point={uuid}/layer-protocol={localId}/air-interface-2-0:air-interface-pac/air-interface-historical-performances:
+    parameters:
+      - $ref: '#/components/parameters/user'
+      - $ref: '#/components/parameters/originator'
+      - $ref: '#/components/parameters/x-correlator'
+      - $ref: '#/components/parameters/trace-indicator'
+      - $ref: '#/components/parameters/customer-journey'
+      - $ref: '#/components/parameters/mountName'
+      - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/fields'
+    get:
+      operationId: getCachedAirInterfaceHistoricalPerformances
+      summary: 'Provides AirInterfaceHistoricalPerformances from cache'
+      tags:
+        - IndividualServices
+      security:
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: 'AirInterfaceHistoricalPerformances provided from cache'
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - air-interface-2-0:air-interface-historical-performances
+                properties:
+                  air-interface-2-0:air-interface-historical-performances:
+                    $ref: '#/components/schemas/air-interface-historical-performances'
+                example:
+                  air-interface-2-0:air-interface-historical-performances:
+                    number-of-historical-performance-sets: 0
+                    time-of-latest-change: '3458-90-13T36:05:34-24:27'
+                    historical-performance-data-list:
+                      - suspect-interval-flag: true
+                        history-data-id: 'string'
+                        granularity-period: 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_UNKNOWN'
+                        period-end-time: '2010-11-20T14:00:00+01:00'
+                        performance-data:
+                          es: 0
+                          ses: 0
+                          cses: 0
+                          unavailability: 0
+                          tx-level-min: 0
+                          tx-level-max: 0
+                          tx-level-avg: 0
+                          rx-level-min: 0
+                          rx-level-max: 0
+                          rx-level-avg: 0
+                          time-xstates-list:
+                            - time-xstate-sequence-number: 0
+                              transmission-mode: 'string'
+                              time: 0
+                          snir-min: 0
+                          snir-max: 0
+                          snir-avg: 0
+                          xpd-min: 0
+                          xpd-max: 0
+                          xpd-avg: 0
+                          rf-temp-min: 0
+                          rf-temp-max: 0
+                          rf-temp-avg: 0
+                          defect-blocks-sum: 0
+                          time-period: 0
+          headers:
+            x-correlator:
+              $ref: '#/components/headers/x-correlator'
+            exec-time:
+              $ref: '#/components/headers/exec-time'
+            backend-time:
+              $ref: '#/components/headers/backend-time'
+            life-cycle-state:
+              $ref: '#/components/headers/life-cycle-state'
+        '4XX':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        '500':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        default:
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+
+  /generic/core-model-1-4:network-control-domain=live/control-construct={mountName}/air-interface-2-0:clear-threshold-cross-alarms:
+    parameters:
+      - $ref: '#/components/parameters/user'
+      - $ref: '#/components/parameters/originator'
+      - $ref: '#/components/parameters/x-correlator'
+      - $ref: '#/components/parameters/trace-indicator'
+      - $ref: '#/components/parameters/customer-journey'
+      - $ref: '#/components/parameters/mountName'
+    post:
+      operationId: postClearThresholdCrossAlarms
+      summary: 'Clears all currently active threshold cross alarms at the referenced AirInterface'
+      tags:
+        - IndividualServices
+      security:
+        - apiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - input
+              properties:
+                input:
+                  type: object
+                  required:
+                    - affected-air-interface
+                  properties:
+                    affected-air-interface:
+                      type: string
+      responses:
+        '204':
+          description: 'Threshold cross alarms cleared'
+          headers:
+            x-correlator:
+              $ref: '#/components/headers/x-correlator'
+            exec-time:
+              $ref: '#/components/headers/exec-time'
+            backend-time:
+              $ref: '#/components/headers/backend-time'
+            life-cycle-state:
+              $ref: '#/components/headers/life-cycle-state'
+        '4XX':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        '500':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        default:
+          $ref: '#/components/responses/responseForErroredServiceRequests'
 
 
 ########################################################################################################################
@@ -234,1387 +1711,769 @@ components:
         message:
           type: string
 
-    control-construct:
+    air-interface-capability:
       type: object
       required:
-        - top-level-equipment
-        - equipment
-        - logical-termination-point
-        - forwarding-domain
-        - profile-collection
-        - uuid
-        - equipment-augment-1-0:control-construct-pac
-        - protocol-collection
-      properties:
-        top-level-equipment:
-          type: array
-          minItems: 1
-          maxItems: 1
-          items:
-            type: string
-        equipment:
-          type: array
-          minItems: 1
-          x-key: uuid
-          items:
-            $ref: '#/components/schemas/equipment'
-        logical-termination-point:
-          type: array
-          minItems: 1
-          x-key: uuid
-          items:
-            $ref: '#/components/schemas/logical-termination-point'
-        forwarding-domain:
-          type: array
-          minItems: 1
-          x-key: uuid
-          items:
-            $ref: '#/components/schemas/forwarding-domain'
-        profile-collection:
-          $ref: '#/components/schemas/profile-collection'
-        external-managed-id:
-          type: object
-          properties:
-            manager-identifier:
-              type: string
-            external-managed-uuid:
-              type: string
-        local-id:
-          type: string
-        uuid:
-          type: string
-        name:
-          type: array
-        label:
-          type: array
-        extension:
-          type: array
-        operational-state:
-          type: string
-        administrative-control:
-          type: string
-        administrative-state:
-          type: string
-        lifecycle-state:
-          type: string
-        address:
-          type: array
-        equipment-augment-1-0:control-construct-pac:
-          type: object
-          required:
-            - external-label
-            - last-config-change-timestamp
-            - device-model-name
-          properties:
-            external-label:
-              type: string
-            last-config-change-timestamp:
-              type: string
-              pattern: '^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[\+\-]\d{2}:\d{2})$'
-            device-model-name:
-              type: string
-        protocol-collection:
-          type: object
-          properties:
-            protocol:
-              type: array
-              minItems: 0
-              x-key: uuid
-              items:
-                type: object
-                required:
-                  - protocol-name
-                  - uuid
-                properties:
-                  protocol-name:
-                    type: string
-                  external-managed-id:
-                    type: object
-                    properties:
-                      manager-identifier:
-                        type: string
-                      external-managed-uuid:
-                        type: string
-                  local-id:
-                    type: string
-                  uuid:
-                    type: string
-                  name:
-                    type: array
-                  label:
-                    type: array
-                  extension:
-                    type: array
-                  operational-state:
-                    type: string
-                  administrative-control:
-                    type: string
-                  administrative-state:
-                    type: string
-                  lifecycle-state:
-                    type: string
-                  address:
-                    type: array
-
-    equipment:
-      type: object
-
-    profile-collection:
-      type: object
-      required:
-        - profile
-      properties:
-        profile:
-          type: array
-          minItems: 1
-          x-key: uuid
-          items:
-            $ref: '#/components/schemas/profile'
-    profile:
-      allOf:
-        - # Profile class
-          type: object
-          required:
-            - uuid
-            - profile-name
-          properties:
-            profile-name:
-              type: string
-              enum:
-                - 'co-channel-profile-1-0:PROFILE_NAME_TYPE_CO_CHANNEL_PROFILE'
-                - 'l-3vpn-profile-1-0:PROFILE_NAME_TYPE_L3VPN_PROFILE'
-                - 'policing-profile-1-0:PROFILE_NAME_TYPE_POLICING_PROFILE'
-                - 'qos-profile-1-0:PROFILE_NAME_TYPE_QOS_PROFILE'
-                - 'scheduler-profile-1-0:PROFILE_NAME_TYPE_SCHEDULER_PROFILE'
-                - 'wred-profile-1-0:PROFILE_NAME_TYPE_WRED_PROFILE'
-                - 'wred-template-profile-1-0:PROFILE_NAME_TYPE_WRED_TEMPLATE_PROFILE'
-            external-managed-id:
-              type: object
-              properties:
-                manager-identifier:
-                  type: string
-                external-managed-uuid:
-                  type: string
-            local-id:
-              type: string
-            uuid:
-              type: string
-            name:
-              type: array
-            label:
-              type: array
-            extension:
-              type: array
-            operational-state:
-              type: string
-            administrative-control:
-              type: string
-            administrative-state:
-              type: string
-            lifecycle-state:
-              type: string
-            address:
-              type: array
-        - # Technology specific augments
-          oneOf:
-            - # CoChannelProfile
-              type: object
-              required:
-                - co-channel-profile-1-0:co-channel-profile-pac
-              properties:
-                co-channel-profile-1-0:co-channel-profile-pac:
-                  type: object
-                  required:
-                    - co-channel-profile-capability
-                    - co-channel-profile-configuration
-                  properties:
-                    co-channel-profile-capability:
-                      $ref: '#/components/schemas/co-channel-profile-capability'
-                    co-channel-profile-configuration:
-                      $ref: '#/components/schemas/co-channel-profile-configuration'
-            - # L3VpnProfile
-              type: object
-              required:
-                - l-3vpn-profile-1-0:l-3vpn-profile-pac
-              properties:
-                l-3vpn-profile-1-0:l-3vpn-profile-pac:
-                  type: object
-                  required:
-                    - l-3vpn-profile-capability
-                    - l-3vpn-profile-configuration
-                  properties:
-                    l-3vpn-profile-capability:
-                      $ref: '#/components/schemas/l-3vpn-profile-capability'
-                    l-3vpn-profile-configuration:
-                      $ref: '#/components/schemas/l-3vpn-profile-configuration'
-            - # PolicingProfile
-              type: object
-              required:
-                - policing-profile-1-0:policing-profile-pac
-              properties:
-                policing-profile-1-0:policing-profile-pac:
-                  type: object
-                  required:
-                    - policing-profile-capability
-                    - policing-profile-configuration
-                  properties:
-                    policing-profile-capability:
-                      $ref: '#/components/schemas/policing-profile-capability'
-                    policing-profile-configuration:
-                      $ref: '#/components/schemas/policing-profile-configuration'
-            - # QosProfile
-              type: object
-              required:
-                - qos-profile-1-0:qos-profile-pac
-              properties:
-                qos-profile-1-0:qos-profile-pac:
-                  type: object
-                  required:
-                    - qos-profile-capability
-                    - qos-profile-configuration
-                  properties:
-                    qos-profile-capability:
-                      $ref: '#/components/schemas/qos-profile-capability'
-                    qos-profile-configuration:
-                      $ref: '#/components/schemas/qos-profile-configuration'
-            - # SchedulerProfile
-              type: object
-              required:
-                - scheduler-profile-1-0:scheduler-profile-pac
-              properties:
-                scheduler-profile-1-0:scheduler-profile-pac:
-                  type: object
-                  required:
-                    - scheduler-profile-capability
-                    - scheduler-profile-configuration
-                  properties:
-                    scheduler-profile-capability:
-                      $ref: '#/components/schemas/scheduler-profile-capability'
-                    scheduler-profile-configuration:
-                      $ref: '#/components/schemas/scheduler-profile-configuration'
-            - # WredProfile
-              type: object
-              required:
-                - wred-profile-1-0:wred-profile-pac
-              properties:
-                wred-profile-1-0:wred-profile-pac:
-                  type: object
-                  required:
-                    - wred-profile-capability
-                    - wred-profile-configuration
-                  properties:
-                    wred-profile-capability:
-                      $ref: '#/components/schemas/wred-profile-capability'
-                    wred-profile-configuration:
-                      $ref: '#/components/schemas/wred-profile-configuration'
-            - # WredTemplateProfile
-              type: object
-              required:
-                - wred-template-profile-1-0:wred-template-profile-pac
-              properties:
-                wred-template-profile-1-0:wred-template-profile-pac:
-                  type: object
-                  required:
-                    - wred-template-profile-capability
-                    - wred-template-profile-configuration
-                  properties:
-                    wred-template-profile-capability:
-                      $ref: '#/components/schemas/wred-template-profile-capability'
-                    wred-template-profile-configuration:
-                      $ref: '#/components/schemas/wred-template-profile-configuration'
-    co-channel-profile-capability:
-      type: object
-      required:
-        - xpic-is-avail
-        - mimo-is-avail
-        - number-of-mimo-channels-max
-        - alic-is-avail
-      properties:
-        xpic-is-avail:
-          type: boolean
-        mimo-is-avail:
-          type: boolean
-        number-of-mimo-channels-max:
-          type: integer
-          format: int8
-        alic-is-avail:
-          type: boolean
-    co-channel-profile-configuration:
-      type: object
-      required:
-        - external-label
-        - kind-of-co-channel-profile
-      properties:
-        external-label:
-          type: string
-        kind-of-co-channel-profile:
-          type: string
-          enum:
-            - 'co-channel-profile-1-0:KIND_OF_CO_CHANNEL_PROFILE_TYPE_XPIC'
-            - 'co-channel-profile-1-0:KIND_OF_CO_CHANNEL_PROFILE_TYPE_MIMO'
-            - 'co-channel-profile-1-0:KIND_OF_CO_CHANNEL_PROFILE_TYPE_ALIC'
-            - 'co-channel-profile-1-0:KIND_OF_CO_CHANNEL_PROFILE_TYPE_NOT_YET_DEFINED'
-        logical-termination-point-list:
-          type: array
-          minItems: 0
-          items:
-            type: string
-    l-3vpn-profile-capability:
-      type: object
-      required:
-        - profile-naming-is-avail
-        - l-3vpn-based-on-ip-v-6-is-avail
-      properties:
-        profile-naming-is-avail:
-          type: boolean
-        l-3vpn-based-on-ip-v-6-is-avail:
-          type: boolean
-    l-3vpn-profile-configuration:
-      type: object
-      required:
-        - external-label
-        - l-3vpn-description
-        - l-3vpn-configuration-list
-      properties:
-        external-label:
-          type: string
-        l-3vpn-description:
-          type: string
-        l-3vpn-configuration-list:
-          type: array
-          minItems: 1
-          maxItems: 2
-          x-key: label-mode
-          items:
-            type: object
-            required:
-              - label-mode
-              - route-distinguisher
-              - route-target-import-list
-              - route-target-export-list
-              - address-family
-            properties:
-              label-mode:
-                type: string
-                enum:
-                  - 'l-3vpn-profile-1-0:LABEL_MODE_TYPE_PER_INSTANCE'
-                  - 'l-3vpn-profile-1-0:LABEL_MODE_TYPE_PER_ROUTE'
-              route-distinguisher:
-                type: object
-                required:
-                  - vpn-number
-                  - device-identifier-kind
-                  - loop-back-ip-address
-                  - as-number
-                properties:
-                  vpn-number:
-                    type: string
-                  device-identifier-kind:
-                    type: string
-                    enum:
-                      - 'l-3vpn-profile-1-0:DEVICE_IDENTIFIER_KIND_TYPE_LOOP_BACK_IP_ADDRESS'
-                      - 'l-3vpn-profile-1-0:DEVICE_IDENTIFIER_KIND_TYPE_AS_NUMBER'
-                      - 'l-3vpn-profile-1-0:DEVICE_IDENTIFIER_KIND_TYPE_NOT_YET_DEFINED'
-                  loop-back-ip-address:
-                    type: string
-                    pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
-                  as-number:
-                    type: string
-              route-target-import-list:
-                type: array
-                minItems: 1
-                x-key: vpn-number
-                items:
-                  type: object
-                  required:
-                    - vpn-number
-                    - device-identifier-kind
-                    - loop-back-ip-address
-                    - as-number
-                  properties:
-                    vpn-number:
-                      type: string
-                    device-identifier-kind:
-                      type: string
-                      enum:
-                        - 'l-3vpn-profile-1-0:DEVICE_IDENTIFIER_KIND_TYPE_LOOP_BACK_IP_ADDRESS'
-                        - 'l-3vpn-profile-1-0:DEVICE_IDENTIFIER_KIND_TYPE_AS_NUMBER'
-                        - 'l-3vpn-profile-1-0:DEVICE_IDENTIFIER_KIND_TYPE_NOT_YET_DEFINED'
-                    loop-back-ip-address:
-                      type: string
-                      pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
-                    as-number:
-                      type: string
-              route-target-export-list:
-                type: array
-                minItems: 1
-                x-key: vpn-number
-                items:
-                  type: object
-                  required:
-                    - vpn-number
-                    - device-identifier-kind
-                    - loop-back-ip-address
-                    - as-number
-                  properties:
-                    vpn-number:
-                      type: string
-                    device-identifier-kind:
-                      type: string
-                      enum:
-                        - 'l-3vpn-profile-1-0:DEVICE_IDENTIFIER_KIND_TYPE_LOOP_BACK_IP_ADDRESS'
-                        - 'l-3vpn-profile-1-0:DEVICE_IDENTIFIER_KIND_TYPE_AS_NUMBER'
-                        - 'l-3vpn-profile-1-0:DEVICE_IDENTIFIER_KIND_TYPE_NOT_YET_DEFINED'
-                    loop-back-ip-address:
-                      type: string
-                      pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
-                    as-number:
-                      type: string
-              address-family:
-                type: string
-                enum:
-                  - 'l-3vpn-profile-1-0:ADDRESS_FAMILY_TYPE_IPV4-FAMILY'
-                  - 'l-3vpn-profile-1-0:ADDRESS_FAMILY_TYPE_IPV6-FAMILY'
-                  - 'l-3vpn-profile-1-0:ADDRESS_FAMILY_TYPE_UNKNOWN'
-                  - 'l-3vpn-profile-1-0:ADDRESS_FAMILY_TYPE_NOT_YET_DEFINED'
-    policing-profile-capability:
-      type: object
-      required:
-        - profile-naming-is-avail
-        - supported-marker-mode-list
-        - supported-policer-kind-list
-        - information-rate-min
-        - information-rate-max
-        - burst-size-min
-        - burst-size-max
-      properties:
-        profile-naming-is-avail:
-          type: boolean
-        supported-marker-mode-list:
-          type: array
-          minItems: 1
-          items:
-            type: string
-            enum:
-              - 'policing-profile-1-0:MARKER_MODE_TYPE_COLOR_BLIND'
-              - 'policing-profile-1-0:MARKER_MODE_TYPE_COLOR_AWARE'
-              - 'policing-profile-1-0:MARKER_MODE_TYPE_NOT_YET_DEFINED'
-        supported-policer-kind-list:
-          type: array
-          minItems: 1
-          items:
-            type: string
-            enum:
-              - 'policing-profile-1-0:POLICER_KIND_TYPE_SINGLE_RATE_THREE_COLOR'
-              - 'policing-profile-1-0:POLICER_KIND_TYPE_TWO_RATE_THREE_COLOR'
-              - 'policing-profile-1-0:POLICER_KIND_TYPE_NOT_YET_DEFINED'
-        information-rate-min:
-          type: integer
-          format: int32
-        information-rate-max:
-          type: integer
-          format: int32
-        burst-size-min:
-          type: integer
-          format: int16
-        burst-size-max:
-          type: integer
-          format: int16
-    policing-profile-configuration:
-      type: object
-      required:
-        - external-label
-        - marker-mode
-        - policer-kind
-        - committed-information-rate
-        - committed-burst-size
-        - excess-burst-size
-        - peak-information-rate
-        - peak-burst-size
-      properties:
-        external-label:
-          type: string
-        marker-mode:
-          type: string
-          enum:
-            - 'policing-profile-1-0:MARKER_MODE_TYPE_COLOR_BLIND'
-            - 'policing-profile-1-0:MARKER_MODE_TYPE_COLOR_AWARE'
-            - 'policing-profile-1-0:MARKER_MODE_TYPE_NOT_YET_DEFINED'
-        policer-kind:
-          type: string
-          enum:
-            - 'policing-profile-1-0:POLICER_KIND_TYPE_SINGLE_RATE_THREE_COLOR'
-            - 'policing-profile-1-0:POLICER_KIND_TYPE_TWO_RATE_THREE_COLOR'
-            - 'policing-profile-1-0:POLICER_KIND_TYPE_NOT_YET_DEFINED'
-        committed-information-rate:
-          type: integer
-          format: int32
-        committed-burst-size:
-          type: integer
-          format: int32
-        excess-burst-size:
-          type: integer
-          format: int32
-        peak-information-rate:
-          type: integer
-          format: int32
-        peak-burst-size:
-          type: integer
-          format: int32
-    qos-profile-capability:
-      type: object
-      required:
-        - profile-naming-is-avail
-        - drop-precedence-at-be-queue-is-avail
-        - drop-precedence-at-af-queues-is-avail
-        - drop-precedence-at-prio-queues-is-avail
-        - available-qos-profile-kind-list
-        - queue-depth-configuration-is-avail
-      properties:
-        profile-naming-is-avail:
-          type: boolean
-        available-queue-list:
-          type: array
-          minItems: 0
-          x-key: queue-name
-          items:
-            type: object
-            required:
-              - queue-name
-              - supported-queue-depth-list
-            properties:
-              queue-name:
-                type: string
-                enum:
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_BEST_EFFORT_QUEUE'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE1'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE2'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE3'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE4'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_EXPEDITED_FORWARDING_QUEUE'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE6'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE7'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_NOT_YET_DEFINED'
-              supported-queue-depth-list:
-                type: array
-                minItems: 1
-                items:
-                  type: integer
-                  format: int32
-        drop-precedence-at-be-queue-is-avail:
-          type: boolean
-        drop-precedence-at-af-queues-is-avail:
-          type: boolean
-        drop-precedence-at-prio-queues-is-avail:
-          type: boolean
-        available-qos-profile-kind-list:
-          type: array
-          minItems: 1
-          items:
-            type: string
-            enum:
-              - 'qos-profile-1-0:QOS_PROFILE_KIND_TYPE_NONE'
-              - 'qos-profile-1-0:QOS_PROFILE_KIND_TYPE_IEEE8021P'
-              - 'qos-profile-1-0:QOS_PROFILE_KIND_TYPE_MPLS_EXP'
-              - 'qos-profile-1-0:QOS_PROFILE_KIND_TYPE_IP_DSCP'
-              - 'qos-profile-1-0:QOS_PROFILE_KIND_TYPE_NOT_YET_DEFINED'
-        queue-depth-configuration-is-avail:
-          type: boolean
-    qos-profile-configuration:
-      type: object
-      required:
-        - external-label
-        - qos-profile-kind
-        - ingress-8021p-to-per-hop-behavior-mapping-list
-        - ingress-exp-to-per-hop-behavior-mapping-list
-        - ingress-ip-dscp-to-per-hop-behavior-mapping-list
-        - writing-per-hop-behavior-into-8021p-is-on
-        - egress-per-hop-behavior-to-8021p-mapping-list
-        - writing-per-hop-behavior-into-mpls-exp-is-on
-        - egress-per-hop-behavior-to-mpls-exp-mapping-list
-        - writing-per-hop-behavior-into-ip-dscp-is-on
-        - egress-per-hop-behavior-to-ip-dscp-mapping-list
-      properties:
-        external-label:
-          type: string
-        queue-depth-list:
-          type: array
-          minItems: 0
-          x-key: queue-name
-          items:
-            type: object
-            required:
-              - queue-name
-              - queue-depth
-            properties:
-              queue-name:
-                type: string
-                enum:
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_BEST_EFFORT_QUEUE'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE1'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE2'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE3'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE4'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_EXPEDITED_FORWARDING_QUEUE'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE6'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE7'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_NOT_YET_DEFINED'
-              queue-depth:
-                type: integer
-                format: int32
-        qos-profile-kind:
-          type: string
-          enum:
-            - 'qos-profile-1-0:QOS_PROFILE_KIND_TYPE_NONE'
-            - 'qos-profile-1-0:QOS_PROFILE_KIND_TYPE_IEEE8021P'
-            - 'qos-profile-1-0:QOS_PROFILE_KIND_TYPE_MPLS_EXP'
-            - 'qos-profile-1-0:QOS_PROFILE_KIND_TYPE_IP_DSCP'
-            - 'qos-profile-1-0:QOS_PROFILE_KIND_TYPE_NOT_YET_DEFINED'
-        ingress-8021p-to-per-hop-behavior-mapping-list:
-          type: array
-          minItems: 8
-          maxItems: 8
-          x-key: p-8021-priority
-          items:
-            type: object
-            required:
-              - p-8021-priority
-              - queue-name
-              - drop-precedence-inside-queue
-            properties:
-              p-8021-priority:
-                type: string
-              queue-name:
-                type: string
-                enum:
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_BEST_EFFORT_QUEUE'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE1'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE2'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE3'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE4'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_EXPEDITED_FORWARDING_QUEUE'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE6'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE7'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_NOT_YET_DEFINED'
-              drop-precedence-inside-queue:
-                type: string
-                enum:
-                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_NONE'
-                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_LOW'
-                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_MEDIUM'
-                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_HIGH'
-                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_NOT_YET_DEFINED'
-        ingress-exp-to-per-hop-behavior-mapping-list:
-          type: array
-          minItems: 8
-          maxItems: 8
-          x-key: exp-priority
-          items:
-            type: object
-            required:
-              - exp-priority
-              - queue-name
-              - drop-precedence-inside-queue
-            properties:
-              exp-priority:
-                type: string
-              queue-name:
-                type: string
-                enum:
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_BEST_EFFORT_QUEUE'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE1'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE2'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE3'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE4'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_EXPEDITED_FORWARDING_QUEUE'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE6'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE7'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_NOT_YET_DEFINED'
-              drop-precedence-inside-queue:
-                type: string
-                enum:
-                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_NONE'
-                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_LOW'
-                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_MEDIUM'
-                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_HIGH'
-                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_NOT_YET_DEFINED'
-        ingress-ip-dscp-to-per-hop-behavior-mapping-list:
-          type: array
-          minItems: 64
-          maxItems: 64
-          x-key: dscp-priority
-          items:
-            type: object
-            required:
-              - dscp-priority
-              - queue-name
-              - drop-precedence-inside-queue
-            properties:
-              dscp-priority:
-                type: string
-              queue-name:
-                type: string
-                enum:
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_BEST_EFFORT_QUEUE'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE1'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE2'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE3'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE4'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_EXPEDITED_FORWARDING_QUEUE'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE6'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE7'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_NOT_YET_DEFINED'
-              drop-precedence-inside-queue:
-                type: string
-                enum:
-                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_NONE'
-                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_LOW'
-                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_MEDIUM'
-                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_HIGH'
-                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_NOT_YET_DEFINED'
-        writing-per-hop-behavior-into-8021p-is-on:
-          type: boolean
-        egress-per-hop-behavior-to-8021p-mapping-list:
-          type: array
-          minItems: 24
-          maxItems: 24
-          x-key: mapping-number
-          items:
-            type: object
-            required:
-              - mapping-number
-              - queue-name
-              - drop-precedence-inside-queue
-              - value-of-priority-bits
-            properties:
-              mapping-number:
-                type: integer
-                format: int8
-              queue-name:
-                type: string
-                enum:
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_BEST_EFFORT_QUEUE'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE1'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE2'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE3'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE4'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_EXPEDITED_FORWARDING_QUEUE'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE6'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE7'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_NOT_YET_DEFINED'
-              drop-precedence-inside-queue:
-                type: string
-                enum:
-                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_NONE'
-                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_LOW'
-                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_MEDIUM'
-                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_HIGH'
-                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_NOT_YET_DEFINED'
-              value-of-priority-bits:
-                type: integer
-                format: int8
-        writing-per-hop-behavior-into-mpls-exp-is-on:
-          type: boolean
-        egress-per-hop-behavior-to-mpls-exp-mapping-list:
-          type: array
-          minItems: 24
-          maxItems: 24
-          x-key: mapping-number
-          items:
-            type: object
-            required:
-              - mapping-number
-              - queue-name
-              - drop-precedence-inside-queue
-              - value-of-priority-bits
-            properties:
-              mapping-number:
-                type: integer
-                format: int8
-              queue-name:
-                type: string
-                enum:
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_BEST_EFFORT_QUEUE'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE1'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE2'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE3'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE4'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_EXPEDITED_FORWARDING_QUEUE'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE6'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE7'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_NOT_YET_DEFINED'
-              drop-precedence-inside-queue:
-                type: string
-                enum:
-                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_NONE'
-                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_LOW'
-                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_MEDIUM'
-                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_HIGH'
-                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_NOT_YET_DEFINED'
-              value-of-priority-bits:
-                type: integer
-                format: int8
-        writing-per-hop-behavior-into-ip-dscp-is-on:
-          type: boolean
-        egress-per-hop-behavior-to-ip-dscp-mapping-list:
-          type: array
-          minItems: 24
-          maxItems: 24
-          x-key: mapping-number
-          items:
-            type: object
-            required:
-              - mapping-number
-              - queue-name
-              - drop-precedence-inside-queue
-              - value-of-priority-bits
-            properties:
-              mapping-number:
-                type: integer
-                format: int8
-              queue-name:
-                type: string
-                enum:
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_BEST_EFFORT_QUEUE'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE1'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE2'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE3'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE4'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_EXPEDITED_FORWARDING_QUEUE'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE6'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE7'
-                  - 'qos-profile-1-0:QUEUE_NAME_TYPE_NOT_YET_DEFINED'
-              drop-precedence-inside-queue:
-                type: string
-                enum:
-                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_NONE'
-                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_LOW'
-                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_MEDIUM'
-                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_HIGH'
-                  - 'qos-profile-1-0:DROP_PRECEDENCE_TYPE_NOT_YET_DEFINED'
-              value-of-priority-bits:
-                type: integer
-                format: int8
-    scheduler-profile-capability:
-      type: object
-      required:
-        - scheduler-kind-configuration-is-avail
-        - available-queue-list
-      properties:
-        scheduler-kind-configuration-is-avail:
-          type: boolean
-        available-queue-list:
-          type: array
-          minItems: 1
-          maxItems: 8
-          x-key: queue-name
-          items:
-            type: object
-            required:
-              - queue-name
-              - available-scheduling-kind-list
-            properties:
-              queue-name:
-                type: string
-                enum:
-                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_BEST_EFFORT_QUEUE'
-                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE1'
-                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE2'
-                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE3'
-                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE4'
-                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_EXPEDITED_FORWARDING_QUEUE'
-                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE6'
-                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE7'
-                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_QUEUENAME_NOT_YET_DEFINED'
-              available-scheduling-kind-list:
-                type: array
-                minItems: 1
-                items:
-                  type: string
-                  enum:
-                    - 'scheduler-profile-1-0:SCHEDULER_KIND_TYPE_STRICT'
-                    - 'scheduler-profile-1-0:SCHEDULER_KIND_TYPE_WFQ'
-                    - 'scheduler-profile-1-0:SCHEDULER_KIND_TYPE_WRR'
-                    - 'scheduler-profile-1-0:SCHEDULER_KIND_TYPE_DWRR'
-                    - 'scheduler-profile-1-0:SCHEDULER_KIND_TYPE_NOT_YET_DEFINED'
-    scheduler-profile-configuration:
-      type: object
-      required:
-        - queue-behavior-list
-      properties:
-        queue-behavior-list:
-          type: array
-          minItems: 1
-          maxItems: 8
-          x-key: queue-name
-          items:
-            type: object
-            required:
-              - queue-name
-              - scheduler-kind
-              - weighting
-            properties:
-              queue-name:
-                type: string
-                enum:
-                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_BEST_EFFORT_QUEUE'
-                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE1'
-                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE2'
-                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE3'
-                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE4'
-                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_EXPEDITED_FORWARDING_QUEUE'
-                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE6'
-                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE7'
-                  - 'scheduler-profile-1-0:QUEUE_NAME_TYPE_QUEUENAME_NOT_YET_DEFINED'
-              scheduler-kind:
-                type: string
-                enum:
-                  - 'scheduler-profile-1-0:SCHEDULER_KIND_TYPE_STRICT'
-                  - 'scheduler-profile-1-0:SCHEDULER_KIND_TYPE_WFQ'
-                  - 'scheduler-profile-1-0:SCHEDULER_KIND_TYPE_WRR'
-                  - 'scheduler-profile-1-0:SCHEDULER_KIND_TYPE_DWRR'
-                  - 'scheduler-profile-1-0:SCHEDULER_KIND_TYPE_NOT_YET_DEFINED'
-              weighting:
-                type: integer
-                format: int8
-    wred-profile-capability:
-      type: object
-      required:
-        - available-buffer-size
-        - drop-probability-at-threshold-low-is-avail
-        - gentle-wred-is-avail
-        - sensitivity-setting-is-avail
-        - coloring-is-avail
-      properties:
-        available-buffer-size:
-          type: integer
-          format: int32
-        drop-probability-at-threshold-low-is-avail:
-          type: boolean
-        gentle-wred-is-avail:
-          type: boolean
-        sensitivity-setting-is-avail:
-          type: boolean
-        coloring-is-avail:
-          type: boolean
-    wred-profile-configuration:
-      type: object
-      required:
-        - external-label
-        - threshold-low
-        - drop-probability-at-threshold-low
-        - threshold-high
-        - drop-probability-at-threshold-high
-        - gentle-wred-is-on
-        - threshold-gentle
-        - sensitivity
-        - coloring-is-on
-      properties:
-        external-label:
-          type: string
-        threshold-low:
-          type: integer
-          format: int32
-        drop-probability-at-threshold-low:
-          type: integer
-          format: int8
-        threshold-high:
-          type: integer
-          format: int32
-        drop-probability-at-threshold-high:
-          type: integer
-          format: int8
-        gentle-wred-is-on:
-          type: boolean
-        threshold-gentle:
-          type: integer
-          format: int32
-        sensitivity:
-          type: integer
-          format: int8
-        coloring-is-on:
-          type: boolean
-    wred-template-profile-capability:
-      type: object
-      required:
-        - available-buffer-size
-        - drop-probability-at-threshold-low-is-avail
-        - gentle-wred-is-avail
-        - sensitivity-setting-is-avail
-        - coloring-is-avail
-        - supported-wred-protocol-list
-        - available-drop-precedence-kind-list
-      properties:
-        available-buffer-size:
-          type: integer
-          format: int32
-        drop-probability-at-threshold-low-is-avail:
-          type: boolean
-        gentle-wred-is-avail:
-          type: boolean
-        sensitivity-setting-is-avail:
-          type: boolean
-        coloring-is-avail:
-          type: boolean
-        supported-wred-protocol-list:
-          type: array
-          minItems: 1
-          items:
-            type: string
-            enum:
-              - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_NONE'
-              - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_ETHERNET_MAC'
-              - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_VLAN'
-              - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_Q_IN_Q'
-              - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_MPLS'
-              - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_IPV4'
-              - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_IPV6'
-              - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_TCP'
-              - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_UDP'
-              - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_RTP'
-              - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_GTP_U'
-              - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_OTHERS'
-              - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_NOT_YET_DEFINED'
-        available-drop-precedence-kind-list:
-          type: array
-          minItems: 1
-          items:
-            type: string
-            enum:
-              - 'wred-template-profile-1-0:DROP_PRECEDENCE_TYPE_ALL'
-              - 'wred-template-profile-1-0:DROP_PRECEDENCE_TYPE_LOW'
-              - 'wred-template-profile-1-0:DROP_PRECEDENCE_TYPE_MEDIUM'
-              - 'wred-template-profile-1-0:DROP_PRECEDENCE_TYPE_HIGH'
-              - 'wred-template-profile-1-0:DROP_PRECEDENCE_TYPE_NOT_YET_DEFINED'
-    wred-template-profile-configuration:
-      type: object
-      properties:
-        wred-template-list:
-          type: array
-          minItems: 0
-          x-key: affected-protocol affected-drop-precedence
-          items:
-            type: object
-            required:
-              - affected-protocol
-              - affected-drop-precedence
-              - wred-configuration
-            properties:
-              affected-protocol:
-                type: string
-                enum:
-                  - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_NONE'
-                  - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_ETHERNET_MAC'
-                  - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_VLAN'
-                  - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_Q_IN_Q'
-                  - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_MPLS'
-                  - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_IPV4'
-                  - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_IPV6'
-                  - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_TCP'
-                  - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_UDP'
-                  - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_RTP'
-                  - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_GTP_U'
-                  - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_OTHERS'
-                  - 'wred-template-profile-1-0:PROTOCOL_LAYER_TYPE_NOT_YET_DEFINED'
-              affected-drop-precedence:
-                type: string
-                enum:
-                  - 'wred-template-profile-1-0:DROP_PRECEDENCE_TYPE_ALL'
-                  - 'wred-template-profile-1-0:DROP_PRECEDENCE_TYPE_LOW'
-                  - 'wred-template-profile-1-0:DROP_PRECEDENCE_TYPE_MEDIUM'
-                  - 'wred-template-profile-1-0:DROP_PRECEDENCE_TYPE_HIGH'
-                  - 'wred-template-profile-1-0:DROP_PRECEDENCE_TYPE_NOT_YET_DEFINED'
-              wred-configuration:
-                type: object
-                required:
-                  - external-label
-                  - threshold-low
-                  - drop-probability-at-threshold-low
-                  - threshold-high
-                  - drop-probability-at-threshold-high
-                  - gentle-wred-is-on
-                  - threshold-gentle
-                  - sensitivity
-                  - coloring-is-on
-                properties:
-                  external-label:
-                    type: string
-                  threshold-low:
-                    type: integer
-                    format: int32
-                  drop-probability-at-threshold-low:
-                    type: integer
-                    format: int8
-                  threshold-high:
-                    type: integer
-                    format: int32
-                  drop-probability-at-threshold-high:
-                    type: integer
-                    format: int8
-                  gentle-wred-is-on:
-                    type: boolean
-                  threshold-gentle:
-                    type: integer
-                    format: int32
-                  sensitivity:
-                    type: integer
-                    format: int8
-                  coloring-is-on:
-                    type: boolean
-
-    logical-termination-point:
-      type: object
-    ethernetContainerCapability:
-      type: object
-      required:
-        - available-queue-list
-        - dropping-behavior-configuration-is-avail
-        - wred-profile-is-avail
-        - wred-profile-configuration-is-avail
-        - wred-template-profile-is-avail
-        - wred-template-profile-configuration-is-avail
-        - scheduler-kind-configuration-is-avail
-        - scheduler-profile-configuration-is-avail
-        - supported-wred-protocol-list
-        - explicit-congestion-notification-is-avail
-        - ingress-policing-is-avail
-        - egress-shaping-is-avail
-        - supported-maximum-information-rate-list
-        - supported-maximum-burst-size-list
-        - bundling-is-avail
-        - bundling-group-size-max
-        - support-of-management-frames-without-preamble-is-avail
-        - supported-header-compression-kind-list
-        - fec-is-avail
-        - fec-word-size-max
-        - supported-fec-redundancy-size-list
-        - supported-fec-interleaver-kind-list
-        - supported-fec-interleaver-depth-list
+        - type-of-equipment
+        - tx-frequency-min
+        - tx-frequency-max
+        - rx-frequency-min
+        - rx-frequency-max
+        - duplex-distance-is-freely-configurable
+        - duplex-distance-list
+        - transmission-mode-list
+        - auto-freq-select-is-avail
+        - receiver-on-off-is-avail
+        - adaptive-modulation-is-avail
+        - atpc-is-avail
+        - atpc-range
+        - supported-radio-signal-id-datatype
+        - supported-radio-signal-id-length
+        - expected-equals-transmitted-radio-signal-id
         - encryption-is-avail
-        - admin-shut-down-is-avail
         - supported-loop-back-kind-list
         - maintenance-timer-range
-        - statistics-is-avail
+        - acm-threshold-cross-alarms-is-avail
+        - clearing-threshold-cross-alarms-is-avail
         - performance-monitoring-is-avail
+        - direction-of-acm-performance-values
       properties:
-        available-queue-list:
-          type: array
-          minItems: 1
-          maxItems: 8
-          items:
-            type: object
-            properties:
-              queue-name:
-                enum:
-                  - 'ethernet-container-2-0:QUEUE_NAME_TYPE_BEST_EFFORT_QUEUE'
-                  - 'ethernet-container-2-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE1'
-                  - 'ethernet-container-2-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE2'
-                  - 'ethernet-container-2-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE3'
-                  - 'ethernet-container-2-0:QUEUE_NAME_TYPE_ASSURED_FORWARDING_QUEUE4'
-                  - 'ethernet-container-2-0:QUEUE_NAME_TYPE_EXPEDITED_FORWARDING_QUEUE'
-                  - 'ethernet-container-2-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE6'
-                  - 'ethernet-container-2-0:QUEUE_NAME_TYPE_CLASS_SELECTOR_QUEUE7'
-                  - 'ethernet-container-2-0:QUEUE_NAME_TYPE_QUEUENAME_NOT_YET_DEFINED'
-              supported-queue-depth-list:
-                type: array
-                items:
-                  type: integer
-              available-dropping-behavior-kind-list:
-                type: array
-                items:
-                  enum:
-                    - 'ethernet-container-2-0:DROPPING_BEHAVIOR_KIND_TYPE_DROP_TAIL'
-                    - 'ethernet-container-2-0:DROPPING_BEHAVIOR_KIND_TYPE_RED'
-                    - 'ethernet-container-2-0:DROPPING_BEHAVIOR_KIND_TYPE_WRED'
-                    - 'ethernet-container-2-0:DROPPING_BEHAVIOR_KIND_TYPE_NOT_YET_DEFINED'
-              available-drop-precedence-kind-list:
-                type: array
-                items:
-                  enum:
-                    - 'ethernet-container-2-0:DROP_PRECEDENCE_TYPE_ALL'
-                    - 'ethernet-container-2-0:DROP_PRECEDENCE_TYPE_LOW'
-                    - 'ethernet-container-2-0:DROP_PRECEDENCE_TYPE_MEDIUM'
-                    - 'ethernet-container-2-0:DROP_PRECEDENCE_TYPE_HIGH'
-                    - 'ethernet-container-2-0:DROP_PRECEDENCE_TYPE_NOT_YET_DEFINED'
-              wred-profile-per-drop-precedence-is-available:
-                type: boolean
-              available-scheduling-kind-list:
-                type: array
-                items:
-                  enum:
-                    - 'ethernet-container-2-0:SCHEDULER_KIND_TYPE_STRICT'
-                    - 'ethernet-container-2-0:SCHEDULER_KIND_TYPE_WFQ'
-                    - 'ethernet-container-2-0:SCHEDULER_KIND_TYPE_WRR'
-                    - 'ethernet-container-2-0:SCHEDULER_KIND_TYPE_DWRR'
-                    - 'ethernet-container-2-0:SCHEDULER_KIND_TYPE_NOT_YET_DEFINED'
-            required:
-              - queue-name
-              - supported-queue-depth-list
-              - available-dropping-behavior-kind-list
-              - available-drop-precedence-kind-list
-              - wred-profile-per-drop-precedence-is-available
-              - available-scheduling-kind-list
-        dropping-behavior-configuration-is-avail:
-          type: boolean
-        wred-profile-is-avail:
-          type: boolean
-        wred-profile-configuration-is-avail:
-          type: boolean
-        wred-template-profile-is-avail:
-          type: boolean
-        wred-template-profile-configuration-is-avail:
-          type: boolean
-        scheduler-kind-configuration-is-avail:
-          type: boolean
-        scheduler-profile-configuration-is-avail:
-          type: boolean
-        supported-wred-protocol-list:
-          type: array
-          items:
-            enum:
-              - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_NONE'
-              - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_ETHERNET_MAC'
-              - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_VLAN'
-              - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_Q_IN_Q'
-              - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_MPLS'
-              - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_IPV4'
-              - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_IPV6'
-              - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_TCP'
-              - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_UDP'
-              - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_RTP'
-              - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_GTP_U'
-              - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_OTHERS'
-              - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_NOT_YET_DEFINED'
-        explicit-congestion-notification-is-avail:
-          type: boolean
-        ingress-policing-is-avail:
-          type: boolean
-        egress-shaping-is-avail:
-          type: boolean
-        supported-maximum-information-rate-list:
-          type: array
-          items:
-            type: integer
-        supported-maximum-burst-size-list:
-          type: array
-          items:
-            type: integer
-        bundling-is-avail:
-          type: boolean
-        bundling-group-size-max:
+        type-of-equipment:
+          type: string
+        tx-frequency-min:
           type: integer
-        support-of-management-frames-without-preamble-is-avail:
+          format: int32
+        tx-frequency-max:
+          type: integer
+          format: int32
+        rx-frequency-min:
+          type: integer
+          format: int32
+        rx-frequency-max:
+          type: integer
+          format: int32
+        duplex-distance-is-freely-configurable:
           type: boolean
-        supported-header-compression-kind-list:
+        duplex-distance-list:
           type: array
+          items:
+            type: integer
+            format: int32
+        transmission-mode-list:
+          type: array
+          x-key: transmission-mode-name
           items:
             type: object
             required:
-              - header-compression-name
-              - header-compression-mode
-              - compressed-protocol-layer-list
-              - mpls-payload-kind-list
-              - compressed-header-length
+              - transmission-mode-name
+              - transmission-mode-rank
+              - channel-bandwidth
+              - modulation-scheme
+              - code-rate
+              - symbol-rate-reduction-factor
+              - tx-power-min
+              - tx-power-max
+              - rx-threshold
+              - am-upshift-level
+              - am-downshift-level
+              - xpic-is-avail
+              - supported-as-fixed-configuration
+              - modulation-scheme-name-at-lct
             properties:
-              header-compression-name:
+              transmission-mode-name:
                 type: string
-              header-compression-mode:
-                enum:
-                  - 'ethernet-container-2-0:HEADER_COMPRESSION_MODE_TYPE_AUTO'
-                  - 'ethernet-container-2-0:HEADER_COMPRESSION_MODE_TYPE_PROTOCOL_BASED'
-                  - 'ethernet-container-2-0:HEADER_COMPRESSION_MODE_TYPE_LENGTH_BASED'
-                  - 'ethernet-container-2-0:HEADER_COMPRESSION_MODE_TYPE_NO_COMPRESSION'
-                  - 'ethernet-container-2-0:HEADER_COMPRESSION_MODE_TYPE_NOT_YET_DEFINED'
-              compressed-protocol-layer-list:
-                type: array
-                items:
-                  enum:
-                    - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_NONE'
-                    - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_ETHERNET_MAC'
-                    - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_VLAN'
-                    - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_Q_IN_Q'
-                    - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_MPLS'
-                    - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_IPV4'
-                    - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_IPV6'
-                    - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_TCP'
-                    - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_UDP'
-                    - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_RTP'
-                    - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_GTP_U'
-                    - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_OTHERS'
-                    - 'ethernet-container-2-0:PROTOCOL_LAYER_TYPE_NOT_YET_DEFINED'
-              mpls-payload-kind-list:
-                type: array
-                items:
-                  enum:
-                    - 'ethernet-container-2-0:MPLS_PAYLOAD_KIND_TYPE_NONE'
-                    - 'ethernet-container-2-0:MPLS_PAYLOAD_KIND_TYPE_AUTO'
-                    - 'ethernet-container-2-0:MPLS_PAYLOAD_KIND_TYPE_ETH_O_MPLS'
-                    - 'ethernet-container-2-0:MPLS_PAYLOAD_KIND_TYPE_IP_O_MPLS'
-                    - 'ethernet-container-2-0:MPLS_PAYLOAD_KIND_TYPE_NOT_YET_DEFINED'
-              compressed-header-length:
+              transmission-mode-rank:
                 type: integer
-
-        fec-is-avail:
+                format: int32
+              channel-bandwidth:
+                type: integer
+                format: int32
+              modulation-scheme:
+                type: integer
+                format: int16
+              code-rate:
+                type: integer
+                format: int8
+              symbol-rate-reduction-factor:
+                type: integer
+                format: int8
+              tx-power-min:
+                type: integer
+                format: int8
+              tx-power-max:
+                type: integer
+                format: int8
+              rx-threshold:
+                type: integer
+                format: int16
+              am-upshift-level:
+                type: integer
+                format: int8
+              am-downshift-level:
+                type: integer
+                format: int8
+              xpic-is-avail:
+                type: boolean
+              supported-as-fixed-configuration:
+                type: boolean
+              modulation-scheme-name-at-lct:
+                type: string
+        auto-freq-select-is-avail:
           type: boolean
-        fec-word-size-max:
+        receiver-on-off-is-avail:
+          type: boolean
+        adaptive-modulation-is-avail:
+          type: boolean
+        atpc-is-avail:
+          type: boolean
+        atpc-range:
           type: integer
-        supported-fec-redundancy-size-list:
-          type: array
-          items:
-            enum:
-              - 'ethernet-container-2-0:FEC_REDUNDANCY_SIZE_TYPE_2'
-              - 'ethernet-container-2-0:FEC_REDUNDANCY_SIZE_TYPE_4'
-              - 'ethernet-container-2-0:FEC_REDUNDANCY_SIZE_TYPE_8'
-              - 'ethernet-container-2-0:FEC_REDUNDANCY_SIZE_TYPE_16'
-              - 'ethernet-container-2-0:FEC_REDUNDANCY_SIZE_TYPE_20'
-              - 'ethernet-container-2-0:FEC_REDUNDANCY_SIZE_TYPE_NOT_YET_DEFINED'
-        supported-fec-interleaver-kind-list:
-          type: array
-          items:
-            enum:
-              - 'ethernet-container-2-0:FEC_INTERLEAVER_KIND_TYPE_NONE'
-              - 'ethernet-container-2-0:FEC_INTERLEAVER_KIND_TYPE_BLOCK'
-              - 'ethernet-container-2-0:FEC_INTERLEAVER_KIND_TYPE_CONVOLUTION'
-              - 'ethernet-container-2-0:FEC_INTERLEAVER_KIND_TYPE_NOT_YET_DEFINED'
-        supported-fec-interleaver-depth-list:
-          type: array
-          items:
-            enum:
-              - 'ethernet-container-2-0:FEC_INTERLEAVER_DEPTH_TYPE_1'
-              - 'ethernet-container-2-0:FEC_INTERLEAVER_DEPTH_TYPE_2'
-              - 'ethernet-container-2-0:FEC_INTERLEAVER_DEPTH_TYPE_3'
-              - 'ethernet-container-2-0:FEC_INTERLEAVER_DEPTH_TYPE_4'
-              - 'ethernet-container-2-0:FEC_INTERLEAVER_DEPTH_TYPE_6'
-              - 'ethernet-container-2-0:FEC_INTERLEAVER_DEPTH_TYPE_8'
-              - 'ethernet-container-2-0:FEC_INTERLEAVER_DEPTH_TYPE_12'
-              - 'ethernet-container-2-0:FEC_INTERLEAVER_DEPTH_TYPE_16'
-              - 'ethernet-container-2-0:FEC_INTERLEAVER_DEPTH_TYPE_24'
-              - 'ethernet-container-2-0:FEC_INTERLEAVER_DEPTH_TYPE_32'
-              - 'ethernet-container-2-0:FEC_INTERLEAVER_DEPTH_TYPE_48'
-              - 'ethernet-container-2-0:FEC_INTERLEAVER_DEPTH_TYPE_96'
-              - 'ethernet-container-2-0:FEC_INTERLEAVER_DEPTH_TYPE_NOT_YET_DEFINED'
-        encryption-is-avail:
+          format: int8
+        supported-radio-signal-id-datatype:
+          type: string
+          enum:
+            - 'air-interface-2-0:RADIO_SIGNAL_ID_DATATYPE_TYPE_INTEGER'
+            - 'air-interface-2-0:RADIO_SIGNAL_ID_DATATYPE_TYPE_STRING'
+            - 'air-interface-2-0:RADIO_SIGNAL_ID_DATATYPE_TYPE_NOT_YET_DEFINED'
+        supported-radio-signal-id-length:
+          type: integer
+          format: int16
+        expected-equals-transmitted-radio-signal-id:
           type: boolean
-        admin-shut-down-is-avail:
+        encryption-is-avail:
           type: boolean
         supported-loop-back-kind-list:
           type: array
           items:
+            type: string
             enum:
-              - 'ethernet-container-2-0:LOOP_BACK_TYPE_NONE'
-              - 'ethernet-container-2-0:LOOP_BACK_TYPE_BACK_TO_LOCAL'
-              - 'ethernet-container-2-0:LOOP_BACK_TYPE_BACK_TO_REMOTE'
-              - 'ethernet-container-2-0:LOOP_BACK_TYPE_NOT_YET_DEFINED'
+              - 'air-interface-2-0:LOOP_BACK_TYPE_RF_TO_REMOTE'
+              - 'air-interface-2-0:LOOP_BACK_TYPE_RF_TO_LOCAL'
+              - 'air-interface-2-0:LOOP_BACK_TYPE_IF_TO_REMOTE'
+              - 'air-interface-2-0:LOOP_BACK_TYPE_IF_TO_LOCAL'
+              - 'air-interface-2-0:LOOP_BACK_TYPE_NONE'
         maintenance-timer-range:
           type: string
-          pattern: '^(Range of the maintenance timer not yet defined\.)$|^([0-9]{1,}){1,1}([,]{1,1}[ ]{1,1}[1-9]{1,1}[0-9]{0,}){0,}$|^([0-9]{1,}){1,1}(-){1,1}([1-9]{1,1}[0-9]{0,}){1,1}$'
-        statistics-is-avail:
+        acm-threshold-cross-alarms-is-avail:
+          type: boolean
+        clearing-threshold-cross-alarms-is-avail:
           type: boolean
         performance-monitoring-is-avail:
           type: boolean
-
-    forwarding-domain:
+        direction-of-acm-performance-values:
+          type: string
+          enum:
+            - 'air-interface-2-0:DIRECTION_TYPE_TX'
+            - 'air-interface-2-0:DIRECTION_TYPE_RX'
+            - 'air-interface-2-0:DIRECTION_TYPE_NONE'
+    air-interface-configuration:
       type: object
+      required:
+        - air-interface-name
+        - remote-air-interface-name
+        - transmitted-radio-signal-id
+        - expected-radio-signal-id
+        - tx-frequency
+        - rx-frequency
+        - duplex-distance
+        - transmission-mode-min
+        - transmission-mode-max
+        - power-is-on
+        - transmitter-is-on
+        - receiver-is-on
+        - tx-power
+        - adaptive-modulation-is-on
+        - xpic-is-on
+        - mimo-is-on
+        - alic-is-on
+        - atpc-is-on
+        - atpc-thresh-upper
+        - atpc-thresh-lower
+        - atpc-tx-power-min
+        - auto-freq-select-is-on
+        - auto-freq-select-range
+        - modulation-is-on
+        - encryption-is-on
+        - cryptographic-key
+        - loop-back-kind-on
+        - maintenance-timer
+        - g-826-threshold-cross-alarm-list
+        - xlts-threshold-cross-alarm-list
+        - acm-threshold-cross-alarm-list
+        - performance-monitoring-is-on
+      properties:
+        air-interface-name:
+          type: string
+        remote-air-interface-name:
+          type: string
+        transmitted-radio-signal-id:
+          type: object
+          required:
+            - numeric-radio-signal-id
+            - alphanumeric-radio-signal-id
+          properties:
+            numeric-radio-signal-id:
+              type: integer
+              format: int32
+            alphanumeric-radio-signal-id:
+              type: string
+        expected-radio-signal-id:
+          type: object
+          required:
+            - numeric-radio-signal-id
+            - alphanumeric-radio-signal-id
+          properties:
+            numeric-radio-signal-id:
+              type: integer
+              format: int32
+            alphanumeric-radio-signal-id:
+              type: string
+        tx-frequency:
+          type: integer
+          format: int32
+        rx-frequency:
+          type: integer
+          format: int32
+        duplex-distance:
+          type: integer
+          format: int32
+        transmission-mode-min:
+          type: string
+        transmission-mode-max:
+          type: string
+        power-is-on:
+          type: boolean
+        transmitter-is-on:
+          type: boolean
+        receiver-is-on:
+          type: boolean
+        tx-power:
+          type: integer
+          format: int8
+        adaptive-modulation-is-on:
+          type: boolean
+        xpic-is-on:
+          type: boolean
+        mimo-is-on:
+          type: boolean
+        alic-is-on:
+          type: boolean
+        atpc-is-on:
+          type: boolean
+        atpc-thresh-upper:
+          type: integer
+          format: int16
+        atpc-thresh-lower:
+          type: integer
+          format: int16
+        atpc-tx-power-min:
+          type: integer
+          format: int8
+        auto-freq-select-is-on:
+          type: boolean
+        auto-freq-select-range:
+          type: integer
+          format: int8
+        modulation-is-on:
+          type: boolean
+        encryption-is-on:
+          type: boolean
+        cryptographic-key:
+          type: string
+        loop-back-kind-on:
+          type: string
+          enum:
+            - 'air-interface-2-0:LOOP_BACK_TYPE_RF_TO_REMOTE'
+            - 'air-interface-2-0:LOOP_BACK_TYPE_RF_TO_LOCAL'
+            - 'air-interface-2-0:LOOP_BACK_TYPE_IF_TO_REMOTE'
+            - 'air-interface-2-0:LOOP_BACK_TYPE_IF_TO_LOCAL'
+            - 'air-interface-2-0:LOOP_BACK_TYPE_NONE'
+        maintenance-timer:
+          type: integer
+          format: int32
+        g-826-threshold-cross-alarm-list:
+          type: array
+          x-key: g-826-value-kind granularity-period
+          items:
+            type: object
+            required:
+              - g-826-value-kind
+              - alarm-raising-threshold
+              - alarm-clearing-threshold
+              - granularity-period
+            properties:
+              g-826-value-kind:
+                type: string
+                enum:
+                  - 'air-interface-2-0:G_826_TYPE_ES'
+                  - 'air-interface-2-0:G_826_TYPE_SES'
+                  - 'air-interface-2-0:G_826_TYPE_CSES'
+                  - 'air-interface-2-0:G_826_TYPE_UAS'
+                  - 'air-interface-2-0:G_826_TYPE_NOT_SPECIFIED'
+              alarm-raising-threshold:
+                type: integer
+                format: int32
+              alarm-clearing-threshold:
+                type: integer
+                format: int32
+              granularity-period:
+                type: string
+                enum:
+                  - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_UNKNOWN'
+                  - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN'
+                  - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-24-HOURS'
+                  - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_NOT_YET_DEFINED'
+        xlts-threshold-cross-alarm-list:
+          type: array
+          x-key: level-threshold-second-kind granularity-period xlts-threshold-cross-alarm-definition-number
+          items:
+            type: object
+            required:
+              - level-threshold-second-kind
+              - xlts-level
+              - amount-of-seconds
+              - granularity-period
+              - xlts-threshold-cross-alarm-definition-number
+            properties:
+              level-threshold-second-kind:
+                type: string
+                enum:
+                  - 'air-interface-2-0:XLEVEL_THRESHOLD_SECOND_KIND_TYPE_RLTS'
+                  - 'air-interface-2-0:XLEVEL_THRESHOLD_SECOND_KIND_TYPE_TLTS'
+                  - 'air-interface-2-0:XLEVEL_THRESHOLD_SECOND_KIND_TYPE_NOT_YET_DEFINED'
+              xlts-level:
+                type: integer
+                format: int8
+              amount-of-seconds:
+                type: integer
+                format: int32
+              granularity-period:
+                type: string
+                enum:
+                  - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_UNKNOWN'
+                  - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN'
+                  - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-24-HOURS'
+                  - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_NOT_YET_DEFINED'
+              xlts-threshold-cross-alarm-definition-number:
+                type: integer
+                format: int8
+        acm-threshold-cross-alarm-list:
+          type: array
+          x-key: acm-threshold-cross-alarm-definition-number granularity-period
+          items:
+            type: object
+            required:
+              - acm-threshold-cross-alarm-definition-number
+              - transmission-mode
+              - seconds-for-raising-alarm
+              - seconds-for-clearing-alarm
+              - granularity-period
+            properties:
+              acm-threshold-cross-alarm-definition-number:
+                type: integer
+                format: int8
+              transmission-mode:
+                type: string
+              seconds-for-raising-alarm:
+                type: integer
+                format: int32
+              seconds-for-clearing-alarm:
+                type: integer
+                format: int32
+              granularity-period:
+                type: string
+                enum:
+                  - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_UNKNOWN'
+                  - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN'
+                  - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-24-HOURS'
+                  - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_NOT_YET_DEFINED'
+        performance-monitoring-is-on:
+          type: boolean
+    air-interface-status:
+      type: object
+      required:
+        - interface-status
+        - tx-frequency-cur
+        - rx-frequency-cur
+        - transmission-mode-cur
+        - received-radio-signal-id
+        - link-is-up
+        - xpic-is-up
+        - mimo-is-up
+        - alic-is-up
+        - atpc-is-up
+        - auto-freq-select-is-up
+        - local-end-point-id
+        - remote-end-point-id
+        - loop-back-kind-up
+        - performance-monitoring-is-up
+        - rx-level-cur
+        - tx-level-cur
+        - snir-cur
+        - xpd-cur
+        - rf-temp-cur
+      properties:
+        interface-status:
+          type: string
+          enum:
+            - 'air-interface-2-0:INTERFACE_STATUS_TYPE_UP'
+            - 'air-interface-2-0:INTERFACE_STATUS_TYPE_DOWN'
+            - 'air-interface-2-0:INTERFACE_STATUS_TYPE_TESTING'
+            - 'air-interface-2-0:INTERFACE_STATUS_TYPE_UNKNOWN'
+            - 'air-interface-2-0:INTERFACE_STATUS_TYPE_DORMANT'
+            - 'air-interface-2-0:INTERFACE_STATUS_TYPE_NOT_PRESENT'
+            - 'air-interface-2-0:INTERFACE_STATUS_TYPE_NOT_YET_DEFINED'
+        tx-frequency-cur:
+          type: integer
+          format: int32
+        rx-frequency-cur:
+          type: integer
+          format: int32
+        transmission-mode-cur:
+          type: string
+        received-radio-signal-id:
+          type: object
+          required:
+            - numeric-radio-signal-id
+            - alphanumeric-radio-signal-id
+          properties:
+            numeric-radio-signal-id:
+              type: integer
+              format: int32
+            alphanumeric-radio-signal-id:
+              type: string
+        link-is-up:
+          type: boolean
+        xpic-is-up:
+          type: boolean
+        mimo-is-up:
+          type: boolean
+        alic-is-up:
+          type: boolean
+        atpc-is-up:
+          type: boolean
+        auto-freq-select-is-up:
+          type: boolean
+        local-end-point-id:
+          type: string
+        remote-end-point-id:
+          type: string
+        loop-back-kind-up:
+          type: string
+          enum:
+            - 'air-interface-2-0:LOOP_BACK_TYPE_RF_TO_REMOTE'
+            - 'air-interface-2-0:LOOP_BACK_TYPE_RF_TO_LOCAL'
+            - 'air-interface-2-0:LOOP_BACK_TYPE_IF_TO_REMOTE'
+            - 'air-interface-2-0:LOOP_BACK_TYPE_IF_TO_LOCAL'
+            - 'air-interface-2-0:LOOP_BACK_TYPE_NONE'
+        performance-monitoring-is-up:
+          type: boolean
+        rx-level-cur:
+          type: integer
+          format: int8
+        tx-level-cur:
+          type: integer
+          format: int8
+        snir-cur:
+          type: integer
+          format: int8
+        xpd-cur:
+          type: integer
+          format: int8
+        rf-temp-cur:
+          type: integer
+          format: int8
+    air-interface-current-performance:
+      type: object
+      required:
+        - number-of-current-performance-sets
+        - current-performance-data-list
+      properties:
+        number-of-current-performance-sets:
+          type: integer
+          format: int8
+        current-performance-data-list:
+          type: array
+          items:
+            type: object
+            required:
+              - timestamp
+              - suspect-interval-flag
+              - elapsed-time
+              - scanner-id
+              - granularity-period
+              - performance-data
+            properties:
+              timestamp:
+                type: string
+                pattern: '^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[\+\-]\d{2}:\d{2})$'
+              suspect-interval-flag:
+                type: boolean
+              elapsed-time:
+                type: string
+              scanner-id:
+                type: string
+              granularity-period:
+                type: string
+                enum:
+                  - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_UNKNOWN'
+                  - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN'
+                  - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-24-HOURS'
+                  - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_NOT_YET_DEFINED'
+              performance-data:
+                type: object
+                required:
+                  - es
+                  - ses
+                  - cses
+                  - unavailability
+                  - tx-level-min
+                  - tx-level-max
+                  - tx-level-avg
+                  - rx-level-min
+                  - rx-level-max
+                  - rx-level-avg
+                  - time-xstates-list
+                  - snir-min
+                  - snir-max
+                  - snir-avg
+                  - xpd-min
+                  - xpd-max
+                  - xpd-avg
+                  - rf-temp-min
+                  - rf-temp-max
+                  - rf-temp-avg
+                  - defect-blocks-sum
+                  - time-period
+                properties:
+                  es:
+                    type: integer
+                    format: int32
+                  ses:
+                    type: integer
+                    format: int32
+                  cses:
+                    type: integer
+                    format: int32
+                  unavailability:
+                    type: integer
+                    format: int32
+                  tx-level-min:
+                    type: integer
+                    format: int8
+                  tx-level-max:
+                    type: integer
+                    format: int8
+                  tx-level-avg:
+                    type: integer
+                    format: int8
+                  rx-level-min:
+                    type: integer
+                    format: int8
+                  rx-level-max:
+                    type: integer
+                    format: int8
+                  rx-level-avg:
+                    type: integer
+                    format: int8
+                  time-xstates-list:
+                    type: array
+                    x-key: time-xstate-sequence-number
+                    items:
+                      type: object
+                      required:
+                        - time-xstate-sequence-number
+                        - transmission-mode
+                        - time
+                      properties:
+                        time-xstate-sequence-number:
+                          type: integer
+                          format: int8
+                        transmission-mode:
+                          type: string
+                        time:
+                          type: integer
+                          format: int32
+                  snir-min:
+                    type: integer
+                    format: int8
+                  snir-max:
+                    type: integer
+                    format: int8
+                  snir-avg:
+                    type: integer
+                    format: int8
+                  xpd-min:
+                    type: integer
+                    format: int8
+                  xpd-max:
+                    type: integer
+                    format: int8
+                  xpd-avg:
+                    type: integer
+                    format: int8
+                  rf-temp-min:
+                    type: integer
+                    format: int8
+                  rf-temp-max:
+                    type: integer
+                    format: int8
+                  rf-temp-avg:
+                    type: integer
+                    format: int8
+                  defect-blocks-sum:
+                    type: integer
+                    format: int16
+                  time-period:
+                    type: integer
+                    format: int32
+    air-interface-historical-performances:
+      type: object
+      required:
+        - number-of-historical-performance-sets
+        - time-of-latest-change
+        - historical-performance-data-list
+      properties:
+        number-of-historical-performance-sets:
+          type: integer
+          format: int16
+        time-of-latest-change:
+          type: string
+          pattern: '^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[\+\-]\d{2}:\d{2})$'
+        historical-performance-data-list:
+          type: array
+          x-key: granularity-period period-end-time
+          items:
+            type: object
+            required:
+              - suspect-interval-flag
+              - history-data-id
+              - granularity-period
+              - period-end-time
+              - performance-data
+            properties:
+              suspect-interval-flag:
+                type: boolean
+              history-data-id:
+                type: string
+              granularity-period:
+                type: string
+                enum:
+                  - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_UNKNOWN'
+                  - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN'
+                  - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-24-HOURS'
+                  - 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_NOT_YET_DEFINED'
+              period-end-time:
+                type: string
+                pattern: '^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[\+\-]\d{2}:\d{2})$'
+              performance-data:
+                type: object
+                required:
+                  - es
+                  - ses
+                  - cses
+                  - unavailability
+                  - tx-level-min
+                  - tx-level-max
+                  - tx-level-avg
+                  - rx-level-min
+                  - rx-level-max
+                  - rx-level-avg
+                  - time-xstates-list
+                  - snir-min
+                  - snir-max
+                  - snir-avg
+                  - xpd-min
+                  - xpd-max
+                  - xpd-avg
+                  - rf-temp-min
+                  - rf-temp-max
+                  - rf-temp-avg
+                  - defect-blocks-sum
+                  - time-period
+                properties:
+                  es:
+                    type: integer
+                    format: int32
+                  ses:
+                    type: integer
+                    format: int32
+                  cses:
+                    type: integer
+                    format: int32
+                  unavailability:
+                    type: integer
+                    format: int32
+                  tx-level-min:
+                    type: integer
+                    format: int8
+                  tx-level-max:
+                    type: integer
+                    format: int8
+                  tx-level-avg:
+                    type: integer
+                    format: int8
+                  rx-level-min:
+                    type: integer
+                    format: int8
+                  rx-level-max:
+                    type: integer
+                    format: int8
+                  rx-level-avg:
+                    type: integer
+                    format: int8
+                  time-xstates-list:
+                    type: array
+                    x-key: time-xstate-sequence-number
+                    items:
+                      type: object
+                      required:
+                        - time-xstate-sequence-number
+                        - transmission-mode
+                        - time
+                      properties:
+                        time-xstate-sequence-number:
+                          type: integer
+                          format: int8
+                        transmission-mode:
+                          type: string
+                        time:
+                          type: integer
+                          format: int32
+                  snir-min:
+                    type: integer
+                    format: int8
+                  snir-max:
+                    type: integer
+                    format: int8
+                  snir-avg:
+                    type: integer
+                    format: int8
+                  xpd-min:
+                    type: integer
+                    format: int8
+                  xpd-max:
+                    type: integer
+                    format: int8
+                  xpd-avg:
+                    type: integer
+                    format: int8
+                  rf-temp-min:
+                    type: integer
+                    format: int8
+                  rf-temp-max:
+                    type: integer
+                    format: int8
+                  rf-temp-avg:
+                    type: integer
+                    format: int8
+                  defect-blocks-sum:
+                    type: integer
+                    format: int16
+                  time-period:
+                    type: integer
+                    format: int32
+
   securitySchemes:
     apiKeyAuth:
       type: apiKey

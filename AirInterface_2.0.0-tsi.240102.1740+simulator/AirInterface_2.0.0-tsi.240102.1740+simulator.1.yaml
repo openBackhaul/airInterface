@@ -638,7 +638,6 @@ components:
         - rx-frequency-min
         - rx-frequency-max
         - duplex-distance-is-freely-configurable
-        - duplex-distance-list
         - transmission-mode-list
         - auto-freq-select-is-avail
         - receiver-on-off-is-avail
@@ -762,6 +761,8 @@ components:
           type: boolean
         supported-loop-back-kind-list:
           type: array
+          minItems: 1
+          maxItems: 4
           items:
             type: string
             enum:
@@ -815,9 +816,6 @@ components:
         - cryptographic-key
         - loop-back-kind-on
         - maintenance-timer
-        - g-826-threshold-cross-alarm-list
-        - xlts-threshold-cross-alarm-list
-        - acm-threshold-cross-alarm-list
         - performance-monitoring-is-on
       properties:
         air-interface-name:
@@ -1112,6 +1110,8 @@ components:
           format: int8
         current-performance-data-list:
           type: array
+          minItems: 1
+          maxItems: 2
           items:
             type: object
             required:
@@ -1196,6 +1196,7 @@ components:
                     format: int8
                   time-xstates-list:
                     type: array
+                    minItems: 1
                     x-key: time-xstate-sequence-number
                     items:
                       type: object
@@ -1250,7 +1251,6 @@ components:
       required:
         - number-of-historical-performance-sets
         - time-of-latest-change
-        - historical-performance-data-list
       properties:
         number-of-historical-performance-sets:
           type: integer

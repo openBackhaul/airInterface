@@ -1,4 +1,4 @@
- [
+[
 	{
 		"mode": "debug",
 		"serverList": [
@@ -31,7 +31,7 @@
 				"customerJourney": ""
 			},
 			{
-				"serverName": "Application in AirInterface_2.0.0-tsi.240102.1740+simulator.completeness",
+				"serverName": "application in AirInterface_2.0.0-tsi.240102.1740+simulator.completeness",
 				"server": "http://localhost:3002",
 				"pathToControlConstruct": "/core-model-1-4:network-control-domain=cache/control-construct={mountName}",
 				"authorizationCode": "",
@@ -43,9 +43,33 @@
 				"customerJourney": ""
 			},
 			{
-				"serverName": "Controller in AirInterface_2.0.0-tsi.240102.1740+simulator.completeness",
+				"serverName": "application for RPC in AirInterface_2.0.0-tsi.240102.1740+simulator.completeness",
+				"server": "http://localhost:3002",
+				"pathToControlConstruct": "/core-model-1-4:network-control-domain=live/control-construct={mountName}",
+				"authorizationCode": "",
+				"operationKey": "Operation key not yet provided.",
+				"userName": "Thorsten Heinze",
+				"originator": "InterfaceValidator_TR532v2.0",
+				"xCorrelator": "00000000-0000-0000-0000-000000000532",
+				"traceIndicator": "1",
+				"customerJourney": ""
+			},
+			{
+				"serverName": "controller in AirInterface_2.0.0-tsi.240102.1740+simulator.completeness",
 				"server": "http://localhost:3002",
 				"pathToControlConstruct": "/rests/data/network-topology:network-topology/topology=topology-netconf/node={mountName}/yang-ext:mount/core-model-1-4:control-construct",
+				"authorizationCode": "",
+				"operationKey": "Operation key not yet provided.",
+				"userName": "Thorsten Heinze",
+				"originator": "InterfaceValidator_TR532v2.0",
+				"xCorrelator": "00000000-0000-0000-0000-000000000532",
+				"traceIndicator": "1",
+				"customerJourney": ""
+			},
+			{
+				"serverName": "controller for RPC in AirInterface_2.0.0-tsi.240102.1740+simulator.completeness",
+				"server": "http://localhost:3002",
+				"pathToControlConstruct": "/rests/operations/network-topology:network-topology/topology=topology-netconf/node={mountName}/yang-ext:mount",
 				"authorizationCode": "",
 				"operationKey": "Operation key not yet provided.",
 				"userName": "Thorsten Heinze",
@@ -57,15 +81,28 @@
 		],
 		"collectionInputList": [
 			{
-				"collectionName": "_device",
+				"collectionName": "AirInterface_device",
 				"serverToBeApplied": "controller",
-				"mountName": "513250011",
+				"mountName": "513250004",
 				"kindOfReference": "dynamic"
 			},
 			{
-				"collectionName": "_simulator",
-				"serverToBeApplied": "AirInterface_2.0.0-tsi.240102.1740+simulator.completeness",
-				"mountName": "0001",
+				"collectionName": "AirInterfaceRpc_device",
+				"serverToBeApplied": "controllerRpc",
+				"mountName": "513250004",
+				"kindOfReference": "dynamic"
+			},
+			{
+				"collectionName": "AirInterface_simulator",
+				"serverToBeApplied": "application in AirInterface_2.0.0-tsi.240102.1740+simulator.completeness",
+				"mountName": "305250001",
+				"kindOfReference": "static",
+				"suffixUrlEncodingIsRequired": true
+			},
+			{
+				"collectionName": "AirInterfaceRpc_simulator",
+				"serverToBeApplied": "application for RPC in AirInterface_2.0.0-tsi.240102.1740+simulator.completeness",
+				"mountName": "305250001",
 				"kindOfReference": "static",
 				"suffixUrlEncodingIsRequired": true
 			}

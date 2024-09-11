@@ -567,7 +567,7 @@ paths:
       tags:
         - IndividualServices
       security:
-        - apiKeyAuth: []
+        - basicAuth: []
       responses:
         '200':
           description: 'List of LTPs provided from cache'
@@ -645,7 +645,7 @@ paths:
       tags:
         - IndividualServices
       security:
-        - apiKeyAuth: []
+        - basicAuth: []
       responses:
         '200':
           description: 'AirInterfaceCapability provided from cache'
@@ -742,7 +742,7 @@ paths:
       tags:
         - IndividualServices
       security:
-        - apiKeyAuth: []
+        - basicAuth: []
       responses:
         '200':
           description: 'AirInterfaceConfiguration provided from cache'
@@ -841,7 +841,7 @@ paths:
       tags:
         - IndividualServices
       security:
-        - apiKeyAuth: []
+        - basicAuth: []
       responses:
         '200':
           description: 'AirInterfaceStatus provided from cache'
@@ -903,7 +903,7 @@ paths:
       tags:
         - IndividualServices
       security:
-        - apiKeyAuth: []
+        - basicAuth: []
       responses:
         '200':
           description: 'AirInterfaceCurrentPerformance provided from cache'
@@ -979,7 +979,7 @@ paths:
       tags:
         - IndividualServices
       security:
-        - apiKeyAuth: []
+        - basicAuth: []
       responses:
         '200':
           description: 'AirInterfaceHistoricalPerformances provided from cache'
@@ -1056,7 +1056,7 @@ paths:
       tags:
         - IndividualServices
       security:
-        - apiKeyAuth: []
+        - basicAuth: []
       requestBody:
         required: true
         content:

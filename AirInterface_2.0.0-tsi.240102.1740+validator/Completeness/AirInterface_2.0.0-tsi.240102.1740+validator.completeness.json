@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "feb7a200-c08c-45a0-af27-eb26abac11d6",
 		"name": "AirInterface_2.0.0-tsi.240102.1740+validator.completeness",
-		"description": "Simple InterfaceValidator for WredTemplateProfile.",
+		"description": "Simple InterfaceValidator for AirInterface.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "9715086"
 	},

@@ -100,6 +100,7 @@ paths:
       - $ref: '#/components/parameters/customer-journey'
       - $ref: '#/components/parameters/mountName'
       - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/localId'
       - $ref: '#/components/parameters/fields'
     get:
       operationId: getCachedAirInterfaceCapability
@@ -197,6 +198,7 @@ paths:
       - $ref: '#/components/parameters/customer-journey'
       - $ref: '#/components/parameters/mountName'
       - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/localId'
       - $ref: '#/components/parameters/fields'
     get:
       operationId: getCachedAirInterfaceConfiguration
@@ -296,6 +298,7 @@ paths:
       - $ref: '#/components/parameters/customer-journey'
       - $ref: '#/components/parameters/mountName'
       - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/localId'
       - $ref: '#/components/parameters/fields'
     get:
       operationId: getCachedAirInterfaceStatus
@@ -358,6 +361,7 @@ paths:
       - $ref: '#/components/parameters/customer-journey'
       - $ref: '#/components/parameters/mountName'
       - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/localId'
       - $ref: '#/components/parameters/fields'
     get:
       operationId: getCachedAirInterfaceCurrentPerformance
@@ -434,6 +438,7 @@ paths:
       - $ref: '#/components/parameters/customer-journey'
       - $ref: '#/components/parameters/mountName'
       - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/localId'
       - $ref: '#/components/parameters/fields'
     get:
       operationId: getCachedAirInterfaceHistoricalPerformances
@@ -550,27 +555,23 @@ paths:
 
 
 #
-# At Controller (copy from above, just different paths)
+# At Controller (copy from above, different paths, less parameters, basicAuth, no headers)
 # =============
 #
 # Preparation => MountName=305250001, UUID=airInt1, LocalID=1
   /rests/data/network-topology:network-topology/topology=topology-netconf/node=305250001/yang-ext:mount/core-model-1-4:control-construct:
     parameters:
-      - $ref: '#/components/parameters/user'
-      - $ref: '#/components/parameters/originator'
-      - $ref: '#/components/parameters/x-correlator'
-      - $ref: '#/components/parameters/trace-indicator'
-      - $ref: '#/components/parameters/customer-journey'
+      - $ref: '#/components/parameters/mountName'
     get:
       operationId: getLtpList
-      summary: 'Provides list of LTPs from cache'
+      summary: 'Provides list of LTPs from device'
       tags:
         - IndividualServices
       security:
         - basicAuth: []
       responses:
         '200':
-          description: 'List of LTPs provided from cache'
+          description: 'List of LTPs provided from device'
           content:
             application/json:
               schema:
@@ -618,37 +619,24 @@ paths:
                         layer-protocol:
                           - local-id: '1'
                             layer-protocol-name: 'air-interface-2-0:LAYER_PROTOCOL_NAME_TYPE_AIR_LAYER'
-          headers:
-            x-correlator:
-              $ref: '#/components/headers/x-correlator'
-            exec-time:
-              $ref: '#/components/headers/exec-time'
-            backend-time:
-              $ref: '#/components/headers/backend-time'
-            life-cycle-state:
-              $ref: '#/components/headers/life-cycle-state'
 
 # Completeness of GET 200
   /rests/data/network-topology:network-topology/topology=topology-netconf/node=305250001/yang-ext:mount/core-model-1-4:control-construct/logical-termination-point=airInt1/layer-protocol=1/air-interface-2-0:air-interface-pac/air-interface-capability:
     parameters:
-      - $ref: '#/components/parameters/user'
-      - $ref: '#/components/parameters/originator'
-      - $ref: '#/components/parameters/x-correlator'
-      - $ref: '#/components/parameters/trace-indicator'
-      - $ref: '#/components/parameters/customer-journey'
       - $ref: '#/components/parameters/mountName'
       - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/localId'
       - $ref: '#/components/parameters/fields'
     get:
       operationId: getCachedAirInterfaceCapability
-      summary: 'Provides AirInterfaceCapability from cache'
+      summary: 'Provides AirInterfaceCapability from device'
       tags:
         - IndividualServices
       security:
         - basicAuth: []
       responses:
         '200':
-          description: 'AirInterfaceCapability provided from cache'
+          description: 'AirInterfaceCapability provided from device'
           content:
             application/json:
               schema:
@@ -717,35 +705,22 @@ paths:
                     clearing-threshold-cross-alarms-is-avail: true
                     performance-monitoring-is-avail: true
                     direction-of-acm-performance-values: 'air-interface-2-0:DIRECTION_TYPE_TX'
-          headers:
-            x-correlator:
-              $ref: '#/components/headers/x-correlator'
-            exec-time:
-              $ref: '#/components/headers/exec-time'
-            backend-time:
-              $ref: '#/components/headers/backend-time'
-            life-cycle-state:
-              $ref: '#/components/headers/life-cycle-state'
   /rests/data/network-topology:network-topology/topology=topology-netconf/node=305250001/yang-ext:mount/core-model-1-4:control-construct/logical-termination-point=airInt1/layer-protocol=1/air-interface-2-0:air-interface-pac/air-interface-configuration:
     parameters:
-      - $ref: '#/components/parameters/user'
-      - $ref: '#/components/parameters/originator'
-      - $ref: '#/components/parameters/x-correlator'
-      - $ref: '#/components/parameters/trace-indicator'
-      - $ref: '#/components/parameters/customer-journey'
       - $ref: '#/components/parameters/mountName'
       - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/localId'
       - $ref: '#/components/parameters/fields'
     get:
       operationId: getCachedAirInterfaceConfiguration
-      summary: 'Provides AirInterfaceConfiguration from cache'
+      summary: 'Provides AirInterfaceConfiguration from device'
       tags:
         - IndividualServices
       security:
         - basicAuth: []
       responses:
         '200':
-          description: 'AirInterfaceConfiguration provided from cache'
+          description: 'AirInterfaceConfiguration provided from device'
           content:
             application/json:
               schema:
@@ -816,35 +791,22 @@ paths:
                         seconds-for-clearing-alarm: 60
                         granularity-period: 'air-interface-2-0:GRANULARITY_PERIOD_TYPE_PERIOD-15-MIN'
                     performance-monitoring-is-on: true
-          headers:
-            x-correlator:
-              $ref: '#/components/headers/x-correlator'
-            exec-time:
-              $ref: '#/components/headers/exec-time'
-            backend-time:
-              $ref: '#/components/headers/backend-time'
-            life-cycle-state:
-              $ref: '#/components/headers/life-cycle-state'
   /rests/data/network-topology:network-topology/topology=topology-netconf/node=305250001/yang-ext:mount/core-model-1-4:control-construct/logical-termination-point=airInt1/layer-protocol=1/air-interface-2-0:air-interface-pac/air-interface-status:
     parameters:
-      - $ref: '#/components/parameters/user'
-      - $ref: '#/components/parameters/originator'
-      - $ref: '#/components/parameters/x-correlator'
-      - $ref: '#/components/parameters/trace-indicator'
-      - $ref: '#/components/parameters/customer-journey'
       - $ref: '#/components/parameters/mountName'
       - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/localId'
       - $ref: '#/components/parameters/fields'
     get:
       operationId: getCachedAirInterfaceStatus
-      summary: 'Provides AirInterfaceStatus from cache'
+      summary: 'Provides AirInterfaceStatus from device'
       tags:
         - IndividualServices
       security:
         - basicAuth: []
       responses:
         '200':
-          description: 'AirInterfaceStatus provided from cache'
+          description: 'AirInterfaceStatus provided from device'
           content:
             application/json:
               schema:
@@ -878,35 +840,22 @@ paths:
                     snir-cur: 4
                     xpd-cur: -99
                     rf-temp-cur: 28
-          headers:
-            x-correlator:
-              $ref: '#/components/headers/x-correlator'
-            exec-time:
-              $ref: '#/components/headers/exec-time'
-            backend-time:
-              $ref: '#/components/headers/backend-time'
-            life-cycle-state:
-              $ref: '#/components/headers/life-cycle-state'
   /rests/data/network-topology:network-topology/topology=topology-netconf/node=305250001/yang-ext:mount/core-model-1-4:control-construct/logical-termination-point=airInt1/layer-protocol=1/air-interface-2-0:air-interface-pac/air-interface-current-performance:
     parameters:
-      - $ref: '#/components/parameters/user'
-      - $ref: '#/components/parameters/originator'
-      - $ref: '#/components/parameters/x-correlator'
-      - $ref: '#/components/parameters/trace-indicator'
-      - $ref: '#/components/parameters/customer-journey'
       - $ref: '#/components/parameters/mountName'
       - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/localId'
       - $ref: '#/components/parameters/fields'
     get:
       operationId: getCachedAirInterfaceCurrentPerformance
-      summary: 'Provides AirInterfaceCurrentPerformance from cache'
+      summary: 'Provides AirInterfaceCurrentPerformance from device'
       tags:
         - IndividualServices
       security:
         - basicAuth: []
       responses:
         '200':
-          description: 'AirInterfaceCurrentPerformance provided from cache'
+          description: 'AirInterfaceCurrentPerformance provided from device'
           content:
             application/json:
               schema:
@@ -954,35 +903,22 @@ paths:
                           rf-temp-avg: 28
                           defect-blocks-sum: 24231
                           time-period: 726
-          headers:
-            x-correlator:
-              $ref: '#/components/headers/x-correlator'
-            exec-time:
-              $ref: '#/components/headers/exec-time'
-            backend-time:
-              $ref: '#/components/headers/backend-time'
-            life-cycle-state:
-              $ref: '#/components/headers/life-cycle-state'
   /rests/data/network-topology:network-topology/topology=topology-netconf/node=305250001/yang-ext:mount/core-model-1-4:control-construct/logical-termination-point=airInt1/layer-protocol=1/air-interface-2-0:air-interface-pac/air-interface-historical-performances:
     parameters:
-      - $ref: '#/components/parameters/user'
-      - $ref: '#/components/parameters/originator'
-      - $ref: '#/components/parameters/x-correlator'
-      - $ref: '#/components/parameters/trace-indicator'
-      - $ref: '#/components/parameters/customer-journey'
       - $ref: '#/components/parameters/mountName'
       - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/localId'
       - $ref: '#/components/parameters/fields'
     get:
       operationId: getCachedAirInterfaceHistoricalPerformances
-      summary: 'Provides AirInterfaceHistoricalPerformances from cache'
+      summary: 'Provides AirInterfaceHistoricalPerformances from device'
       tags:
         - IndividualServices
       security:
         - basicAuth: []
       responses:
         '200':
-          description: 'AirInterfaceHistoricalPerformances provided from cache'
+          description: 'AirInterfaceHistoricalPerformances provided from device'
           content:
             application/json:
               schema:
@@ -1030,25 +966,11 @@ paths:
                           rf-temp-avg: 28
                           defect-blocks-sum: 24553
                           time-period: 900
-          headers:
-            x-correlator:
-              $ref: '#/components/headers/x-correlator'
-            exec-time:
-              $ref: '#/components/headers/exec-time'
-            backend-time:
-              $ref: '#/components/headers/backend-time'
-            life-cycle-state:
-              $ref: '#/components/headers/life-cycle-state'
 
 # Completeness of RPC
   # /rests/operations/network-topology:network-topology/topology=topology-netconf/node=305250001/yang-ext:mount/air-interface-2-0:clear-threshold-cross-alarms
   /rests/operations/network-topology:network-topology/topology=topology-netconf/node=305250001/yang-ext:mount/air-interface-2-0%3Aclear-threshold-cross-alarms:
     parameters:
-      - $ref: '#/components/parameters/user'
-      - $ref: '#/components/parameters/originator'
-      - $ref: '#/components/parameters/x-correlator'
-      - $ref: '#/components/parameters/trace-indicator'
-      - $ref: '#/components/parameters/customer-journey'
       - $ref: '#/components/parameters/mountName'
     post:
       operationId: postClearThresholdCrossAlarms
@@ -1076,15 +998,6 @@ paths:
       responses:
         '204':
           description: 'Threshold cross alarms cleared'
-          headers:
-            x-correlator:
-              $ref: '#/components/headers/x-correlator'
-            exec-time:
-              $ref: '#/components/headers/exec-time'
-            backend-time:
-              $ref: '#/components/headers/backend-time'
-            life-cycle-state:
-              $ref: '#/components/headers/life-cycle-state'
 
 
 ########################################################################################################################
@@ -1099,6 +1012,7 @@ paths:
       - $ref: '#/components/parameters/customer-journey'
       - $ref: '#/components/parameters/mountName'
       - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/localId'
       - $ref: '#/components/parameters/fields'
     get:
       operationId: getCachedAirInterfaceCapability
@@ -1184,6 +1098,7 @@ paths:
       - $ref: '#/components/parameters/customer-journey'
       - $ref: '#/components/parameters/mountName'
       - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/localId'
       - $ref: '#/components/parameters/fields'
     get:
       operationId: getCachedAirInterfaceConfiguration
@@ -1280,6 +1195,7 @@ paths:
       - $ref: '#/components/parameters/customer-journey'
       - $ref: '#/components/parameters/mountName'
       - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/localId'
       - $ref: '#/components/parameters/fields'
     get:
       operationId: getCachedAirInterfaceStatus
@@ -1348,6 +1264,7 @@ paths:
       - $ref: '#/components/parameters/customer-journey'
       - $ref: '#/components/parameters/mountName'
       - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/localId'
       - $ref: '#/components/parameters/fields'
     get:
       operationId: getCachedAirInterfaceCurrentPerformance
@@ -1427,6 +1344,7 @@ paths:
       - $ref: '#/components/parameters/customer-journey'
       - $ref: '#/components/parameters/mountName'
       - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/localId'
       - $ref: '#/components/parameters/fields'
     get:
       operationId: getCachedAirInterfaceHistoricalPerformances

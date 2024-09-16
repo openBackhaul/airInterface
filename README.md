@@ -23,10 +23,10 @@
 - [AirInterface_2.0.0-tsi.240102.1740+schema](./AirInterface_2.0.0-tsi.240102.1740+schema/)
 
 ### Interface Simulator
-- [AirInterface_2.0.0-tsi.240102.1740+simulator](./AirInterface_2.0.0-tsi.240102.1740+simulator/)
+- [AirInterface_2.0.0-tsi.240102.1740+simulator](./AirInterface_2.0.0-tsi.240102.1740+simu/)
 
 ### Interface Validator
-- [AirInterface_2.0.0-tsi.240102.1740+validator](./AirInterface_2.0.0-tsi.240102.1740+validator/)
+- [AirInterface_2.0.0-tsi.240102.1740+validator](./AirInterface_2.0.0-tsi.240102.1740+vali/)
 
 ### Publication
 - Published as a part of ONF TR-532 v2.0  

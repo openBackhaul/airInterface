@@ -1,0 +1,81 @@
+@startuml AirInterface_2.0.0-tsi.240102.1740+diagram.completeness
+skinparam responseMessageBelowArrow true
+
+title
+AirInterface_2.0.0-tsi.240102.1740+testcase.completeness
+end title
+
+participant "Postman" as Postman
+participant "Data" as Data
+participant "Collection" as Collection
+
+participant "/control-construct?fields=..." as ListOfLTPUuidAndLidPairsAndNames
+
+participant "/air-interface-capability" as Capability
+participant "/air-interface-configuration" as Configuration
+participant "/air-interface-status" as Status
+participant "/air-interface-current-performance" as CurrentPerformance
+participant "/air-interface-historical-performances" as HistoricalPerformances
+
+group Preparation
+  Data --\\o Postman : {servers,\n   mountName,\n   kindOfReference,\n   suffixUrlEncodingIsRequired}
+  activate Postman
+  Postman --\\o Collection : {servers,\n   mountName,\n   kindOfReference,\n   suffixUrlEncodingIsRequired}
+
+  Collection --\\o Postman : {servers, mountName}
+  Postman -> ListOfLTPUuidAndLidPairsAndNames : {mountName}
+  Postman <-- ListOfLTPUuidAndLidPairsAndNames : {(uuid, localId, layerProtocolName)}
+  note right Postman
+    selection of AirInterface
+  end note
+  Postman --\\o Collection : {uuid, localId}
+end
+
+group /air-interface-capability
+  Collection --\\o Postman : {mountName, uuid, localId}
+  Postman -> Capability : {mountName, uuid, localId}
+  Postman <-- Capability : {CapabilityClass}
+  note right Postman
+    schema validation
+  end note
+end
+
+group /air-interface-configuration
+  Collection --\\o Postman : {mountName, uuid, localId}
+  Postman -> Configuration : {mountName, uuid, localId}
+  Postman <-- Configuration : {ConfigurationClass}
+  note right Postman
+    schema validation
+  end note
+end
+
+group /air-interface-status
+  Collection --\\o Postman : {mountName, uuid, localId}
+  Postman -> Status : {mountName, uuid, localId}
+  Postman <-- Status : {StatusClass}
+  note right Postman
+    schema validation
+  end note
+end
+
+group /air-interface-current-performance
+  Collection --\\o Postman : {mountName, uuid, localId}
+  Postman -> CurrentPerformance : {mountName, uuid, localId}
+  Postman <-- CurrentPerformance : {CurrentPerformanceClass}
+  note right Postman
+    schema validation
+  end note
+end
+
+group /air-interface-historical-performances
+  Collection --\\o Postman : {mountName, uuid, localId}
+  Postman -> HistoricalPerformances : {mountName, uuid, localId}
+  Postman <-- HistoricalPerformances : {HistoricalPerformancesClass}
+  note right Postman
+    schema validation
+  end note
+end
+
+deactivate Postman
+
+@enduml

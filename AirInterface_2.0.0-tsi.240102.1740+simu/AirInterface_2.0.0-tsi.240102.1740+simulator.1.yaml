@@ -17,6 +17,7 @@ paths:
       - $ref: '#/components/parameters/customer-journey'
       - $ref: '#/components/parameters/mountName'
       - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/localId'
       - $ref: '#/components/parameters/fields'
     get:
       operationId: getCachedAirInterfaceCapability
@@ -102,6 +103,7 @@ paths:
       - $ref: '#/components/parameters/customer-journey'
       - $ref: '#/components/parameters/mountName'
       - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/localId'
       - $ref: '#/components/parameters/fields'
     get:
       operationId: getCachedAirInterfaceConfiguration
@@ -198,6 +200,7 @@ paths:
       - $ref: '#/components/parameters/customer-journey'
       - $ref: '#/components/parameters/mountName'
       - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/localId'
       - $ref: '#/components/parameters/fields'
     get:
       operationId: getCachedAirInterfaceStatus
@@ -266,6 +269,7 @@ paths:
       - $ref: '#/components/parameters/customer-journey'
       - $ref: '#/components/parameters/mountName'
       - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/localId'
       - $ref: '#/components/parameters/fields'
     get:
       operationId: getCachedAirInterfaceCurrentPerformance
@@ -345,6 +349,7 @@ paths:
       - $ref: '#/components/parameters/customer-journey'
       - $ref: '#/components/parameters/mountName'
       - $ref: '#/components/parameters/uuid'
+      - $ref: '#/components/parameters/localId'
       - $ref: '#/components/parameters/fields'
     get:
       operationId: getCachedAirInterfaceHistoricalPerformances
@@ -368,7 +373,7 @@ paths:
                 example:
                   air-interface-2-0:air-interface-historical-performances:
                     number-of-historical-performance-sets: 0
-                    time-of-latest-change: '3458-90-13T36:05:34-24:27'
+                    time-of-latest-change: '2010-11-20T14:00:00+01:00'
                     historical-performance-data-list:
                       - suspect-interval-flag: true
                         history-data-id: 'string'

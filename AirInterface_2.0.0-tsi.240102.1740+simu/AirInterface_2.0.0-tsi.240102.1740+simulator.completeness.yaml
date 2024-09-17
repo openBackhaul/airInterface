@@ -384,7 +384,7 @@ paths:
                     $ref: '#/components/schemas/air-interface-current-performance'
                 example:
                   air-interface-2-0:air-interface-current-performance:
-                    number-of-current-performance-sets: 0
+                    number-of-current-performance-sets: 1
                     current-performance-data-list:
                       - timestamp: '2010-11-20T14:00:00+01:00'
                         suspect-interval-flag: true
@@ -562,6 +562,7 @@ paths:
   /rests/data/network-topology:network-topology/topology=topology-netconf/node=305250001/yang-ext:mount/core-model-1-4:control-construct:
     parameters:
       - $ref: '#/components/parameters/mountName'
+      - $ref: '#/components/parameters/fields'
     get:
       operationId: getLtpList
       summary: 'Provides list of LTPs from device'
@@ -867,7 +868,7 @@ paths:
                     $ref: '#/components/schemas/air-interface-current-performance'
                 example:
                   air-interface-2-0:air-interface-current-performance:
-                    number-of-current-performance-sets: 0
+                    number-of-current-performance-sets: 1
                     current-performance-data-list:
                       - timestamp: '2010-11-20T14:00:00+01:00'
                         suspect-interval-flag: true
@@ -1368,7 +1369,7 @@ paths:
                 example:
                   air-interface-2-0:air-interface-historical-performances:
                     number-of-historical-performance-sets: 0
-                    time-of-latest-change: '3458-90-13T36:05:34-24:27'
+                    time-of-latest-change: '2010-11-20T14:00:00+01:00'
                     historical-performance-data-list:
                       - suspect-interval-flag: true
                         history-data-id: 'string'

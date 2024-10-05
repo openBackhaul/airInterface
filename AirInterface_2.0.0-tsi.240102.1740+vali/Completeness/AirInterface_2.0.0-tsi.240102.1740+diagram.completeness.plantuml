@@ -16,6 +16,7 @@ participant "/air-interface-configuration" as Configuration
 participant "/air-interface-status" as Status
 participant "/air-interface-current-performance" as CurrentPerformance
 participant "/air-interface-historical-performances" as HistoricalPerformances
+participant "/clear-threshold-cross-alarms" as ClearThresholdCrossAlarms
 
 group Preparation
   Data --\\o Postman : {servers,\n   mountName,\n   kindOfReference,\n   suffixUrlEncodingIsRequired}
@@ -73,6 +74,15 @@ group /air-interface-historical-performances
   Postman <-- HistoricalPerformances : {HistoricalPerformancesClass}
   note right Postman
     schema validation
+  end note
+end
+
+group /clear-threshold-cross-alarms
+  Collection --\\o Postman : {mountName, uuid, \n suffixUrlEncodingIsRequired}
+  Postman -> ClearThresholdCrossAlarms : {mountName, uuid}
+  Postman <-- ClearThresholdCrossAlarms : 204
+  note right Postman
+    f(x)==204?
   end note
 end
 

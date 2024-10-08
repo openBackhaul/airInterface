@@ -20,7 +20,19 @@
 			},
 			{
 				"serverName": "mwdi",
-				"server": "https://IP_ADRESS:PORT",
+				"server": "http://IP_ADRESS:PORT",
+				"pathToControlConstruct": "/core-model-1-4:network-control-domain=cache/control-construct={mountName}",
+				"authorizationCode": "YOUR_BASIC_AUTH_CODE",
+				"operationKey": "Operation key not yet provided.",
+				"userName": "Thorsten Heinze",
+				"originator": "InterfaceValidator_TR532v2.0",
+				"xCorrelator": "00000000-0000-0000-0000-000000000532",
+				"traceIndicator": "1",
+				"customerJourney": ""
+			},
+      {
+				"serverName": "mdip",
+				"server": "http://IP_ADRESS:PORT",
 				"pathToControlConstruct": "/core-model-1-4:network-control-domain=cache/control-construct={mountName}",
 				"authorizationCode": "YOUR_BASIC_AUTH_CODE",
 				"operationKey": "Operation key not yet provided.",
@@ -81,27 +93,27 @@
 		],
 		"collectionInputList": [
 			{
-				"collectionName": "AirInterface_device",
+				"collectionName": "AirInterface",
 				"serverToBeApplied": "controller",
 				"mountName": "513250004",
 				"kindOfReference": "dynamic"
 			},
 			{
-				"collectionName": "AirInterfaceRpc_device",
+				"collectionName": "AirInterfaceRpc",
 				"serverToBeApplied": "controllerRpc",
 				"mountName": "513250004",
-				"kindOfReference": "dynamic"
+				"kindOfReference": "dynamic",
+				"suffixUrlEncodingIsRequired": false
 			},
 			{
 				"collectionName": "AirInterface_simulator",
-				"serverToBeApplied": "application in AirInterface_2.0.0-tsi.240102.1740+simulator.completeness",
+				"serverToBeApplied": "controller in AirInterface_2.0.0-tsi.240102.1740+simulator.completeness",
 				"mountName": "305250001",
-				"kindOfReference": "static",
-				"suffixUrlEncodingIsRequired": true
+				"kindOfReference": "static"
 			},
 			{
 				"collectionName": "AirInterfaceRpc_simulator",
-				"serverToBeApplied": "application for RPC in AirInterface_2.0.0-tsi.240102.1740+simulator.completeness",
+				"serverToBeApplied": "controller for RPC in AirInterface_2.0.0-tsi.240102.1740+simulator.completeness",
 				"mountName": "305250001",
 				"kindOfReference": "static",
 				"suffixUrlEncodingIsRequired": true

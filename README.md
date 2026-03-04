@@ -23,7 +23,7 @@
 
 ### YANG File
 - [AirInterface_2.0.0-tsi.240102.1740+yang.1](./AirInterface_2.0.0-tsi.240102.1740+yang/air-interface-2-0.yang)
-- [AirInterface_2.1.0-ts.260304.1400+yang.1](./AirInterface_2.1.0-ts.260304.1400+yang/air-interface-2-1.yang)
+- [AirInterface_2.1.0-ts.260304.1400+yang.1](./AirInterface_2.1.0-ts.260304.1400+yang/air-interface-2-0.yang)
 
 ### Schema
 - [AirInterface_2.0.0-tsi.240102.1740+schema](./AirInterface_2.0.0-tsi.240102.1740+schema/)
